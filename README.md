@@ -1,2 +1,3 @@
-# PingMe
-A simple and quick way to send a message – just ping! PingMe keeps messaging easy and instant, perfect for checking in on the go.
+## Leetcode Journal
+
+The LeetCode Journal project helps developers track, organize, and review their LeetCode solutions with an intuitive interface. Users can save solutions, categorize problems, monitor progress, and analyze performance over time. It functions as both a personal learning tool and a portfolio of problem-solving skills.
