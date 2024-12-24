@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Separator } from "@/components/ui/separator"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { BookOpen, Code, LineChart, Users, CheckCircle, Zap, Target, Lightbulb } from 'lucide-react'
+import { BookOpen, CheckCircle} from 'lucide-react'
 
 export default function LandingPage() {
   return (
