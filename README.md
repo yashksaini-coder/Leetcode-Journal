@@ -1,2 +1,1 @@
-# Leetcode-Journal
-A Leetcode Journal to showcase your profile and show stats 
+The Leetcode Journal project helps developers track, organize, and review their Leetcode solutions with an intuitive interface. Users can save solutions, categorize problems, monitor progress, and analyze performance over time. It functions as both a personal learning tool and a portfolio of problem-solving skills.
