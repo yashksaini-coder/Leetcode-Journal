@@ -7,7 +7,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Separator } from "@/components/ui/separator"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { BookOpen, CheckCircle} from 'lucide-react'
+import { BookOpen, CheckCircle, Github } from 'lucide-react'
+import { SocialLinks } from "@/components/socials"
+import { Highlight } from "@/components/ui/hero-hihglight";
 
 export default function LandingPage() {
   return (
@@ -31,12 +33,15 @@ export default function LandingPage() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-secondary">
-          <div className="container px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary overflow-hidden">
+          <div className="container px-4 md:px-6 relative z-10">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Master LeetCode, Track Your Progress
+                <h1 className="text-3xl mb-9 font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+                <p className='mb-5'>Master LeetCode</p>
+                  <Highlight className="dark:bg-primary/20 bg-primary/10">
+                    Track Your Progress
+                  </Highlight>
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                   LeetCode Journal helps you organize your problem-solving journey, track your progress, and achieve your coding interview goals.
@@ -49,7 +54,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+        <section id="features" className="w-full abo py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Features</h2>
             <Tabs defaultValue="track" className="w-full max-w-4xl mx-auto">
@@ -238,68 +243,86 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
-      <footer className="w-full py-6 px-4 md:px-6 border-t">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="font-semibold mb-2">Product</h3>
-              <ul className="space-y-1">
-                <li><Link href="#" className="text-sm hover:text-primary">Features</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Pricing</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">FAQ</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Company</h3>
-              <ul className="space-y-1">
-                <li><Link href="#" className="text-sm hover:text-primary">About</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Blog</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Careers</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Resources</h3>
-              <ul className="space-y-1">
-                <li><Link href="#" className="text-sm hover:text-primary">Documentation</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Community</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Support</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Legal</h3>
-              <ul className="space-y-1">
-                <li><Link href="#" className="text-sm hover:text-primary">Privacy Policy</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Terms of Service</Link></li>
-                <li><Link href="#" className="text-sm hover:text-primary">Cookie Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-          <Separator className="my-8" />
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-sm text-muted-foreground">© 2023 LeetCode Journal. All rights reserved.</p>
-            <div className="flex space-x-4 mt-4 sm:mt-0">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">Instagram</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.248 2.242 1.31 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.31 3.608-.975.975-2.242 1.248-3.608 1.31-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.975-1.248-2.242-1.31-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.756 0 8.332.013 7.052.072 5.773.131 4.548.403 3.467 1.484 2.387 2.564 2.115 3.789 2.056 5.068.997 6.348.984 6.772.984 12s.013 5.652.072 6.932c.059 1.279.331 2.504 1.412 3.585 1.08 1.08 2.305 1.352 3.584 1.411 1.28.059 1.704.072 6.932.072s5.652-.013 6.932-.072c1.279-.059 2.504-.331 3.585-1.412 1.08-1.08 1.352-2.305 1.411-3.584.059-1.28.072-1.704.072-6.932s-.013-5.652-.072-6.932c-.059-1.279-.331-2.504-1.412-3.585-1.08-1.08-2.305-1.352-3.584-1.411C15.652.013 15.228 0 12 0zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
-                </svg>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">Twitter</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">GitHub</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <footer className="w-full py-12 px-4 md:px-6 border-t bg-secondary">
+  <div className="container mx-auto">
+    <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+      <div className="flex items-center space-x-4 mb-4 md:mb-0">
+        <BookOpen className="h-6 w-6 text-primary" />
+        <span className="font-bold text-lg">LeetCode Journal</span>
+      </div>
+      <div className="flex items-center space-x-4 -ml-2">
+        <Button
+          variant="outline"
+          size="sm"
+          className="hidden md:flex"
+          asChild
+        >
+          <a
+            href="https://github.com/yourusername/leetcode-journal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github className="mr-2 h-4 w-4" />
+            Star on GitHub
+          </a>
+        </Button>
+        <SocialLinks />
+      </div>
+    </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h3 className="font-semibold mb-3 text-lg">Product</h3>
+        <ul className="space-y-2">
+          <li><Link href="#features" className="text-sm hover:text-primary transition-colors">Features</Link></li>
+          <li><Link href="#pricing" className="text-sm hover:text-primary transition-colors">Pricing</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">FAQ</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-3 text-lg">Company</h3>
+        <ul className="space-y-2">
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">About</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Blog</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Careers</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-3 text-lg">Resources</h3>
+        <ul className="space-y-2">
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Documentation</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Community</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Support</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-3 text-lg">Legal</h3>
+        <ul className="space-y-2">
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Privacy Policy</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Terms of Service</Link></li>
+          <li><Link href="#" className="text-sm hover:text-primary transition-colors">Cookie Policy</Link></li>
+        </ul>
+      </div>
+    </div>
+    <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
+      <p className="text-sm text-muted-foreground mb-4 md:mb-0">© 2023 LeetCode Journal. All rights reserved.</p>
+      <Button
+        variant="outline"
+        size="sm"
+        className="md:hidden"
+        asChild
+      >
+        <a
+          href="https://github.com/yourusername/leetcode-journal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Github className="mr-2 h-4 w-4" />
+          Star on GitHub
+        </a>
+      </Button>
+    </div>
+  </div>
+</footer>
     </div>
   )
 }
