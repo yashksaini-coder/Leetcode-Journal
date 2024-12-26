@@ -258,7 +258,7 @@ export default function LandingPage() {
           asChild
         >
           <a
-            href="https://github.com/yourusername/leetcode-journal"
+            href="https://github.com/yashksaini-coder/leetcode-journal"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -305,21 +305,6 @@ export default function LandingPage() {
     </div>
     <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
       <p className="text-sm text-muted-foreground mb-4 md:mb-0">© 2023 LeetCode Journal. All rights reserved.</p>
-      <Button
-        variant="outline"
-        size="sm"
-        className="md:hidden"
-        asChild
-      >
-        <a
-          href="https://github.com/yourusername/leetcode-journal"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Github className="mr-2 h-4 w-4" />
-          Star on GitHub
-        </a>
-      </Button>
     </div>
   </div>
 </footer>
