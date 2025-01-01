@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Separator } from "@/components/ui/separator"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { BookOpen, CheckCircle, Github } from 'lucide-react'
@@ -22,9 +21,6 @@ export default function LandingPage() {
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:text-primary" href="#features">
             Features
-          </Link>
-          <Link className="text-sm font-medium hover:text-primary" href="#testimonials">
-            Testimonials
           </Link>
           <Link className="text-sm font-medium hover:text-primary" href="#pricing">
             Pricing
@@ -114,46 +110,6 @@ export default function LandingPage() {
             </Tabs>
           </div>
         </section>
-        <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">What Our Users Say</h2>
-            <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
-              <CarouselContent>
-                {[
-                  {
-                    name: "Alex Johnson",
-                    role: "Software Engineer at Google",
-                    content: "LeetCode Journal has been instrumental in my interview prep. It's like having a personal coding coach!"
-                  },
-                  {
-                    name: "Sarah Lee",
-                    role: "Recent CS Graduate",
-                    content: "This tool helped me stay organized and motivated throughout my job search. Highly recommended!"
-                  },
-                  {
-                    name: "Michael Chen",
-                    role: "Senior Developer at Amazon",
-                    content: "The progress tracking feature is a game-changer. It's satisfying to see my skills improve over time."
-                  }
-                ].map((testimonial, index) => (
-                  <CarouselItem key={index}>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{testimonial.name}</CardTitle>
-                        <CardDescription>{testimonial.role}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p>{testimonial.content}</p>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </div>
-        </section>
         <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Simple Pricing</h2>
@@ -200,31 +156,6 @@ export default function LandingPage() {
                 </Card>
               ))}
             </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Frequently Asked Questions</h2>
-            <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>How does LeetCode Journal help me prepare for coding interviews?</AccordionTrigger>
-                <AccordionContent>
-                  LeetCode Journal provides a structured approach to your interview preparation by helping you track problems, analyze your progress, and focus on areas that need improvement. It also offers personalized recommendations and curated problem sets to enhance your skills efficiently.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Can I use LeetCode Journal with other coding platforms?</AccordionTrigger>
-                <AccordionContent>
-                  While LeetCode Journal is optimized for LeetCode, you can use it to track your progress on other coding platforms as well. You can manually add problems from other sources and categorize them according to your needs.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Is there a mobile app available?</AccordionTrigger>
-                <AccordionContent>
-                  Currently, LeetCode Journal is available as a web application optimized for both desktop and mobile browsers. We're working on dedicated mobile apps for iOS and Android, which will be released in the near future.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32">
