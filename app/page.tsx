@@ -19,12 +19,6 @@ export default function LandingPage() {
           <span className="font-bold text-lg">LeetCode Journal</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:text-primary" href="#features">
-            Features
-          </Link>
-          <Link className="text-sm font-medium hover:text-primary" href="#pricing">
-            Pricing
-          </Link>
           <ThemeToggle />
         </nav>
       </header>
@@ -45,7 +39,9 @@ export default function LandingPage() {
               </div>
               <div className="space-x-4">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">Get Started</Button>
-                <Button variant="outline" size="lg">Learn More</Button>
+                <Button variant="outline" size="lg">Learn More
+                  <a href=""></a>
+                </Button>
               </div>
             </div>
           </div>
