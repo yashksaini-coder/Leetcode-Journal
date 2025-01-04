@@ -19,16 +19,23 @@ jobs:
 
       - name: Add Comment on Pull Request
         if: ${{ github.event_name == 'pull_request' }}
-        uses: peter-evans/create-or-update-comment@v3
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            🚀 **Hello @${{ github.event.pull_request.user.login }}!**
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issueNumber = context.issue.number;
+            const contributor = context.issue.pull_request.user.login;
+            const relatedIssue = context.issue.pull_request.issue.number; 
+
+            const commentBody = `🚀 **Hello @${contributor}!**
 
             Thank you for your contribution to the **Leetcode Journal** project! 🎉  
             We value your effort and are excited to review your changes.
+
+             **PR Details:**
+
+            * **Contributor:** @${contributor} 
+            * **Related Issue:** Closes #${relatedIssue} (if applicable)
 
             ### PR Checklist:
             Please ensure your PR adheres to the following checklist:
@@ -45,26 +52,56 @@ jobs:
             The team will review your PR shortly. If you have any questions, feel free to ask here!  
             Happy Coding! 🚀
 
+            const params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: commentBody
+            };
+
+            github.rest.issues.createComment(params);
+
       - name: Add Comment on Issue
         if: ${{ github.event_name == 'issues' }}
-        uses: peter-evans/create-or-update-comment@v3
+        uses: actions/github-script@v6        
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            👋 **Hello @${{ github.event.issue.user.login }}!**
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issueNumber = context.issue.number;
+            const contributor = context.issue.user.login;
 
+            const commentBody = `👋 **Hello @${contributor}!**
+            
             Thank you for raising an issue in the **Leetcode Journal** project!  
             Your issue has been logged, and the team will review it shortly.
+
+            **Issue Details:**
+
+            * **Contributor:** @${contributor}
 
             ### Issue Handling Checklist:
             - [ ] Make sure the issue includes clear steps to reproduce (if applicable).
             - [ ] Provide relevant context, screenshots, or logs.
             - [ ] Mention if this issue blocks any critical workflows.
+            - [ ] **If it's a Feature Request:**
+                *   Explain the desired functionality, including:
+                    *   Approach: How you envision implementing this feature.
+                    *   Benefits: How this feature will improve the project. 
+            - [ ] **If it's a Bug:**
+                *   Describe how to resolve it without affecting the working of the project.
+
 
             ### Notifications:
             - **Project Admin:** @yashksaini-coder  
             - **Mentor:** @ompharate  
 
             We'll get back to you soon. Stay tuned! 🚀
+
+            const params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: commentBody
+            };
+
+            github.rest.issues.createComment(params);
