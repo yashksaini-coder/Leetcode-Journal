@@ -4,7 +4,8 @@ on:
   issues:
     types: [opened]
   pull_request:
-    types: [opened]
+    types:
+      - opened
 
 jobs:
   auto-comment:
@@ -13,17 +14,57 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: Auto Comment
-        uses: actions/github-script@v7
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Add Comment on Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: peter-evans/create-or-update-comment@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const issueComment = context.payload.issue
-              ? `Thank you for opening an issue, @${context.payload.issue.user.login}! will review it soon. Meanwhile you can describe & share your approach on how to resolve this issue.`
-              : `Thank you for creating this pull request, @${context.payload.pull_request.user.login}! A reviewer will check it shortly.`;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: issueComment,
-            });
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🚀 **Hello @${{ github.event.pull_request.user.login }}!**
+
+            Thank you for your contribution to the **Leetcode Journal** project! 🎉  
+            We value your effort and are excited to review your changes.
+
+            ### PR Checklist:
+            Please ensure your PR adheres to the following checklist:
+            - [ ] PR description includes a summary and context for the changes.
+            - [ ] Relevant dependencies have been listed.
+            - [ ] Testing section is filled out with details on verification.
+            - [ ] Screenshots/Videos are attached (if applicable).
+            - [ ] Checklist items are marked as completed.
+
+            ### Review Notifications:
+            - **Project Admin:** @yashksaini-coder  
+            - **Mentor:** @ompharate  
+
+            The team will review your PR shortly. If you have any questions, feel free to ask here!  
+            Happy Coding! 🚀
+
+      - name: Add Comment on Issue
+        if: ${{ github.event_name == 'issues' }}
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            👋 **Hello @${{ github.event.issue.user.login }}!**
+
+            Thank you for raising an issue in the **Leetcode Journal** project!  
+            Your issue has been logged, and the team will review it shortly.
+
+            ### Issue Handling Checklist:
+            - [ ] Make sure the issue includes clear steps to reproduce (if applicable).
+            - [ ] Provide relevant context, screenshots, or logs.
+            - [ ] Mention if this issue blocks any critical workflows.
+
+            ### Notifications:
+            - **Project Admin:** @yashksaini-coder  
+            - **Mentor:** @ompharate  
+
+            We'll get back to you soon. Stay tuned! 🚀
