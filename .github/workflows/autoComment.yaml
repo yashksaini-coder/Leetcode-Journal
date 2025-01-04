@@ -19,7 +19,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const issueComment = context.payload.issue
-              ? `Thank you for opening an issue, @${context.payload.issue.user.login}! We'll review it soon.`
+              ? `Thank you for opening an issue, @${context.payload.issue.user.login}! will review it soon. Meanwhile you can describe & share your approach on how to resolve this issue.`
               : `Thank you for creating this pull request, @${context.payload.pull_request.user.login}! A reviewer will check it shortly.`;
             github.rest.issues.createComment({
               owner: context.repo.owner,
