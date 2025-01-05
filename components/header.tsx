@@ -16,19 +16,19 @@ const Navbar: FC = () => {
           <span className="text-xl font-semibold">LeetCodeJournal</span>
         </div>
         <div className="hidden lg:flex space-x-6">
-          <Link href="#" className="hover:text-purple-400 hover:animate-spin">
+          <Link href="#" className="hover:text-purple-400 ">
             Home
           </Link>
-          <Link href="#" className="hover:text-purple-400 hover:animate-pulse">
+          <Link href="#" className="hover:text-purple-400 ">
             Features
           </Link>
-          <Link href="#" className="hover:text-purple-400 hover:animate-bounce">
+          <Link href="#" className="hover:text-purple-400 ">
             How it Works
           </Link>
-          <Link href="#" className="hover:text-purple-400 hover:animate-ping">
+          <Link href="#" className="hover:text-purple-400 ">
             FAQs
           </Link>
-          <Link href="#" className="hover:text-purple-400 hover:animate-bounce">
+          <Link href="#" className="hover:text-purple-400 ">
             Blog
           </Link>
         </div>
