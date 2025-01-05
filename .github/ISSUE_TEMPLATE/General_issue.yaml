@@ -1,0 +1,67 @@
+name: "🤔 General Issue"
+description: "Submit a general question, suggestion or issue"
+title: "[GENERAL] "
+labels: ["triage-needed"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # General Issue Template
+        Thanks for taking the time to fill out this issue! Please provide as much information as possible.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category"
+      description: "What type of issue is this?"
+      options:
+        - Question
+        - Suggestion
+        - Problem
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What would you like to share or ask?"
+      placeholder: "Provide details about your issue, question, or suggestion..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional Context"
+      description: "Add any other context, screenshots, or relevant information"
+      placeholder: "Add any additional details here..."
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: "Impact Level"
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Contribution Guidelines"
+      options:
+        - label: "I have searched [existing issues](https://github.com/yashksaini-coder/Leetcode-Journal/issues) to avoid duplicates"
+          required: true
+        - label: "I would like to help resolve this issue"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        Thank you for contributing to our project! 🙏

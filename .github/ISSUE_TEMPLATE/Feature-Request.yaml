@@ -1,0 +1,71 @@
+name: "✨ Feature Request"
+description: "Suggest a new feature to enhance our Leetcode-Journal"
+title: "[FEATURE] "
+labels: ["enhancement"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Feature Request
+        Thanks for taking the time to suggest a new feature! 
+        Please fill out the information below to help us understand your suggestion better.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What problem does this feature solve?"
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Describe the solution you'd like"
+      placeholder: "It would be great if..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternative Solutions"
+      description: "What alternatives have you considered?"
+      placeholder: "Another approach could be..."
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or Mockups"
+      description: "Add any relevant screenshots, mockups or examples"
+      placeholder: "Drag and drop images here..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Contribution Guidelines"
+      options:
+        - label: "I have searched [existing issues](https://github.com/yashksaini-coder/Leetcode-Journal/issues) and this is not a duplicate"
+          required: true
+        - label: "I would like to implement this feature"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        💡 Thank you for contributing to make our Leetcode Journal better!
