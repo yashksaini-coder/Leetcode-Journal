@@ -1,0 +1,67 @@
+name: "📚 Documentation Update"
+description: "Help us improve our documentation"
+title: "[DOCS] "
+labels: ["documentation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! 📖
+        Please fill out the information below to help us understand your suggestion better.
+
+  - type: textarea
+    id: current_docs
+    attributes:
+      label: "Current Documentation"
+      description: "What's currently in the documentation that needs to be updated?"
+      placeholder: "Example: The installation guide is missing steps for Windows setup..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested_change
+    attributes:
+      label: "Suggested Changes"
+      description: "What changes would you like to see?"
+      placeholder: "Example: Add Windows-specific installation steps..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or Examples"
+      description: "Add screenshots or examples if applicable"
+      placeholder: "Drag and drop images here..."
+
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: "Documentation Type"
+      options:
+        - Installation Guide
+        - API Reference
+        - Tutorials
+        - README
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Contribution Agreement"
+      options:
+        - label: "I have searched existing issues and this is not a duplicate"
+          required: true
+        - label: "I have read the contributing guidelines"
+          required: true
+        - label: "I would like to work on fixing this documentation"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ⭐ Thank you for helping make our documentation better!
