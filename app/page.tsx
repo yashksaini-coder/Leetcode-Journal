@@ -9,19 +9,12 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { BookOpen, CheckCircle, Github } from 'lucide-react'
 import { SocialLinks } from "@/components/socials"
 import { Highlight } from "@/components/ui/hero-hihglight";
+import Navbar from '@/components/header'
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b">
-        <Link className="flex items-center justify-center" href="#">
-          <BookOpen className="h-6 w-6 mr-2 text-primary" />
-          <span className="font-bold text-lg">LeetCode Journal</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <ThemeToggle />
-        </nav>
-      </header>
+      <Navbar/>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary overflow-hidden">
           <div className="container px-4 md:px-6 relative z-10">
