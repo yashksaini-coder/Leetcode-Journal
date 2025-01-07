@@ -10,7 +10,7 @@ const Navbar: FC = () => {
   return (
     <header>
      
-      <nav className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white dark:bg-gray-800">
+      <nav className="flex justify-between items-center px-6 py-4 bg-primary-foreground">
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold">📓</span>
           <span className="text-xl font-semibold">LeetCodeJournal</span>
