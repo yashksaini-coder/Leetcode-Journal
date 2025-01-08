@@ -11,7 +11,7 @@ const Navbar = ({ userId }: { userId?: string }) => {
   const router = useRouter(); 
   return (
     <header>
-      <nav className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white dark:bg-gray-800">
+      <nav className="flex justify-between items-center px-6 py-4 bg-neutral-900 text-white dark:bg-neutral-800">
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold">📓</span>
           <span className="text-xl font-semibold">
@@ -42,18 +42,18 @@ const Navbar = ({ userId }: { userId?: string }) => {
               onClick={() =>
                 supabase.auth
                   .signOut()
-                  .then(() => router.push("/login"))
+                  .then(() => router.push("/auth/signin"))
               }
             >
               Sign Out
             </Button>
           ) : (
             <>
-              <Link href="/login" className="hover:text-gray-400">
+              <Link href="/auth/signin" className="hover:text-neutral-400">
                 Log in
               </Link>
               <Button className="bg-purple-500 hover:bg-purple-600">
-                <Link href="/signup" className="">
+                <Link href="/auth/register" className="">
                   Sign up
                 </Link>
               </Button>
