@@ -1,17 +1,6 @@
 # Leetcode Journal 🚀
 
-Your ultimate companion for mastering LeetCode!
-
 Leetcode Journal is a robust platform designed to help developers track, organize, and analyze their problem-solving journey on LeetCode. Whether you're preparing for coding interviews or sharpening your skills, Leetcode Journal ensures an intuitive and efficient experience.
-
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
 
 ## Project Overview
 
@@ -41,19 +30,6 @@ Leetcode Journal leverages cutting-edge technologies to deliver a seamless user 
 - **Visualization:** Chart.js for interactive data insights and progress monitoring.
 - **Hosting:** Vercel for a fast, optimized live application experience.
 
-## Installation
-
-### Prerequisites
-
-Ensure you have the following tools installed:
-
-- [Node.js](https://nodejs.org/) (v16.x or higher)
-- [npm](https://www.npmjs.com/) (v6.x or higher) or yarn (v1.x or higher)
-- [Python](https://www.python.org/) (v3.x or higher)
-- [PostgreSQL](https://www.postgresql.org/) (v14.x or higher)
-    Python 3.x
-    PostgreSQL
-
 ### Setup
 
 #### 1. Clone the Repository
@@ -66,35 +42,31 @@ cd leetcode-journal
 
 #### 2. Install Dependencies
 ```bash
-# Install backend dependencies  
-pip install -r requirements.txt  
-
-# Install frontend dependencies  
-cd client  
 npm install  
 ```
-#### 3. Set Up Database
+#### 3. Set Up Supabase
 
-- Configure your PostgreSQL database in the backend settings.
+- Go to the [Supabase](https://supabase.io/) website and create an account.
+- Create a new project in Supabase.
+- Navigate to the API section and create a new API key.
+- Copy the API key and the URL of your Supabase project.
+
+#### 4. Set Up Environment Variables
+- Create a new file named `.env` in the `client` directory.
+- Add the following environment variables to the file:
+```bash
+NEXT_PUBLIC_SUPABASE_URL = your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY = your-anon-key
+```
 
 #### 4. Start the Application
 ```bash
-# Start the backend  
-python manage.py runserver  
-
-# Start the frontend  
-cd client  
-npm start 
+# Start the application  
+npm run dev 
 ```
+
 #### 5. Open the app in your browser 
 You should now be able to access the application at [http://localhost:3000](http://localhost:3000)
-
-## Usage
-
-- **Login/Sign Up:** Access your personalized dashboard.
-- **Save Solutions:** Add your solutions and tag them by category.
-- **Analyze Performance:** Explore your progress using charts and statistics.
-- **Categorize Problems:** Organize and retrieve problems effortlessly.
 
 ## Contributing
 
@@ -104,7 +76,7 @@ We welcome contributions! Follow these steps to get started:
 ```
 ```bash
 # Clone the forked repository to your local machine
-git clone https://github.com/your-username/leetcode-journal.git 
+git clone https://github.com/yashksaini-coder/leetcode-journal.git 
 ```
 ```bash
 # Navigate into the project directory
