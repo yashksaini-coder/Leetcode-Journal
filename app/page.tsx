@@ -9,30 +9,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { BookOpen, CheckCircle, Github } from "lucide-react";
-import { SocialLinks } from "@/components/socials";
+import { BookOpen, Github } from "lucide-react";
+import { SocialLinks } from "@/components/SocialLinks";
 import { Highlight } from "@/components/ui/hero-hihglight";
-import Navbar from "@/components/header";
 import PricingCard from "@/components/LandingComponents/PriceCard";
+import Navbar1 from "@/components/navbar";
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <Navbar />
+      <Navbar1 />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary overflow-hidden">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
