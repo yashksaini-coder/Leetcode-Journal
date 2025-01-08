@@ -42,11 +42,11 @@ const Navbar1 = () => {
           ))}
         </div>
         <div className="hidden lg:flex items-center space-x-4">
-          <Link href="/login" className="text-sm font-medium text-muted-foreground hover:text-primary">
+          <Link href="/auth/signin" className="text-sm font-medium text-muted-foreground hover:text-primary">
             Log in
           </Link>
           <Button asChild>
-            <Link href="/signup">Sign up</Link>
+            <Link href="/auth/register">Sign up</Link>
           </Button>
           <ThemeToggle />
         </div>
@@ -76,14 +76,14 @@ const Navbar1 = () => {
             ))}
             <div className="flex flex-col space-y-4 pt-4 border-t">
               <Link
-                href="/login"
+                href="/auth/signin"
                 className="text-sm font-medium text-muted-foreground hover:text-primary"
                 onClick={toggleMenu}
               >
                 Log in
               </Link>
               <Button asChild onClick={toggleMenu}>
-                <Link href="/signup">Sign up</Link>
+                <Link href="/auth/register">Sign up</Link>
               </Button>
               <div className="flex justify-start">
                 <ThemeToggle />

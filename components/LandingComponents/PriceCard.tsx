@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import LandingEmerlandButton from "./LandingEmerlandButton";
+import LandingEmerlandButton from "../Buttons/LandingEmerlandButton";
 
 export interface PricingCardProps {
   title: string;

@@ -1,78 +1,97 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
-import { useRouter } from 'next/navigation';
-import Navbar from '@/components/header';
-import StatsCard from '@/components/Stats';
-import { fetchLeetCodeStats } from '@/lib/utils';
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/AuthStore/useAuthStore";
+import Navbar from "@/components/header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
-    const [userData, setUserData] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
+  const router = useRouter();
+  const { authUser, fetchAuthUser, authUserLoading } = useAuthStore();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data, error } = await supabase.auth.getSession();
+  useEffect(() => {
+    fetchAuthUser();
+  }, [fetchAuthUser]);
 
-                if (error) throw new Error("Error fetching session.");
-
-                const session = data.session;
-                if (!session) {
-                    router.push('/login');
-                    return;
-                }
-                // Fetch user-specific data in a single call
-                const { data: userInfo, error: userInfoError } = await supabase
-                    .from('user_info')
-                    .select('*')
-                    .eq('user_id', session.user.id)
-                    .single(); 
-
-                if (userInfoError) throw userInfoError;
-
-                setUserData(userInfo);
-
-            } catch (err: any) {
-                console.error(err);
-                setError(err.message || 'An error occurred.');
-                router.push('/login');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, [router]);
-
-    if (loading) return <p>Loading...</p>;
-
-    if (error) {
-        return (
-            <div>
-                <Navbar userId={userData.user_id} />
-                <p className="text-red-500">{error}</p>
-            </div>
-        );
+  useEffect(() => {
+    if (!authUserLoading && !authUser) {
+      router.push("/auth/signin");
     }
+  }, [authUserLoading, authUser, router]);
 
-    return (
-        <div>
-            <Navbar userId={userData?.user_id} />
-            <div className="container mx-auto p-4">
-                <h1 className="text-xl font-bold mb-4">Welcome, {userData.name}</h1>
-                <div className="mb-4">
-                    <p>LeetCode Username: {userData.leetcode_username}</p>
-                    <p>Gender: {userData.gender}</p>
-                </div>
-                
-                <div className="mt-6">
-                    <h2 className="text-lg font-bold mb-2">LeetCode Stats</h2>
-                    <StatsCard leetcodeUsername={userData.leetcode_username} id={userData.id} />
-                </div>
-            </div>
-        </div>
-    );
+  if (authUserLoading) {
+    return <DashboardSkeleton />;
+  }
+
+  if (!authUser) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen">
+      <Navbar userId={authUser.id} />
+      <main className="container mx-auto p-4 space-y-6">
+        <h1 className="text-3xl font-bold">Welcome, {authUser.fullName}</h1>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Your Profile</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p>
+              <span className="font-medium">LeetCode Username:</span>{" "}
+              {authUser.leetcodeUsername}
+            </p>
+            <p>
+              <span className="font-medium">Gender:</span> {authUser.gender}
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>LeetCode Stats</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {/* LeetCode stats component will go here */}
+            <p className="text-muted-foreground">
+              LeetCode stats are coming soon!
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </div>
+  );
+}
+
+function DashboardSkeleton() {
+  return (
+    <div className="min-h-screen">
+      {/* <Navbar userId={} /> */}
+      <main className="container mx-auto p-4 space-y-6">
+        <Skeleton className="h-10 w-[250px]" />
+
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-7 w-[100px]" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-full" />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-7 w-[120px]" />
+          </CardHeader>
+          <CardContent>
+            <Skeleton className="h-20 w-full" />
+          </CardContent>
+        </Card>
+      </main>
+    </div>
+  );
 }
