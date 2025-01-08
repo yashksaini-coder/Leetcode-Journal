@@ -33,10 +33,14 @@ const Navbar: FC = () => {
           </Link>
         </div>
         <div className="hidden lg:flex items-center space-x-4">
-          <Link href="#" className="hover:text-gray-400">
+          <Link href="/login" className="hover:text-gray-400">
             Log in
           </Link>
-          <Button className="bg-purple-500 hover:bg-purple-600">Sign up</Button>
+          <Button className="bg-purple-500 hover:bg-purple-600">
+            <Link href="/signup" className="">
+              Sign up
+            </Link>
+          </Button>
           <ThemeToggle />
         </div>
         <button
