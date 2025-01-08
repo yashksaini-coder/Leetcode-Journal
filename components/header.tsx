@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { supabase } from "@/lib/supabaseClient";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
 
 const Navbar = ({ userId }: { userId?: string }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

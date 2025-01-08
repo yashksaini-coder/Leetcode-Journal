@@ -60,7 +60,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <Navbar userId={userData.user_id} />
+            <Navbar userId={userData?.user_id} />
             <div className="container mx-auto p-4">
                 <h1 className="text-xl font-bold mb-4">Welcome, {userData.name}</h1>
                 <div className="mb-4">
