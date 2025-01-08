@@ -70,7 +70,7 @@ const transformLeetCodeData = (stats: any) => {
 };
 
 // API POST Handler
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const username = searchParams.get('username');
     const id = searchParams.get('id');
@@ -89,5 +89,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     await storeUserStats(id, transformedStats);
 
-    return NextResponse.json({ message: "Success", stats:transformedStats });
+    return NextResponse.json({ message: "Success", stats: transformedStats });
 }
