@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -42,19 +43,19 @@ const Navbar = ({ userId }: { userId?: string }) => {
               onClick={() =>
                 supabase.auth
                   .signOut()
-                  .then(() => router.push("/login"))
+                  .then(() => router.push("/auth/signin"))
               }
             >
               Sign Out
             </Button>
           ) : (
             <>
-              <Link href="/login" className="hover:text-gray-400">
-                Log in
+              <Link href="/auth/signin" className="hover:text-gray-400">
+                Sign In
               </Link>
               <Button className="bg-purple-500 hover:bg-purple-600">
-                <Link href="/signup" className="">
-                  Sign up
+                <Link href="/auth/register" className="">
+                  Register
                 </Link>
               </Button>
             </>
