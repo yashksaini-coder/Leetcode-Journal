@@ -68,7 +68,7 @@ export const useAuthStore = create<authStore>((set) => ({
             const response = await axios.post('/api/auth/register', signupMetaData);
             if (response.status === 201) {
                 set({ user: signupMetaData });
-                router.push('/dashboard');
+                router.push('/auth/signin');
                 set({ signupError: null });
             }
         } catch (error: any) {
