@@ -57,6 +57,7 @@ npm install
 ```bash
 NEXT_PUBLIC_SUPABASE_URL = your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY = your-anon-key
+DATABASE_URL = your-database-url
 ```
 
 #### 4. Start the Application
