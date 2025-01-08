@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { fetchLeetCodeStats } from '@/lib/utils';
-import { supabase } from '@/lib/supabaseClient';
 
 interface StatsCardProps {
     leetcodeUsername: string;
-    userId:string
+    id:string
 }
 
-const StatsCard: React.FC<StatsCardProps> = ({ leetcodeUsername, userId }) => {
+const StatsCard: React.FC<StatsCardProps> = ({ leetcodeUsername, id }) => {
     const [stats, setStats] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -18,7 +17,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ leetcodeUsername, userId }) => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const {stats} = await fetchLeetCodeStats(leetcodeUsername, userId);
+                const {stats} = await fetchLeetCodeStats(leetcodeUsername, id);
                 setStats(stats);
             } catch (err: any) {
                 setError(err.message || 'Error fetching LeetCode stats.');
@@ -26,7 +25,6 @@ const StatsCard: React.FC<StatsCardProps> = ({ leetcodeUsername, userId }) => {
                 setLoading(false);
             }
         };
-        console.log(stats);
         
         fetchStats();
     }, [leetcodeUsername]);

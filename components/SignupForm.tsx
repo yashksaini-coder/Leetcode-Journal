@@ -15,6 +15,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { supabase } from '@/lib/supabaseClient';
+import Link from 'next/link';
 
 const SignupForm: React.FC = () => {
     const router = useRouter();
@@ -179,6 +180,12 @@ const SignupForm: React.FC = () => {
                         <Button type="submit" disabled={loading} className="w-full">
                             {loading ? 'Submitting...' : 'Sign Up'}
                         </Button>
+                        <div className="flex justify-center mt-4">
+                            <Link href="/login" className="text-sm text-gray-500">
+                                Already have an account? 
+                                <span className='hover:underline ms-1'>Log in</span>
+                            </Link>
+                        </div> 
                     </form>
                 </div>
             </div>

@@ -35,9 +35,9 @@ const fetchLeetCodeStats = async (username: string) => {
 };
 
 // Store transformed user stats in Supabase
-const storeUserStats = async (userId: string, stats: any) => {
+const storeUserStats = async (id: string, stats: any) => {
     const entry = {
-        user_id: String(userId),
+        id: String(id),
         ranking: stats.profile.ranking,
         solved_easy: stats.submitStats.acSubmissionNum.find((item: any) => item.difficulty === 'Easy')?.count || "0",
         solved_medium: stats.submitStats.acSubmissionNum.find((item: any) => item.difficulty === 'Medium')?.count || "0",
@@ -73,10 +73,10 @@ const transformLeetCodeData = (stats: any) => {
 export async function POST(req: NextRequest, res: NextResponse) {
     const searchParams = req.nextUrl.searchParams;
     const username = searchParams.get('username');
-    const userId = searchParams.get('userId');
+    const id = searchParams.get('id');
 
-    if (!username || !userId) {
-        return NextResponse.json({ error: "Username and userId are required" }, { status: 400 });
+    if (!username || !id) {
+        return NextResponse.json({ error: "Username and id are required" }, { status: 400 });
     }
 
     const stats = await fetchLeetCodeStats(username);
@@ -87,9 +87,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const transformedStats = transformLeetCodeData(stats);
 
-    console.log('Transformed Stats:', JSON.stringify(transformedStats, null, 2));
-
-    await storeUserStats(userId, transformedStats);
+    await storeUserStats(id, transformedStats);
 
     return NextResponse.json({ message: "Success", stats:transformedStats });
 }

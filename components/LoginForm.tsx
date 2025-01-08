@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import Link from 'next/link';
 
 const LoginForm: React.FC = () => {
     const router = useRouter();
@@ -92,6 +93,13 @@ const LoginForm: React.FC = () => {
                         <Button type="submit" disabled={loading} className="w-full">
                             {loading ? 'Logging in...' : 'Log In'}
                         </Button>
+                        
+                        <div className="flex justify-center mt-4">
+                            <Link href="/signup" className="text-sm text-gray-500">
+                                Don't have an account? 
+                                <span className='hover:underline ms-1'>Sign up</span>
+                            </Link>
+                        </div> 
                     </form>
                 </div>
             </div>

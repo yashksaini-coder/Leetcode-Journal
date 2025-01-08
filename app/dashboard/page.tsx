@@ -52,7 +52,7 @@ export default function Dashboard() {
     if (error) {
         return (
             <div>
-                <Navbar />
+                <Navbar userId={userData.user_id} />
                 <p className="text-red-500">{error}</p>
             </div>
         );
@@ -60,23 +60,17 @@ export default function Dashboard() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar userId={userData.user_id} />
             <div className="container mx-auto p-4">
                 <h1 className="text-xl font-bold mb-4">Welcome, {userData.name}</h1>
                 <div className="mb-4">
                     <p>LeetCode Username: {userData.leetcode_username}</p>
                     <p>Gender: {userData.gender}</p>
-                    <p>User ID: {userData.user_id}</p>
                 </div>
-                <button
-                    className="px-4 py-2 bg-red-500 text-white rounded"
-                    onClick={() => supabase.auth.signOut().then(() => router.push('/login'))}
-                >
-                    Sign Out
-                </button>
+                
                 <div className="mt-6">
                     <h2 className="text-lg font-bold mb-2">LeetCode Stats</h2>
-                    <StatsCard leetcodeUsername={userData.leetcode_username} userId={userData.user_id} />
+                    <StatsCard leetcodeUsername={userData.leetcode_username} id={userData.id} />
                 </div>
             </div>
         </div>
