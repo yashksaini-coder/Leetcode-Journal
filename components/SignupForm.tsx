@@ -56,14 +56,13 @@ const SignupForm: React.FC = () => {
             const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
                 email,
                 password,
-                
             });
 
             if (signUpError) {
                 throw new Error(signUpError.message);
             }
 
-            const userId = signUpData?.user?.id;
+            const userId = signUpData?.user?.id; // Ensure correct path to user ID
 
             // Insert additional user information
             if (userId) {
