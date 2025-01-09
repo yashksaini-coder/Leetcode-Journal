@@ -25,4 +25,9 @@ export const signupSchema = z.object({
         .nonempty({ message: "Please select your gender " }),
 });
 
+export const signinSchema = z.object({
+    email: z.string().email({ message: "Please provide a valid email address." }),
+    password: z.string().nonempty({ message: "Password is required." }),
+});
+
 

@@ -1,10 +1,20 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import React from "react"
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import {
   Card,
   CardContent,
@@ -12,33 +22,29 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { useAuthStore } from "@/store/AuthStore/useAuthStore";
-import LoadingButton from "../Buttons/LoadingButton";
-import AuthBottom from "./AuthBottom";
+} from "@/components/ui/card"
+import { useAuthStore } from "@/store/AuthStore/useAuthStore"
+import LoadingButton from "../Buttons/LoadingButton"
+import AuthBottom from "./AuthBottom"
+import { signinSchema } from "@/validations/validation"
 
-interface FormData {
-  email: string;
-  password: string;
-}
+type SigninFormValues = z.infer<typeof signinSchema>
 
 export default function SigninForm() {
-  const { isSigningIn, signin, signinError } = useAuthStore();
-  const router = useRouter();
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-    password: "",
-  });
+  const { isSigningIn, signin, signinError } = useAuthStore()
+  const router = useRouter()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const form = useForm<SigninFormValues>({
+    resolver: zodResolver(signinSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    signin(formData, router);
-  };
+  const onSubmit = (data: SigninFormValues) => {
+    signin(data, router)
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
@@ -50,46 +56,47 @@ export default function SigninForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
                 name="email"
-                type="email"
-                placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="you@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
+              <FormField
+                control={form.control}
                 name="password"
-                type="password"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                required
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-
-            {signinError && (
-              <Alert variant="destructive">
-                <AlertDescription>{signinError}</AlertDescription>
-              </Alert>
-            )}
-
-            <LoadingButton
-              loading={isSigningIn}
-              loadingTitle="Signing in"
-              title="Signin"
-              type="submit"
-            />
-          </form>
+              {signinError && (
+                <Alert variant="destructive">
+                  <AlertDescription>{signinError}</AlertDescription>
+                </Alert>
+              )}
+              <LoadingButton
+                loading={isSigningIn}
+                loadingTitle="Signing in"
+                title="Sign in"
+                type="submit"
+              />
+            </form>
+          </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <AuthBottom
@@ -100,5 +107,5 @@ export default function SigninForm() {
         </CardFooter>
       </Card>
     </main>
-  );
+  )
 }
