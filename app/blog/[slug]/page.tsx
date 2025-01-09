@@ -91,10 +91,9 @@ const posts: Record<string, Post> = {
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = posts[params.slug]
-
-  if (!post) {
-    notFound()
-  }
+    if (!post) {
+        return { notFound: true }
+    }
 
   return (
     <div className="bg-gradient-to-br from-purple-50 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 bg-texture">
