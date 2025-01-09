@@ -232,7 +232,9 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
-      <footer className="w-full py-12 px-4 md:px-6 border-t bg-secondary">
+      <footer className="w-full pt-8 pb-4 px-4 md:px-6 border-t bg-secondary">
+        {/* <-- Changed pt-12 into pt-8 and pb-4 to reduce unnecessary padding */}
+
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
@@ -376,7 +378,8 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row justify-center items-center pt-8 border-t border-border">
+            {/* <-- Changed justify-between into justify-center to center the copyright statement*/}
             <p className="text-sm text-muted-foreground mb-4 md:mb-0">
               © {currentYear} LeetCode Journal. All rights reserved.
             </p>
