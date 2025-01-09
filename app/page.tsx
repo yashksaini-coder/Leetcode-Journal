@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -14,8 +15,17 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { Highlight } from "@/components/ui/hero-hihglight";
 import PricingCard from "@/components/LandingComponents/PriceCard";
 import Navbar1 from "@/components/navbar";
+import { useEffect, useState } from "react";
 
 export default function LandingPage() {
+  const [currentYear, setCurrentYear] = useState<number>(
+    new Date().getFullYear()
+  );
+
+  useEffect(() => {
+    // Set the current year dynamically on mount
+    setCurrentYear(new Date().getFullYear());
+  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Navbar1 />
@@ -222,7 +232,9 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
-      <footer className="w-full py-12 px-4 md:px-6 border-t bg-secondary">
+      <footer className="w-full pt-8 pb-4 px-4 md:px-6 border-t bg-secondary">
+        {/* <-- Changed pt-12 into pt-8 and pb-4 to reduce unnecessary padding */}
+
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
@@ -366,9 +378,10 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row justify-center items-center pt-8 border-t border-border">
+            {/* <-- Changed justify-between into justify-center to center the copyright statement*/}
             <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-              © 2023 LeetCode Journal. All rights reserved.
+              © {currentYear} LeetCode Journal. All rights reserved.
             </p>
           </div>
         </div>
