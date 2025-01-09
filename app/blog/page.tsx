@@ -1,68 +1,150 @@
-import BlogCard from '@/components/BlogCard'
-import Navbar1 from '@/components/navbar'
-import { BookOpen, Github } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { SocialLinks } from '@/components/SocialLinks'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import Link from 'next/link'
+import Navbar1 from "@/components/navbar"
+import { BlogSidebar } from "@/components/BlogSidebar"
+import { BookOpen, Github } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { SocialLinks } from '@/components/SocialLinks'
 
-export const metadata = {
-    title: 'Purple Blog',
-    description: 'A beautiful blog with a purple touch',
-  }  
+interface Post {
+  slug: string
+  title: string
+  date: string
+  description: string
+  tags: string[]
+}
 
-// Mock data for blog posts
-export const blogPosts = [
+const posts: Post[] = [
     {
-      id: '1',
-      title: 'Getting Started with Next.js',
-      excerpt: "Learn how to build modern web applications with Next.js and React. Dive into the world of server-side rendering, static site generation, and API routes with this powerful framework. This blog will guide you through setting up your first Next.js project, understanding its folder structure, and leveraging its built-in features to create high-performance, SEO-friendly web applications. Whether you're new to web development or transitioning from traditional React applications, this guide will give you a strong foundation. Topics include installing dependencies, working with dynamic routes, creating reusable components, and deploying your project to platforms like Vercel. By the end, you'll have a fully functional app and the knowledge to build more complex applications.",
-      date: 'May 1, 2023'
+      slug: 'release-v2',
+      title: 'Release of Tailwind Nextjs Starter Blog v2.0',
+      date: 'August 5, 2023',
+      description: 'Release of Tailwind Nextjs Starter Blog template v2.0, refactored with Nextjs App directory and React Server Components setup.',
+      tags: ['NEXT-JS', 'TAILWIND', 'GUIDE', 'FEATURE'],
     },
     {
-      id: '2',
-      title: 'Mastering Tailwind CSS',
-      excerpt: "Discover the power of utility-first CSS with Tailwind. Tailwind CSS has revolutionized the way developers approach styling by providing a robust utility-first framework that minimizes CSS files while maximizing design flexibility. This blog explores how to integrate Tailwind into your projects, leverage its utility classes for rapid UI development, and customize themes to match your brand. Learn about responsive design principles, how to use Tailwind’s JIT (Just-In-Time) compiler for faster builds, and best practices for creating maintainable styles. By mastering Tailwind CSS, you can significantly speed up your workflow and achieve visually appealing results with less effort. Whether you’re building a small project or a complex application, this guide has you covered.",
-      date: 'May 15, 2023'
+      slug: 'new-features-v1',
+      title: 'New features in v1',
+      date: 'August 7, 2021',
+      description: 'An overview of the new features released in v1 - code block copy, multiple authors, frontmatter layout and more',
+      tags: ['NEXT-JS', 'TAILWIND', 'GUIDE'],
     },
     {
-      id: '3',
-      title: 'The Future of Web Development',
-      excerpt: 'Explore upcoming trends and technologies in web development. The web development landscape is constantly evolving, with new tools and methodologies emerging at a rapid pace. In this blog, we delve into the future of web development by examining trends such as WebAssembly, AI-driven development, JAMstack architecture, and advancements in progressive web apps (PWAs). Discover how these technologies are reshaping how websites are built and consumed. We’ll also discuss the growing importance of accessibility, ethical coding practices, and the role of machine learning in automating web development processes. Stay ahead of the curve and prepare for what’s next in the ever-changing world of the web.',
-      date: 'June 1, 2023'
+      slug: 'multi-part-posts',
+      title: 'Introducing Multi-part Posts with Nested Routing',
+      date: 'May 2, 2021',
+      description: 'The blog template supports posts in nested sub-folders. This can be used to group posts of similar content e.g. a multi-part course. This post is itself an example of a nested route!',
+      tags: ['FEATURE', 'NEXT-JS'],
     },
     {
-      id: '4',
-      title: 'Building Accessible Web Applications',
-      excerpt: 'Learn best practices for creating inclusive and accessible web experiences. Accessibility is no longer optional in modern web development; it’s a necessity. This blog explains why accessibility matters and how to ensure your applications are usable by everyone, including individuals with disabilities. Topics include implementing semantic HTML, using ARIA (Accessible Rich Internet Applications) roles effectively, ensuring keyboard navigability, and testing with tools like Lighthouse and screen readers. By adopting accessibility practices, you can reach a broader audience, comply with regulations, and create a more inclusive internet. Whether you’re a seasoned developer or a beginner, this guide provides actionable insights and techniques to improve the accessibility of your projects.',
-      date: 'June 15, 2023'
+      slug: 'seo-optimization-guide',
+      title: 'SEO Optimization for Next.js Blogs',
+      date: 'March 15, 2023',
+      description: 'A step-by-step guide to optimizing your Next.js blog for search engines using dynamic metadata, Open Graph, and structured data.',
+      tags: ['NEXT-JS', 'SEO', 'GUIDE'],
     },
     {
-      id: '5',
-      title: 'Optimizing Performance in React Apps',
-      excerpt: 'Techniques and tools for improving the performance of your React applications. Performance is a critical aspect of any application, directly impacting user experience and retention. This blog focuses on the best practices for optimizing React apps, including techniques like code splitting, lazy loading, memoization with React.memo, and using hooks such as useCallback and useMemo effectively. You’ll also learn about performance monitoring tools, such as React Developer Tools and browser profiling, to identify and resolve bottlenecks. Explore advanced strategies like server-side rendering with Next.js and optimizing state management with libraries like Redux Toolkit or Zustand. By following these practices, you can ensure your React apps remain fast, responsive, and scalable.',
-      date: 'July 1, 2023'
+      slug: 'tailwind-best-practices',
+      title: 'Best Practices for Tailwind CSS',
+      date: 'July 10, 2022',
+      description: 'Learn how to use Tailwind CSS effectively with reusable components, themes, and responsive design techniques.',
+      tags: ['TAILWIND', 'CSS', 'GUIDE'],
     },
     {
-      id: '6',
-      title: 'Introduction to TypeScript',
-      excerpt: 'Get started with TypeScript and improve your JavaScript development. TypeScript is a superset of JavaScript that adds static typing, making your code more predictable and easier to debug. In this beginner-friendly blog, we introduce TypeScript, guide you through setting up your development environment, and cover core concepts such as types, interfaces, classes, and generics. Discover how TypeScript integrates seamlessly with popular frameworks like React and Node.js, and explore real-world examples that demonstrate its power. By adopting TypeScript, you’ll reduce bugs, improve code maintainability, and gain a deeper understanding of your projects. This guide is perfect for developers looking to elevate their JavaScript skills and write more robust code.',
-      date: 'July 15, 2023'
-    }
+      slug: 'performance-improvements',
+      title: 'Boosting Performance in Next.js Apps',
+      date: 'November 22, 2023',
+      description: 'Explore techniques to enhance the performance of your Next.js applications with lazy loading, dynamic imports, and more.',
+      tags: ['NEXT-JS', 'PERFORMANCE', 'FEATURE'],
+    },
+    {
+      slug: 'markdown-integration',
+      title: 'Markdown Integration in Next.js',
+      date: 'January 5, 2022',
+      description: 'Understand how to use markdown files with Next.js to create a seamless blogging experience.',
+      tags: ['NEXT-JS', 'MARKDOWN', 'GUIDE'],
+    },
+    {
+      slug: 'custom-themes',
+      title: 'Creating Custom Themes with Tailwind CSS',
+      date: 'February 18, 2023',
+      description: 'Learn how to build and apply custom themes using Tailwind CSS for consistent branding across your web apps.',
+      tags: ['TAILWIND', 'CUSTOMIZATION', 'GUIDE'],
+    },
+    {
+      slug: 'dynamic-routing',
+      title: 'Understanding Dynamic Routing in Next.js',
+      date: 'June 20, 2021',
+      description: 'A comprehensive explanation of dynamic routing and how to implement it in Next.js projects.',
+      tags: ['NEXT-JS', 'ROUTING', 'FEATURE'],
+    },
+    {
+      slug: 'accessibility-tips',
+      title: 'Web Accessibility Tips for Tailwind CSS Users',
+      date: 'October 10, 2022',
+      description: 'Discover how to make your Tailwind CSS-based websites more accessible to all users.',
+      tags: ['TAILWIND', 'ACCESSIBILITY', 'GUIDE'],
+    },
   ];
   
-export default function BlogPage() {
+export default function BlogPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  const tag = searchParams.tag as string | undefined
+  
+  const filteredPosts = tag
+    ? posts.filter(post => post.tags.includes(tag))
+    : posts
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-100 to-purple-200 dark:from-gray-800 dark:to-purple-900">
+    <div className="space-y-10 bg-gradient-to-br from-purple-200 via-white to-purple-200 dark:from-purple-900 dark:via-black dark:to-purple-900 bg-texture">
         <Navbar1 />
-        <div className="min-h-screen bg-gradient-to-r from-purple-100 to-purple-200 dark:from-gray-800 dark:to-purple-900">
-        <div className="container mx-auto px-4 py-12">
-            <h1 className="text-4xl font-bold text-center mb-12 text-purple-900 dark:text-purple-300">Our Blog</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-                <BlogCard key={post.id} post={post} />
-            ))}
+        <div className="container mx-auto p-4 flex w-full bg-transperent">
+            <div className="flex-1 w-[20%] mr-4">
+                <BlogSidebar />
+            </div> 
+            <div className="space-y-10 w-[80%]">
+            {tag && (
+                <div className="text-lg font-semibold">
+                Showing posts tagged with: <span className="text-primary">{tag}</span>
+                </div>
+            )}
+            <div className="grid gap-6 sm:grid-cols-1">
+                {filteredPosts.map((post) => (
+                <Card key={post.slug} className="group relative overflow-hidden transition-shadow hover:shadow-lg bg-transperent border border-zinc-800 dark:border-zinc-500 hover:bg-white/80 dark:hover:bg-gray-800/80">
+                    <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
+                    <span className="sr-only">View {post.title}</span>
+                    </Link>
+                    <CardHeader className="space-y-2">
+                    <div className="text-sm text-muted-foreground">
+                        {post.date}
+                    </div>
+                    <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
+                        {post.title}
+                    </CardTitle>
+                    <div className="flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="bg-transperent border border-zinc-800 dark:border-zinc-500">
+                            {tag}
+                        </Badge>
+                        ))}
+                    </div>
+                    </CardHeader>
+                    <CardContent>
+                    <p className="text-muted-foreground">{post.description}</p>
+                    </CardContent>
+                </Card>
+                ))}
             </div>
-        </div>
+            {filteredPosts.length === 0 && (
+                <div className="text-center text-muted-foreground">
+                No posts found for the selected tag.
+                </div>
+            )}
+            </div>
         </div>
         <footer className="w-full py-12 px-4 md:px-6 border-t bg-secondary">
         <div className="container mx-auto">
