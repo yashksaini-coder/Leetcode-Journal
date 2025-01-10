@@ -47,12 +47,14 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="space-x-4">
+                <Link href={"/auth/register"}>
                 <Button
                   size="lg"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   Get Started
                 </Button>
+                </Link>
                 <Button variant="outline" size="lg">
                   Learn More
                   <a href=""></a>
