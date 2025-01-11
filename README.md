@@ -114,7 +114,9 @@ git push origin feature/your-feature-name
 We are grateful to our contributors!
 Below is a list of all the amazing contributors who have helped make this project better:
 
-<p align="center"> <a href="https://github.com/yashksaini-coder/Leetcode-Journal/graphs/contributors"> <img src="https://contrib.rocks/image?repo=yashksaini-coder/Leetcode-Journal" /> </a> </p>
+<p align="center">
+  <img src="https://contrib.rocks/image?repo=yashksaini-coder/leetcode-journal"/>
+</p>
 
 
 *Connect with me on GitHub: [yashksaini-coder](https://github.com/yashksaini-coder)*
