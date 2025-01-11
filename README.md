@@ -109,34 +109,14 @@ git push origin feature/your-feature-name
 # Go to the original repository on GitHub and open a new Pull Request
 # Provide a clear description of your changes in the Pull Request.
 ```
+
 ## Contributors
 We are grateful to our contributors!
 Below is a list of all the amazing contributors who have helped make this project better:
 
 <p align="center"> <a href="https://github.com/yashksaini-coder/Leetcode-Journal/graphs/contributors"> <img src="https://contrib.rocks/image?repo=yashksaini-coder/Leetcode-Journal" /> </a> </p>
 
-##
-<<<<<<< HEAD
-=======
-
-# Project Contributers: 
-### Thank you everyone for your contributions! 🙏 We hope to see you contribute even more in the future. 🚀👨‍💻👩‍💻
-
-
-<p align="center">
-  <a href="https://github.com/yashksaini-coder/Leetcode-Journal/graphs/contributors">
-    <img src="https://contributors-img.web.app/image?repo=yashksaini-coder/Leetcode-Journal" alt="Contributors"/>
-  </a>
-</p>
-
-
----
->>>>>>> e9d5817b131855e47dd0b52d0c40e8546a339662
 
 *Connect with me on GitHub: [yashksaini-coder](https://github.com/yashksaini-coder)*
 
 *Explore the live application: [Leetcode Journal Live](https://leetcode-journal.vercel.app/)*
-
-*Learn more about effective Leetcode practices: [The DEFINITIVE way on how to LeetCode properly](https://www.reddit.com/r/cscareerquestions/comments/sgktuv/the_definitive_way_on_how_to_leetcode_properly/)*
-
-<h3 align="center"> Happy Coding ☕️</h3>
