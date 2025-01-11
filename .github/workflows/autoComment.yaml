@@ -45,6 +45,29 @@ jobs:
             The team will review your PR shortly. If you have any questions, feel free to ask here!  
             Happy Coding! 🚀
 
+      # Add labels to the pull request
+      - name: Add Labels to Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: 'Under Review'
+          number: ${{ github.event.pull_request.number }}
+
+      # Request a review for the pull request
+      - name: Request Review on Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: ['yashksaini-coder']
+            })
+
+      # Add a comment to the issue
       - name: Add Comment on Issue
         if: ${{ github.event_name == 'issues' }}
         uses: peter-evans/create-or-update-comment@v3

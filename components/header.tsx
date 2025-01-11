@@ -19,20 +19,14 @@ const Navbar = ({ userId }: { userId?: string }) => {
           </span>
         </div>
         <div className="hidden lg:flex space-x-6">
-          <Link href="#" className="hover:text-purple-400 ">
+          <Link href="/" className="hover:text-purple-400 ">
             Home
           </Link>
-          <Link href="#" className="hover:text-purple-400 ">
-            Features
-          </Link>
-          <Link href="#" className="hover:text-purple-400 ">
+          <Link href="/learn-more" className="hover:text-purple-400 ">
             How it Works
           </Link>
-          <Link href="#" className="hover:text-purple-400 ">
+          <Link href="/FAQ" className="hover:text-purple-400 ">
             FAQs
-          </Link>
-          <Link href="#" className="hover:text-purple-400 ">
-            Blog
           </Link>
         </div>
         <div className="hidden lg:flex items-center space-x-4">
@@ -42,7 +36,7 @@ const Navbar = ({ userId }: { userId?: string }) => {
               onClick={() =>
                 supabase.auth
                   .signOut()
-                  .then(() => router.push("/auth/signin"))
+                  .then(() => router.push("/"))
               }
             >
               Sign Out
