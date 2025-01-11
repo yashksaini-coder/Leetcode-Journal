@@ -1,33 +1,19 @@
-import z from 'zod';
+import * as z from "zod";
 
 export const signupSchema = z.object({
-    email: z
-        .string()
-        .email({ message: "Please provide a valid email address." }),
-    password: z
-        .string()
-        .min(6, { message: "Password must be at least 6 characters." })
-        .max(20, { message: "Your password cannot exceed 20 characters" })
-        .regex(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&#^])[A-Za-z@$!%*?&#^]{6,}$/,
-            {
-                message: "Password must include at least one uppercase letter, one lowercase letter, and one special character",
-            }
-        ),
-    fullName: z
-        .string()
-        .nonempty({ message: "Full name is required." }),
-    leetcodeUsername: z
-        .string()
-        .nonempty({ message: "Leetcode username is required to connect your profile" }),
-    gender: z
-        .string()
-        .nonempty({ message: "Please select your gender " }),
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .max(100, "Password must be less than 100 characters"),
+  leetcodeUsername: z.string().min(1, "LeetCode username is required"),
+  gender: z.enum(["male", "female", "other"], {
+    required_error: "Please select a gender",
+  }),
 });
 
 export const signinSchema = z.object({
-    email: z.string().email({ message: "Please provide a valid email address." }),
-    password: z.string().nonempty({ message: "Password is required." }),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
 });
-
-

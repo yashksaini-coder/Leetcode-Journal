@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { Eye, EyeOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -39,6 +41,7 @@ type SignupFormValues = z.infer<typeof signupSchema>;
 export default function SignupForm() {
   const { isSigningUp, signup, signupError } = useAuthStore();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -47,7 +50,7 @@ export default function SignupForm() {
       email: "",
       password: "",
       leetcodeUsername: "",
-      gender: "",
+      gender: undefined, // Changed from "" to undefined
     },
   });
 
@@ -102,7 +105,26 @@ export default function SignupForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="••••••" {...field} />
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="••••••"
+                          {...field}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

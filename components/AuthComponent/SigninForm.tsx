@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
-import React from "react"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Eye, EyeOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,9 +14,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -22,17 +24,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { useAuthStore } from "@/store/AuthStore/useAuthStore"
-import LoadingButton from "../Buttons/LoadingButton"
-import AuthBottom from "./AuthBottom"
-import { signinSchema } from "@/validations/validation"
+} from "@/components/ui/card";
+import { useAuthStore } from "@/store/AuthStore/useAuthStore";
+import LoadingButton from "../Buttons/LoadingButton";
+import AuthBottom from "./AuthBottom";
+import { signinSchema } from "@/validations/validation";
 
-type SigninFormValues = z.infer<typeof signinSchema>
+type SigninFormValues = z.infer<typeof signinSchema>;
 
 export default function SigninForm() {
-  const { isSigningIn, signin, signinError } = useAuthStore()
-  const router = useRouter()
+  const { isSigningIn, signin, signinError } = useAuthStore();
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<SigninFormValues>({
     resolver: zodResolver(signinSchema),
@@ -40,11 +43,11 @@ export default function SigninForm() {
       email: "",
       password: "",
     },
-  })
+  });
 
   const onSubmit = (data: SigninFormValues) => {
-    signin(data, router)
-  }
+    signin(data, router);
+  };
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
@@ -78,7 +81,26 @@ export default function SigninForm() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="••••••••"
+                          {...field}
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -107,5 +129,5 @@ export default function SigninForm() {
         </CardFooter>
       </Card>
     </main>
-  )
+  );
 }
