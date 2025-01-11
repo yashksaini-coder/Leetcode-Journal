@@ -52,7 +52,7 @@ export default function FAQPage() {
               <SocialLinks />
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="font-semibold mb-3 text-lg">Product</h3>
               <ul className="space-y-2">
@@ -174,7 +174,7 @@ export default function FAQPage() {
             <p className="text-sm text-muted-foreground mb-4 md:mb-0">
               © 2023 LeetCode Journal. All rights reserved.
             </p>
-          </div>
+          </div> */}
         </div>
       </footer>
     </div>
