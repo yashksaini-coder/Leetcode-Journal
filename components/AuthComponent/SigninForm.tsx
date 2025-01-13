@@ -50,11 +50,13 @@ export default function SigninForm() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4">
-      <div className="grid md:grid-cols-2 grid-cols-1 md:dark:bg-dark-auth md:bg-light-auth md:bg-no-repeat object-cover rounded-xl md:p-10 gap-10">
-        <Card className="w-full md:border-none md:bg-white/10 backdrop-blur-3xl max-w-sm rounded-2xl">
-          <CardHeader>
-            <CardTitle>Sign in</CardTitle>
+    <main className="flex min-h-screen items-center justify-center p-2 md:p-0">
+      <div className="w-full max-w-3xl min-h-[70vh] grid md:grid-cols-2 gap-8 bg-light-auth dark:bg-dark-auth rounded-2xl shadow-lg md:overflow-hidden">
+        <Card className="md:col-span-1 flex flex-col justify-center h-full md:border-none shadow-none md:bg-primary-foreground/10 backdrop-blur-3xl">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-3xl font-bold">
+              Log In
+            </CardTitle>
             <CardDescription>
               Enter your credentials to access your account
             </CardDescription>
@@ -72,7 +74,11 @@ export default function SigninForm() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="you@example.com" {...field} />
+                        <Input
+                          placeholder="you@example.com"
+                          {...field}
+                          className="rounded-md"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -90,6 +96,7 @@ export default function SigninForm() {
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             {...field}
+                            className="rounded-md pr-10"
                           />
                           <Button
                             type="button"
@@ -127,18 +134,14 @@ export default function SigninForm() {
           <CardFooter className="flex justify-center">
             <AuthBottom
               href="/auth/register"
-              title="Don't have an account? "
+              title="Don't have an account?"
               toTitle="Create One!"
             />
           </CardFooter>
         </Card>
-        <div className="h-96 md:flex hidden flex-col justify-center w-96">
-          <div>
-            <h1 className="text-7xl font-semibold">Welcome</h1>
-            <h1 className="text-7xl font-semibold">Back</h1>
-          </div>
-
-          <h2 className="text-2xl mt-4">
+        <div className="hidden md:flex flex-col justify-center p-4">
+          <h1 className="text-5xl font-bold mb-4">Welcome Back</h1>
+          <h2 className="text-xl">
             We're glad to see you again! Please sign in to continue.
           </h2>
         </div>
