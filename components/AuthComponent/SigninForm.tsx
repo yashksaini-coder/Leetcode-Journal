@@ -33,8 +33,8 @@ import { signinSchema } from "@/validations/validation";
 type SigninFormValues = z.infer<typeof signinSchema>;
 
 export default function SigninForm() {
-  const { isSigningIn, signin, signinError } = useAuthStore();
-  const router = useRouter();
+  const router = useRouter()
+  const { isSigningIn,signin, signinError } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<SigninFormValues>({
@@ -46,7 +46,7 @@ export default function SigninForm() {
   });
 
   const onSubmit = (data: SigninFormValues) => {
-    signin(data, router);
+    signin(data, router)
   };
 
   return (

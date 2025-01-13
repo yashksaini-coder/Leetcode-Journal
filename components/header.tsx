@@ -1,23 +1,22 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { supabase } from "@/lib/supabaseClient";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { signout } from "@/app/actions/action";
 
 const Navbar = ({ userId }: { userId?: string }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter(); 
+  const router = useRouter();
   return (
     <header>
       <nav className="flex justify-between items-center px-6 py-4 bg-neutral-900 text-white dark:bg-neutral-800">
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold">📓</span>
-          <span className="text-xl font-semibold">
-            LeetCodeJournal
-          </span>
+          <span className="text-xl font-semibold">LeetCodeJournal</span>
         </div>
         <div className="hidden lg:flex space-x-6">
           <Link href="/" className="hover:text-purple-400 ">
@@ -32,14 +31,7 @@ const Navbar = ({ userId }: { userId?: string }) => {
         </div>
         <div className="hidden lg:flex items-center space-x-4">
           {userId ? (
-            <Button
-              variant="destructive" 
-              onClick={() =>
-                supabase.auth
-                  .signOut()
-                  .then(() => router.push("/"))
-              }
-            >
+            <Button variant="destructive" onClick={signout}>
               Sign Out
             </Button>
           ) : (
