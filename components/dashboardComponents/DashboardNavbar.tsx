@@ -4,21 +4,24 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { supabase } from "@/lib/supabaseClient";
-import { useRouter } from "next/navigation";
 import { signout } from "@/app/actions/action";
 
-const Navbar = ({ userId }: { userId?: string }) => {
+const Navbar = ({
+  userId,
+  isLoading,
+}: {
+  userId?: string;
+  isLoading: boolean;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
   return (
-    <header>
-      <nav className="flex justify-between items-center px-6 py-4 bg-neutral-900 text-white dark:bg-neutral-800">
+    <header className="p-2">
+      <nav className="flex justify-between items-center px-6 py-4 bg-secondary/30 backdrop-blur-3xl rounded-xl ">
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold">📓</span>
           <span className="text-xl font-semibold">LeetCodeJournal</span>
         </div>
-        <div className="hidden lg:flex space-x-6">
+        {/* <div className="hidden lg:flex space-x-6">
           <Link href="/" className="hover:text-purple-400 ">
             Home
           </Link>
@@ -28,23 +31,27 @@ const Navbar = ({ userId }: { userId?: string }) => {
           <Link href="/FAQ" className="hover:text-purple-400 ">
             FAQs
           </Link>
-        </div>
+        </div> */}
         <div className="hidden lg:flex items-center space-x-4">
-          {userId ? (
-            <Button variant="destructive" onClick={signout}>
-              Sign Out
-            </Button>
-          ) : (
-            <>
-              <Link href="/auth/signin" className="hover:text-neutral-400">
-                Log in
-              </Link>
-              <Button className="bg-purple-500 hover:bg-purple-600">
-                <Link href="/auth/register" className="">
-                  Sign up
-                </Link>
+          {!isLoading ? (
+            userId ? (
+              <Button variant="destructive" onClick={signout}>
+                Sign Out
               </Button>
-            </>
+            ) : (
+              <>
+                <Link href="/auth/signin" className="hover:text-neutral-400">
+                  Log in
+                </Link>
+                <Button className="bg-purple-500 hover:bg-purple-600">
+                  <Link href="/auth/register" className="">
+                    Sign up
+                  </Link>
+                </Button>
+              </>
+            )
+          ) : (
+            ""
           )}
           <ThemeToggle />
         </div>
