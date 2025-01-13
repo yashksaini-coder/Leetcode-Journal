@@ -1,10 +1,11 @@
 import prisma from "@/lib/database/prismaClient";
-import { supabase } from "@/lib/supabaseClient";
 import { hashPassword } from "@/utils/hashing";
+import { createClient } from "@/utils/supabase/server";
 import { signupSchema } from "@/validations/validation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
+    const supabase = await createClient();
     const body = await request.json();
     const { email, password, fullName, leetcodeUsername, gender } = body;
     try {
