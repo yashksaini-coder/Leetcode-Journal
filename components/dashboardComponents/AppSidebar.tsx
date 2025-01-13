@@ -1,11 +1,11 @@
 "use client";
+
 import {
   Calendar,
   ChevronUp,
-  Home,
-  Inbox,
   Search,
   Settings,
+  User,
   User2,
 } from "lucide-react";
 import { useState } from "react";
@@ -29,20 +29,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/AuthStore/useAuthStore";
 import { signout } from "@/app/actions/action";
+import Dashboard from "@/app/dashboard/page";
 
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "profile",
     url: "#",
-    icon: Home,
+    icon: User,
   },
   {
-    title: "Inbox",
+    title: "Problems",
     url: "#",
-    icon: Inbox,
+    icon: Dashboard,
   },
   {
     title: "Calendar",
