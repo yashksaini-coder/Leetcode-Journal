@@ -1,5 +1,4 @@
-import prisma from '@/lib/database/prismaClient';
-import { supabase } from '@/lib/supabaseClient';
+import { createClient } from '@/utils/supabase/client'
 import axios from 'axios';
 import { create } from 'zustand'
 
@@ -15,12 +14,12 @@ interface User {
 interface authStore {
     isSigningIn: boolean;
     signinError: string | null;
-    signin: (signinMetaData: { email: string, password: string }, router: any) => void;
+    signin: (signinMetaData: { email: string, password: string },router: any) => void;
     logout: () => void;
 
     signupError: string | null;
     isSigningUp: boolean;
-    signup: (signupMetaData: User, router: any) => void;
+    signup: (signupMetaData: User,router: any) => void;
     user: User | null;
 
     authUserLoading: boolean;
@@ -31,7 +30,8 @@ interface authStore {
 export const useAuthStore = create<authStore>((set) => ({
     signinError: null,
     isSigningIn: false,
-    signin: async (signinMetaData, router) => {
+    signin: async (signinMetaData,router) => {
+        const supabase = createClient()
         set({ isSigningIn: true })
         try {
             const { data, error: loginError } =
@@ -62,7 +62,8 @@ export const useAuthStore = create<authStore>((set) => ({
 
     signupError: null,
     isSigningUp: false,
-    signup: async (signupMetaData, router) => {
+    signup: async (signupMetaData,router) => {
+
         set({ isSigningUp: true });
         try {
             const response = await axios.post('/api/auth/register', signupMetaData);
@@ -86,13 +87,7 @@ export const useAuthStore = create<authStore>((set) => ({
     fetchAuthUser: async () => {
         try {
             set({ authUserLoading: true });
-            const { data: sessionData, error: sessionError } =
-                await supabase.auth.getSession();
-            const supabaseId = sessionData.session?.user.id;
-
-            const response = await axios.post('/api/auth/user', {
-                supabaseId,
-            });
+            const response = await axios.get('/api/auth/user');
             if (response.status === 200) {
                 set({ authUser: response.data.user });
             }
