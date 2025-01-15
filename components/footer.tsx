@@ -37,7 +37,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col md:flex-row justify-center items-center pt-8 border-t border-border">
                     <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-                        © {currentYear} LeetCode Journal. All rights reserved.
+                        © 2025 LeetCode Journal. All rights reserved.
                     </p>
                 </div>
             </div>
