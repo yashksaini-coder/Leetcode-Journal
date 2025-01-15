@@ -9,17 +9,29 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SidebarData } from "@/data/SidebarData";
+import { supabase } from "@/lib/supabaseClient";
 
 export function AppSidebar() {
   const { setTheme, theme } = useTheme();
   const pathname = usePathname();
+  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      router.push('/auth/signin');
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }         
+    // Fix the Logout functionality, something is wrong here, It keeps throwing a 307 error on logout,and the user is not redirected to the login page
+  };
 
   return (
     <aside
@@ -85,7 +97,12 @@ export function AppSidebar() {
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
-          <Button variant="outline" size="icon">
+          <Button 
+            variant="outline"
+            size="icon"
+            onClick={handleLogout}
+            className="rounded-full"
+          >
             <LogOut className="h-[1.2rem] w-[1.2rem]" />
             <span className="sr-only">Logout</span>
           </Button>
