@@ -1,150 +1,107 @@
 "use client";
 
-import {
-  Calendar,
-  LayoutDashboard,
-  ChevronUp,
-  Search,
-  Settings,
-  User,
-  User2,
-} from "lucide-react";
-import { useState } from "react";
+import * as React from "react";
+import { Moon, Sun, LogOut, User, Settings, BookA, FileQuestion, ChevronRight, ChevronLeft } from 'lucide-react';
+import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { signout } from "@/app/actions/action";
 
-// Menu items.
-const items = [
+const SidebarData = [
   {
-    title: "profile",
-    url: "/dashboard/profile",
+    title: "Profile",
     icon: User,
+    href: "/dashboard/profile",
   },
   {
     title: "Problems",
-    url: "#",
-    icon: LayoutDashboard,
+    icon: FileQuestion,
+    href: "/dashboard/problems",
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Journal",
+    icon: BookA,
+    href: "/dashboard/journal",
   },
   {
     title: "Settings",
-    url: "#",
     icon: Settings,
+    href: "/dashboard/settings",
   },
 ];
 
 export function AppSidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { setTheme, theme } = useTheme();
+  const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+
   return (
-    <Sidebar collapsible="icon" className="border-r">
-      <SidebarTrigger
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute right-[-12px] top-4 z-20 flex h-6 w-6 items-center justify-center rounded-full border bg-background text-foreground shadow-sm"
-      >
-        {isCollapsed ? "→" : "←"}
-      </SidebarTrigger>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-lg font-semibold">
-            Leetcode Journal
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="group relative">
-                    <a
-                      href={item.url}
-                      className="flex items-center gap-3 rounded-md p-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                    >
-                      <item.icon className="h-5 w-5" />
-                      <span
-                        className={cn(
-                          "transition-opacity",
-                          isCollapsed ? "opacity-0" : "opacity-100"
-                        )}
-                      >
-                        {item.title}
-                      </span>
-                      {isCollapsed && (
-                        <span className="absolute left-full ml-2 hidden rounded-md bg-accent px-2 py-1 text-xs group-hover:block">
-                          {item.title}
-                        </span>
-                      )}
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter className="border-t">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className="w-full">
-                  <User2 className="h-5 w-5" />
-                  <span
-                    className={cn(
-                      "ml-2 transition-opacity",
-                      isCollapsed ? "opacity-0" : "opacity-100"
-                    )}
-                  >
-                    Username
-                  </span>
-                  <ChevronUp
-                    className={cn(
-                      "ml-auto h-4 w-4 transition-transform",
-                      isCollapsed ? "opacity-0" : "opacity-100"
-                    )}
-                  />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="top" align="start" className="w-56">
-                <DropdownMenuItem>
-                  <span>Account</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={signout}>
-                  <span className="text-red-500">Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-    </Sidebar>
+    <aside
+      className={cn(
+        "h-full bg-neutral-200 dark:bg-neutral-900 rounded-sm md:rounded-xl flex flex-col transition-all duration-300 ease-in-out",
+        isCollapsed ? "md:w-16 w-14" : "w-60"
+      )}
+    >
+      <div className="p-4 border-b flex items-center justify-between">
+        {!isCollapsed && (
+          <h2 className="text-lg font-semibold">Leetcode Journal</h2>
+        )}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="ml-auto"
+        >
+          {isCollapsed ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <ChevronLeft className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+      <nav className="flex-grow overflow-y-auto py-4">
+        <ul className="space-y-2 px-2">
+          {SidebarData.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <li key={index}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex items-center p-2 rounded-lg transition-colors duration-200",
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-primary/10 dark:hover:bg-primary/20",
+                    isCollapsed ? "justify-center" : "justify-start"
+                  )}
+                >
+                  <item.icon className={cn("h-6 w-6", isCollapsed ? "" : "mr-4")} />
+                  {!isCollapsed && <span>{item.title}</span>}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <div className={cn("p-3 border-t")}>
+        <div className={cn("flex", isCollapsed ? "flex-col space-y-2" : "justify-between")}>
+          <Button
+          className="rounded-full"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+          <Button variant="outline" size="icon">
+            <LogOut className="h-[1.2rem] w-[1.2rem]" />
+            <span className="sr-only">Logout</span>
+          </Button>
+        </div>
+      </div>
+    </aside>
   );
 }

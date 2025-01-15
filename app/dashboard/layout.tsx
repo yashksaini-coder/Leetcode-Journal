@@ -1,5 +1,4 @@
 import { AppSidebar } from "@/components/dashboardComponents/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,9 +12,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main className="w-full">{children}</main>
-    </SidebarProvider>
+    <body>
+      <main className="flex min-h-screen overflow-hidden md:gap-3 gap-1 md:p-3 p-1 h-full">
+        <div>
+          <AppSidebar />
+        </div>
+        <div className="w-full dark:bg-neutral-900 md:p-6 p-3 bg-neutral-200 md:rounded-xl rounded-sm">{children}</div>
+      </main>
+    </body>
   );
 }
