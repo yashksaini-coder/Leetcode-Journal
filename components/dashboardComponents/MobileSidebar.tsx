@@ -36,9 +36,9 @@ export default function MobileSidear() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button size={"sm"} variant="secondary" className="bg-opacity-50">
+        <button className="p-2 rounded-lg bg-secondary/50 dark:bg-secondary/60 backdrop-blur-sm">
           <Menu />
-        </Button>
+        </button>
       </SheetTrigger>
       <SheetContent side={"left"}>
         <SheetHeader>
