@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { UserData } from '../src/types';
+import { UserData } from '../../../../types/typeInterfaces';
 
 const fetchUserDetails = async (
   options: { username: string; limit: number },
