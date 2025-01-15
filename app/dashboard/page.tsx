@@ -83,7 +83,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen w-full">
-      <DashboardNavbar isLoading={authUserLoading} userId={authUser?.id} />
       {authUserLoading ? (
         <DashboardContentSkeleton />
       ) : (
