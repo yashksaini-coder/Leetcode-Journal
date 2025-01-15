@@ -21,17 +21,6 @@ const Navbar = ({
           <span className="text-2xl font-bold">📓</span>
           <span className="text-xl font-semibold">LeetCodeJournal</span>
         </div>
-        {/* <div className="hidden lg:flex space-x-6">
-          <Link href="/" className="hover:text-purple-400 ">
-            Home
-          </Link>
-          <Link href="/learn-more" className="hover:text-purple-400 ">
-            How it Works
-          </Link>
-          <Link href="/FAQ" className="hover:text-purple-400 ">
-            FAQs
-          </Link>
-        </div> */}
         <div className="hidden lg:flex items-center space-x-4">
           {!isLoading ? (
             userId ? (
@@ -40,7 +29,7 @@ const Navbar = ({
               </Button>
             ) : (
               <>
-                <Link href="/auth/signin" className="hover:text-neutral-400">
+                <Link href="/" className="hover:text-neutral-400">
                   Log in
                 </Link>
                 <Button className="bg-purple-500 hover:bg-purple-600">
@@ -67,39 +56,11 @@ const Navbar = ({
         <div className="fixed inset-x-0 top-[65px] z-50 border-b bg-background p-6 lg:hidden">
           <nav className="flex flex-col space-y-4">
             <Link
-              href="#"
+              href="/"
               className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => setIsMenuOpen(true)}
             >
               Home
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              How it Works
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              FAQs
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
             </Link>
           </nav>
         </div>
