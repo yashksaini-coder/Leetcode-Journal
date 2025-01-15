@@ -75,7 +75,7 @@ export default function Dashboard() {
         <>
           <DashboardContent authUser={authUser} />
           {leetcodeStats && (
-            <div className="container mx-auto mt-6">
+            <div className="container mx-auto bg-neutral-800 rounded-lg p-3 mt-6">
               <h2 className="text-xl font-semibold mb-4">Your LeetCode Progress</h2>
               <div className="max-w-xl">
                 <Bar data={chartData} />

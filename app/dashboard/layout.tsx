@@ -11,6 +11,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <body>
       <main className="flex min-h-screen overflow-hidden md:gap-3 gap-1 md:p-3 p-1 h-full">

@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun, LogOut, User, Settings, BookA, FileQuestion, ChevronRight, ChevronLeft } from 'lucide-react';
+import {
+  Moon,
+  Sun,
+  LogOut,
+  User,
+  Settings,
+  BookA,
+  FileQuestion,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -45,9 +55,7 @@ export function AppSidebar() {
       )}
     >
       <div className="p-4 border-b flex items-center justify-between">
-        {!isCollapsed && (
-          <h2 className="text-lg font-semibold">Leetcode Journal</h2>
-        )}
+        {!isCollapsed && <h2 className="text-lg font-semibold">Dashboard</h2>}
         <Button
           variant="ghost"
           size="icon"
@@ -77,7 +85,9 @@ export function AppSidebar() {
                     isCollapsed ? "justify-center" : "justify-start"
                   )}
                 >
-                  <item.icon className={cn("h-6 w-6", isCollapsed ? "" : "mr-4")} />
+                  <item.icon
+                    className={cn("h-6 w-6", isCollapsed ? "" : "mr-2")}
+                  />
                   {!isCollapsed && <span>{item.title}</span>}
                 </Link>
               </li>
@@ -86,9 +96,14 @@ export function AppSidebar() {
         </ul>
       </nav>
       <div className={cn("p-3 border-t")}>
-        <div className={cn("flex", isCollapsed ? "flex-col space-y-2" : "justify-between")}>
+        <div
+          className={cn(
+            "flex",
+            isCollapsed ? "flex-col space-y-2" : "justify-between"
+          )}
+        >
           <Button
-          className="rounded-full"
+            className="rounded-full"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
