@@ -55,9 +55,10 @@ const Navbar1 = () => {
           </Button>
           <ThemeToggle />
         </div>
-        <button
+        <div
           onClick={toggleMenu}
           className="lg:hidden focus:outline-none"
+          role="button"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           {/* ADDED THEME TOGGLE ALONG WITH MENU  */}
@@ -65,7 +66,7 @@ const Navbar1 = () => {
             <ThemeToggle />
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </div>
-        </button>
+        </div>
       </nav>
 
       {isMenuOpen && (
