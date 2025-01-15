@@ -5,10 +5,6 @@ import {
   Moon,
   Sun,
   LogOut,
-  User,
-  Settings,
-  BookA,
-  FileQuestion,
   ChevronRight,
   ChevronLeft,
 } from "lucide-react";
@@ -18,29 +14,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const SidebarData = [
-  {
-    title: "Profile",
-    icon: User,
-    href: "/dashboard/profile",
-  },
-  {
-    title: "Problems",
-    icon: FileQuestion,
-    href: "/dashboard/problems",
-  },
-  {
-    title: "Journal",
-    icon: BookA,
-    href: "/dashboard/journal",
-  },
-  {
-    title: "Settings",
-    icon: Settings,
-    href: "/dashboard/settings",
-  },
-];
+import { SidebarData } from "@/data/SidebarData";
 
 export function AppSidebar() {
   const { setTheme, theme } = useTheme();
