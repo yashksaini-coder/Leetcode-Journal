@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/AuthStore/useAuthStore";
 import DashboardNavbar from "@/components/dashboardComponents/DashboardNavbar";
 import { DashboardContentSkeleton } from "@/components/dashboardComponents/DashboardContentSkeleton";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement);
 
 function DashboardContent({ authUser }: any) {
   return (
@@ -25,7 +29,7 @@ function DashboardContent({ authUser }: any) {
           </p>
         </CardContent>
       </Card>
-
+{/* 
       <Card>
         <CardHeader>
           <CardTitle>LeetCode Stats</CardTitle>
@@ -35,24 +39,65 @@ function DashboardContent({ authUser }: any) {
             LeetCode stats are coming soon!
           </p>
         </CardContent>
-      </Card>
+      </Card> */}
     </main>
   );
 }
 
 export default function Dashboard() {
   const { authUser, fetchAuthUser, authUserLoading } = useAuthStore();
+  const [leetcodeStats, setLeetcodeStats] = useState<any>(null);
 
   useEffect(() => {
     fetchAuthUser();
   }, [fetchAuthUser]);
+
+  // Fetch and store stats once we have the user
+  useEffect(() => {
+    if (authUser?.leetcodeUsername && authUser?.id) {
+      const fetchStats = async () => {
+        const res = await fetch(
+          `/api/leetcode?username=${authUser.leetcodeUsername}&id=${authUser.id}`,
+          { method: "POST" }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setLeetcodeStats(data.stats);
+        }
+      };
+      fetchStats();
+    }
+  }, [authUser]);
+
+  // Simple bar chart config
+  const chartData = {
+    labels: ["Easy", "Medium", "Hard"],
+    datasets: [
+      {
+        label: "Solved",
+        data: leetcodeStats?.submitStats.acSubmissionNum?.map((i: any) => i.count) || [0, 0, 0],
+        backgroundColor: ["#4ade80", "#fbbf24", "#ef4444"],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full">
       <DashboardNavbar isLoading={authUserLoading} userId={authUser?.id} />
       {authUserLoading ? (
         <DashboardContentSkeleton />
       ) : (
-        <DashboardContent authUser={authUser} />
+        <>
+          <DashboardContent authUser={authUser} />
+          {leetcodeStats && (
+            <div className="container mx-auto mt-6">
+              <h2 className="text-xl font-semibold mb-4">Your LeetCode Progress</h2>
+              <div className="max-w-xl">
+                <Bar data={chartData} />
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

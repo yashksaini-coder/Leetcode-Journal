@@ -2,6 +2,7 @@
 
 import {
   Calendar,
+  LayoutDashboard,
   ChevronUp,
   Search,
   Settings,
@@ -30,19 +31,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { signout } from "@/app/actions/action";
-import Dashboard from "@/app/dashboard/page";
 
 // Menu items.
 const items = [
   {
     title: "profile",
-    url: "#",
+    url: "/dashboard/profile",
     icon: User,
   },
   {
     title: "Problems",
     url: "#",
-    icon: Dashboard,
+    icon: LayoutDashboard,
   },
   {
     title: "Calendar",
