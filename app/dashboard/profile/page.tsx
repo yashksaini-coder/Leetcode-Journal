@@ -13,7 +13,7 @@ function DashboardContent({ authUser }: any) {
   return (
     <main className="container mx-auto space-y-6">
       <h1 className="text-3xl font-bold">Welcome, {authUser?.fullName}</h1>
-      <Card>
+      <Card className="bg-secondary">
         <CardHeader>
           <CardTitle>Your Profile</CardTitle>
         </CardHeader>
@@ -75,7 +75,7 @@ export default function Dashboard() {
         <>
           <DashboardContent authUser={authUser} />
           {leetcodeStats && (
-            <div className="container mx-auto bg-neutral-800 rounded-lg p-3 mt-6">
+            <div className="container mx-auto bg-secondary rounded-lg p-3 mt-6">
               <h2 className="text-xl font-semibold mb-4">Your LeetCode Progress</h2>
               <div className="max-w-xl">
                 <Bar data={chartData} />
