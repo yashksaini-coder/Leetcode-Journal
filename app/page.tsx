@@ -1,7 +1,10 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import Navbar1 from "@/components/navbar";
+import PricingCard from "@/components/LandingComponents/PriceCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import {
   Card,
   CardContent,
@@ -9,48 +12,187 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Highlight } from "@/components/ui/hero-hihglight";
-import PricingCard from "@/components/LandingComponents/PriceCard";
-import Navbar1 from "@/components/navbar";
 import Footer from "@/components/footer";
+import { useRouter } from "next/navigation"; // Changed this import
+
+//@ts-ignore
+const Highlight = ({ children, className }) => {
+  const words = children.split(" ");
+  return (
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={cn(
+        "relative inline-block pb-1 px-1 py-2",
+        "rounded-lg",
+        className
+      )}
+    >
+      <motion.div
+        className="absolute inset-0 rounded-lg"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+        style={{
+          background:
+            "linear-gradient(to right, rgb(129 140 248), rgb(192 132 252), rgb(244 114 182))",
+          originX: 0,
+        }}
+      />
+
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.4 + i * 0.1,
+            ease: "easeOut",
+          }}
+          className="relative inline-block mx-1"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+//@ts-ignore
+const Star = ({ style }) => (
+  <div
+    className="star-wrapper"
+    style={{
+      position: "absolute",
+      ...style,
+    }}
+  >
+    <svg
+      className="star"
+      viewBox="0 0 24 24"
+      width="100%"
+      height="100%"
+      fill="currentColor"
+    >
+      <path d="M12 2L7 12L12 22L17 12L12 2Z M2 12L12 7L22 12L12 17L2 12Z" />
+    </svg>
+  </div>
+);
 
 export default function LandingPage() {
+  const router = useRouter(); // Initialize router
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-black">
+      {/* Header */}
       <Navbar1 />
+
+      {/* Main Content */}
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl mb-9 font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  <p className="mb-5">Master LeetCode</p>
-                  <Highlight className="dark:bg-primary/20 bg-primary/10">
-                    Track Your Progress
-                  </Highlight>
-                </h1>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  LeetCode Journal helps you organize your problem-solving
-                  journey, track your progress, and achieve your coding
-                  interview goals.
-                </p>
+        {/* Hero Section */}
+        <section className="w-full min-h-[calc(100vh-3.5rem)] py-12 md:py-24 lg:py-32 relative overflow-hidden bg-black">
+          {/* <NetworkBackground /> */}
+          <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center justify-center h-full text-center">
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
+              <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-white">
+                <span className="relative inline-block">
+                  LeetCodeJournal
+                  <Star
+                    style={{
+                      top: "-30px",
+                      left: "10%",
+                      width: "20px",
+                      height: "20px",
+                      color: "white",
+                    }}
+                  />
+                  <Star
+                    style={{
+                      top: "20%",
+                      right: "-30px",
+                      width: "24px",
+                      height: "24px",
+                      color: "white",
+                      animationDelay: "0.3s",
+                    }}
+                  />
+                  <Star
+                    style={{
+                      bottom: "-20px",
+                      left: "30%",
+                      width: "16px",
+                      height: "16px",
+                      color: "white",
+                      animationDelay: "0.6s",
+                    }}
+                  />
+                  <Star
+                    style={{
+                      top: "40%",
+                      left: "-25px",
+                      width: "20px",
+                      height: "20px",
+                      color: "white",
+                      animationDelay: "0.9s",
+                    }}
+                  />
+                  <Star
+                    style={{
+                      bottom: "30%",
+                      right: "20%",
+                      width: "18px",
+                      height: "18px",
+                      color: "white",
+                      animationDelay: "1.2s",
+                    }}
+                  />
+                </span>
               </div>
-              <div className="space-x-4">
-                <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  Get Started
-                </Button>
-                <Button variant="outline" size="lg">
-                  Learn More
-                  <a href=""></a>
-                </Button>
-              </div>
+              <p></p>
+              <span className="inline-block mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl/none">
+                <Highlight className="px-2 sm:px-4 md:px-6 lg:px-10 py-3">
+                  Track Your Progress
+                </Highlight>
+              </span>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl/none relative"
+              >
+                <span className="bg-gradient-to-b from-transparent via-white to-white bg-clip-text text-transparent">
+                  & Master LeetCode
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent" />
+              </motion.p>
+            </h1>
+
+            <p className="mx-auto max-w-[700px] text-muted-foreground text-xl mt-6">
+              LeetCode Journal helps you organize your problem-solving journey,
+              track your progress, and achieve your coding interview goals.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Button
+                size="lg"
+                className="rounded-full text-md px-10 py-6 font-bold transform transition-all duration-200 hover:scale-105 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+                onClick={() => router.push("/auth/register")}
+              >
+                Get Started
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="rounded-full text-md px-10 py-6 font-bold transform transition-all duration-200 hover:scale-105 border-purple-500/50 hover:bg-purple-500/10"
+                onClick={() => router.push("/learn-more")}
+              >
+                Learn More
+              </Button>
             </div>
           </div>
         </section>
+
         <section id="features" className="w-full abo py-12 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
@@ -221,8 +363,58 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        <Footer />
       </main>
-      <Footer />
     </div>
   );
+}
+
+const starStyles = `
+  .star-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .star {
+    animation: starPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes starPulse {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .star-wrapper:nth-child(2) .star {
+    animation-delay: 0.3s;
+  }
+  
+  .star-wrapper:nth-child(3) .star {
+    animation-delay: 0.6s;
+  }
+  
+  .star-wrapper:nth-child(4) .star {
+    animation-delay: 0.9s;
+  }
+  
+  .star-wrapper:nth-child(5) .star {
+    animation-delay: 1.2s;
+  }
+`;
+
+// Update style injection
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = starStyles;
+  document.head.appendChild(style);
 }

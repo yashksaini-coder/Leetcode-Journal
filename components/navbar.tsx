@@ -22,18 +22,20 @@ const Navbar1 = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="flex h-16 items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-4 z-50 w-full">
+      <nav className="mx-auto max-w-[95%] h-16 rounded-xl border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 flex items-center justify-between px-4 sm:px-6">
         <div className="flex items-center space-x-2">
-          <span className="text-2xl">📓</span>
-          <span className="text-xl font-semibold">LeetCodeJournal</span>
+          <span className="text-2xl">📚</span>
+          <span className="text-xl font-semibold font-sans">
+            LeetCodeJournal
+          </span>
         </div>
         <div className="hidden lg:flex items-center space-x-6">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm px-2 font-medium transition-colors hover:text-primary ${
                 pathname === item.href
                   ? "text-primary"
                   : "text-muted-foreground"
@@ -44,12 +46,12 @@ const Navbar1 = () => {
           ))}
         </div>
         <div className="hidden lg:flex items-center space-x-4">
-          <Link
-            href="/auth/signin"
-            className="text-sm font-medium text-muted-foreground hover:text-primary"
+          <Button
+            asChild
+            className="bg-transparent border border-muted-foreground text-muted-foreground"
           >
-            Log in
-          </Link>
+            <Link href="/auth/signin">Login</Link>
+          </Button>
           <Button asChild>
             <Link href="/auth/register">Sign up</Link>
           </Button>
@@ -69,9 +71,9 @@ const Navbar1 = () => {
       </nav>
 
       {isMenuOpen && (
-        <div className="lg:hidden">
+        <div className="lg:hidden mx-auto max-w-[95%] mt-2">
           {/* ADDED X-PADDING TO MAKE IT FIT PROPERLY ON MOBILE SCREENS */}
-          <nav className="container flex flex-col space-y-4 py-4 px-4">
+          <nav className="rounded-lg border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/10 flex flex-col space-y-4 py-4 px-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}
