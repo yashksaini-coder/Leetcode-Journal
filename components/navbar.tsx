@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Menu, X } from "lucide-react";
+import { BookOpen, Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -25,7 +25,7 @@ const Navbar1 = () => {
     <header className="sticky top-4 z-50 w-full">
       <nav className="mx-auto max-w-[95%] h-16 rounded-xl border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 flex items-center justify-between px-4 sm:px-6">
         <div className="flex items-center space-x-2">
-          <span className="text-2xl">📚</span>
+          <BookOpen className="h-6 w-6 text-primary mx-2" />
           <span className="text-xl font-semibold font-sans">
             LeetCodeJournal
           </span>
