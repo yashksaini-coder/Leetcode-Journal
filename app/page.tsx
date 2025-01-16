@@ -41,7 +41,7 @@ const Highlight = ({ children, className }) => {
         }}
       />
 
-      {words.map((word, i) => (
+      {words.map((word: any, i: any) => (
         <motion.span
           key={i}
           initial={{ y: 20, opacity: 0 }}

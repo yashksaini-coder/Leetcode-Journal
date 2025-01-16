@@ -48,7 +48,7 @@ const Navbar1 = () => {
         <div className="hidden lg:flex items-center space-x-4">
           <Button
             asChild
-            className="bg-transparent border border-muted-foreground text-muted-foreground"
+            className="bg-transparent hover:bg-transparent hover:text-white hover:border-foreground border border-muted-foreground text-muted-foreground"
           >
             <Link href="/auth/signin">Login</Link>
           </Button>
@@ -57,17 +57,18 @@ const Navbar1 = () => {
           </Button>
           <ThemeToggle />
         </div>
-        <button
+        <div
           onClick={toggleMenu}
           className="lg:hidden focus:outline-none"
+          role="button"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {/* ADDED THEME TOGGLE ALONG WITH MENU  */}
+          {/* ADDED THEME TOGGLE ALONG WITH MENU */}
           <div className="flex flex-row justify-center items-center gap-2">
             <ThemeToggle />
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </div>
-        </button>
+        </div>
       </nav>
 
       {isMenuOpen && (

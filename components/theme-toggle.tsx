@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (!resolvedTheme) {
@@ -19,8 +24,8 @@ export function ThemeToggle() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  // NOT RENDERING ICONS UNTIL THE THEME IS RESOLVED
-  if (!resolvedTheme) {
+  // NOT RENDERING ICONS UNTIL THE THEME IS RESOLVED AND COMPONENT IS MOUNTED
+  if (!mounted || !resolvedTheme) {
     return null;
   }
 
