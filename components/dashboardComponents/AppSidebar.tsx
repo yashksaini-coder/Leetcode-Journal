@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SidebarData } from "@/data/SidebarData";
 import { supabase } from "@/lib/supabaseClient";
+import { signout } from "@/app/actions/action";
 
 export function AppSidebar() {
   const { setTheme, theme } = useTheme();
@@ -24,13 +25,11 @@ export function AppSidebar() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const handleLogout = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      signout();
       router.push('/auth/signin');
     } catch (error) {
       console.error("Sign out error:", error);
-    }         
-    // Fix the Logout functionality, something is wrong here, It keeps throwing a 307 error on logout,and the user is not redirected to the login page
+    }
   };
 
   return (
