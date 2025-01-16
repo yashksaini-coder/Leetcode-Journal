@@ -23,7 +23,7 @@ const Navbar1 = () => {
 
   return (
     <header className="sticky top-4 z-50 w-full">
-      <nav className="mx-auto max-w-[95%] h-16 rounded-xl border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 flex items-center justify-between px-4 sm:px-6">
+      <nav className="mx-auto max-w-[95%] h-16 rounded-xl border border-foreground/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 flex items-center justify-between px-4 sm:px-6">
         <div className="flex items-center space-x-2">
           <BookOpen className="h-6 w-6 text-primary mx-2" />
           <span className="text-xl font-semibold font-sans">

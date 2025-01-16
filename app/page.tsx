@@ -13,7 +13,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Footer from "@/components/footer";
-import { useRouter } from "next/navigation"; // Changed this import
+import { useRouter } from "next/navigation";
+import "./starStyles.css";
 
 //@ts-ignore
 const Highlight = ({ children, className }) => {
@@ -82,20 +83,20 @@ const Star = ({ style }) => (
 );
 
 export default function LandingPage() {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
   return (
-    <div className="flex flex-col min-h-screen bg-black">
+    <div className="flex flex-col min-h-screen bg-background">
       {/* Header */}
       <Navbar1 />
 
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full min-h-[calc(100vh-3.5rem)] py-12 md:py-24 lg:py-32 relative overflow-hidden bg-black">
+        <section className="w-full min-h-[calc(100vh-3.5rem)] py-12 md:py-24 lg:py-32 relative overflow-hidden bg-background">
           {/* <NetworkBackground /> */}
           <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center justify-center h-full text-center">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
-              <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-white">
+              <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-foreground">
                 <span className="relative inline-block">
                   LeetCodeJournal
                   <Star
@@ -104,7 +105,7 @@ export default function LandingPage() {
                       left: "10%",
                       width: "20px",
                       height: "20px",
-                      color: "white",
+                      color: "foreground",
                     }}
                   />
                   <Star
@@ -113,7 +114,7 @@ export default function LandingPage() {
                       right: "-30px",
                       width: "24px",
                       height: "24px",
-                      color: "white",
+                      color: "text-foreground",
                       animationDelay: "0.3s",
                     }}
                   />
@@ -123,7 +124,7 @@ export default function LandingPage() {
                       left: "30%",
                       width: "16px",
                       height: "16px",
-                      color: "white",
+                      color: "text-foreground",
                       animationDelay: "0.6s",
                     }}
                   />
@@ -133,7 +134,7 @@ export default function LandingPage() {
                       left: "-25px",
                       width: "20px",
                       height: "20px",
-                      color: "white",
+                      color: "text-foreground",
                       animationDelay: "0.9s",
                     }}
                   />
@@ -143,7 +144,7 @@ export default function LandingPage() {
                       right: "20%",
                       width: "18px",
                       height: "18px",
-                      color: "white",
+                      color: "text-foreground",
                       animationDelay: "1.2s",
                     }}
                   />
@@ -161,10 +162,10 @@ export default function LandingPage() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl/none relative"
               >
-                <span className="bg-gradient-to-b from-transparent via-white to-white bg-clip-text text-transparent">
+                <span className="bg-gradient-to-b from-transparent via-foreground to-foreground bg-clip-text text-transparent">
                   & Master LeetCode
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent" />
               </motion.p>
             </h1>
 
@@ -369,52 +370,8 @@ export default function LandingPage() {
   );
 }
 
-const starStyles = `
-  .star-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .star {
-    animation: starPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes starPulse {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.3;
-      transform: scale(0.7);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .star-wrapper:nth-child(2) .star {
-    animation-delay: 0.3s;
-  }
-  
-  .star-wrapper:nth-child(3) .star {
-    animation-delay: 0.6s;
-  }
-  
-  .star-wrapper:nth-child(4) .star {
-    animation-delay: 0.9s;
-  }
-  
-  .star-wrapper:nth-child(5) .star {
-    animation-delay: 1.2s;
-  }
-`;
-
-// Update style injection
-if (typeof document !== "undefined") {
-  const style = document.createElement("style");
-  style.textContent = starStyles;
-  document.head.appendChild(style);
-}
+// if (typeof document !== "undefined") {
+//   const style = document.createElement("style");
+//   style.textContent = starStyles;
+//   document.head.appendChild(style);
+// }
