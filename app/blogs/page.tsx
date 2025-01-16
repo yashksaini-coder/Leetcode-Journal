@@ -1,13 +1,18 @@
-import Link from 'next/link';
-import { getBlogsByYear } from '@/lib/getBlogs';
+import Link from "next/link";
+import { getBlogsByYear } from "@/lib/getBlogs";
+import { Timeline } from "@/components/ui/timeline";
 
 export default async function BlogsPage() {
   const blogsByYear = getBlogsByYear();
+  //covert object to array
+  const blogsByYearArray = Object.keys(blogsByYear).map((year) => ({
+    year,
+    blogs: blogsByYear[year],
+  }));
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Blogs</h1>
-      {Object.keys(blogsByYear)
+      {/* {Object.keys(blogsByYear)
         .sort((a, b) => parseInt(b) - parseInt(a))
         .map((year) => (
           <div key={year} className="mb-8">
@@ -15,14 +20,20 @@ export default async function BlogsPage() {
             <ul className="space-y-2">
               {blogsByYear[year].map((blog) => (
                 <li key={blog.slug}>
-                  <Link href={`/blogs/${blog.slug}`} className="text-blue-600 hover:underline">
+                  <Link
+                    href={`/blogs/${blog.slug}`}
+                    className="text-blue-600 hover:underline"
+                  >
                     {blog.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-        ))}
+        ))} */}
+      <div className="w-full">
+        <Timeline data={blogsByYearArray} />
+      </div>
     </div>
   );
 }
