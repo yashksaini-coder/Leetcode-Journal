@@ -40,8 +40,8 @@ export default async function BlogPage({
   const minuteRead = content.length / 200;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800 py-12">
-      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen md:py-10 p-2">
+      <article className="max-w-3xl dark:bg-neutral-900 bg-neutral-100 shadow-sm rounded-xl py-6 mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white mb-2">
             {meta.title}
