@@ -21,10 +21,5 @@ export const SidebarData = [
       icon: Settings,
       href: "/dashboard/settings",
     },
-    {
-      title: "Blogs",
-      icon: BellRingIcon,
-      href: "/blogs",
-    }
   ];
   
