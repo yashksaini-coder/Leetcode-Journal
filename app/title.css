@@ -1,0 +1,67 @@
+:root {
+  --index: calc(1vw + 1vh);
+  --transition: cubic-bezier(0.1, 0.7, 0, 1);
+}
+
+.items {
+  display: flex;
+  gap: 0.1rem; /* Reduced from 0.4rem */
+  perspective: calc(var(--index) * 35);
+  font-size: 5rem; /* Increased from 2.5rem */
+  font-weight: bolder;
+}
+
+.item {
+  cursor: pointer;
+  filter: brightness(0.5);
+  transition: transform 1.25s var(--transition), filter 2s var(--transition);
+  will-change: transform, filter, rotateY;
+  /* padding: 0.1rem; */
+}
+
+.items .item:hover {
+  filter: brightness(1);
+  transform: translateZ(calc(var(--index) * 5));
+}
+
+/*Right*/
+.items .item:hover + * {
+  filter: brightness(0.8);
+  transform: translateZ(calc(var(--index) * 4)) rotateY(35deg);
+  z-index: -1;
+}
+
+.items .item:hover + * + * {
+  filter: brightness(0.7);
+  transform: translateZ(calc(var(--index) * 3)) rotateY(40deg);
+  z-index: -2;
+}
+
+.items .item:hover + * + * + * {
+  filter: brightness(0.6);
+  transform: translateZ(calc(var(--index) * 2)) rotateY(30deg);
+  z-index: -3;
+}
+
+/*Left*/
+.items .item:has(+ :hover) {
+  filter: brightness(0.8);
+  transform: translateZ(calc(var(--index) * 4)) rotateY(-35deg);
+}
+
+.items .item:has(+ * + :hover) {
+  filter: brightness(0.7);
+  transform: translateZ(calc(var(--index) * 3)) rotateY(-40deg);
+}
+
+.items .item:has(+ * + * + :hover) {
+  filter: brightness(0.6);
+  transform: translateZ(calc(var(--index) * 2)) rotateY(-30deg);
+}
+
+.items .item:active,
+.items .item:focus {
+  filter: brightness(1);
+  z-index: 100;
+  transform: translateZ(calc(var(--index) * 5)) scale(1.2);
+}
