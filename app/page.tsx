@@ -156,7 +156,7 @@ export default function LandingPage() {
                   Track Your Progress
                 </Highlight>
               </span>
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -166,7 +166,7 @@ export default function LandingPage() {
                   & Master LeetCode
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent" />
-              </motion.p>
+              </motion.div>
             </h1>
 
             <p className="mx-auto max-w-[700px] text-muted-foreground text-xl mt-6">
