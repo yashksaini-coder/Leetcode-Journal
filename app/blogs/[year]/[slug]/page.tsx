@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github-dark.css"; // Using a dark theme for syntax highlighting
+import "highlight.js/styles/github-dark.css";
 import { Metadata } from "next";
 import { ClockIcon } from "lucide-react";
 
