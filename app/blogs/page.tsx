@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getBlogsByYear } from "@/lib/getBlogs";
 import { Timeline } from "@/components/ui/timeline";
 

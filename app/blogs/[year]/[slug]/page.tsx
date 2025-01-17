@@ -20,21 +20,17 @@ async function getBlogContent(year: string, slug: string) {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { year: string; slug: string };
-}): Promise<Metadata> {
-  const { meta } = await getBlogContent(params.year, params.slug);
+}: any): Promise<Metadata> {
+  const { year, slug } = await params;
+  const { meta } = await getBlogContent(year, slug);
   return {
     title: meta.title,
     description: meta.description || `Read ${meta.title} on our blog`,
   };
 }
 
-export default async function BlogPage({
-  params: { year, slug },
-}: {
-  params: { year: string; slug: string };
-}) {
+export default async function BlogPage({ params }: any) {
+  const { year, slug } = await params;
   const { content, meta } = await getBlogContent(year, slug);
 
   const minuteRead = content.length / 200;
