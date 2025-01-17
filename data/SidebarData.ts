@@ -1,4 +1,4 @@
-import { BookA, FileQuestion, Settings, User } from "lucide-react";
+import { BellRingIcon, BookA, FileQuestion, Settings, User } from "lucide-react";
 
 export const SidebarData = [
     {
@@ -21,5 +21,10 @@ export const SidebarData = [
       icon: Settings,
       href: "/dashboard/settings",
     },
+    {
+      title: "Blogs",
+      icon: BellRingIcon,
+      href: "/blogs",
+    }
   ];
   
