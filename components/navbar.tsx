@@ -13,6 +13,7 @@ const navItems = [
   { href: "/learn-more", label: "How it Works" },
   { href: "/FAQ", label: "FAQs" },
   // { href: "/blog", label: "Blog" },
+  { href: "/blogs", label: "Blogs" },
 ];
 
 const Navbar1 = () => {
