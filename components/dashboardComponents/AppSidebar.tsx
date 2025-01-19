@@ -16,6 +16,18 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SidebarData } from "@/data/SidebarData";
 import { signout } from "@/app/actions/action";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 export function AppSidebar() {
   const { setTheme, theme } = useTheme();
@@ -95,15 +107,23 @@ export function AppSidebar() {
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
-          <Button 
-            variant="outline"
-            size="icon"
-            onClick={handleLogout}
-            className="rounded-full"
-          >
-            <LogOut className="h-[1.2rem] w-[1.2rem]" />
-            <span className="sr-only">Logout</span>
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <LogOut className="cursor-pointer h-[1.8rem] w-[1.8rem] bg-grey " />
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action will Logout you from the application.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleLogout}>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
     </aside>
