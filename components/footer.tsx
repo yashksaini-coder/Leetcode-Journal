@@ -41,8 +41,6 @@ export default function Footer() {
                         <SocialLinks />
                     </div>
                 </div>
-            </div>
-            <div className="flex flex-col md:flex-row justify-start items-center border-t border-border">
                 <p className="text-sm text-muted-foreground mb-4 md:mb-0">
                         © 2025 LeetCode Journal. All rights reserved.
                 </p>
