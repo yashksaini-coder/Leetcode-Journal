@@ -113,15 +113,15 @@ const Navbar1 = () => {
               </MenuItem>
             </Menu>
           </div>
-          <div className="hidden lg:flex items-center space-x-4">
-            <Button asChild className="bg-transparent hover:bg-transparent hover:text-white hover:border-foreground border border-muted-foreground text-muted-foreground">
+            <div className="hidden lg:flex items-center space-x-4">
+            <Button asChild className="bg-transparent hover:bg-primary hover:text-white border border-muted-foreground text-muted-foreground dark:text-muted-foreground dark:border-muted-foreground dark:hover:bg-primary dark:hover:text-black">
               <Link href="/auth/signin">Login</Link>
             </Button>
-            <Button asChild>
+            <Button asChild className="bg-primary text-white hover:bg-primary-dark dark:bg-primary dark:text-black dark:hover:bg-primary-dark">
               <Link href="/auth/register">Sign up</Link>
             </Button>
             <ThemeToggle />
-          </div>
+            </div>
           <MenuToggle isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </nav>
       </div>
