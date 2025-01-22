@@ -1,7 +1,6 @@
 name: "🤔 General Issue"
 description: "Submit a general question, suggestion or issue"
-title: "[GENERAL] "
-labels: ["triage-needed"]
+title: "[GENERAL]"
 
 body:
   - type: markdown
@@ -29,24 +28,6 @@ body:
       label: "Description"
       description: "What would you like to share or ask?"
       placeholder: "Provide details about your issue, question, or suggestion..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: additional
-    attributes:
-      label: "Additional Context"
-      description: "Add any other context, screenshots, or relevant information"
-      placeholder: "Add any additional details here..."
-
-  - type: dropdown
-    id: impact
-    attributes:
-      label: "Impact Level"
-      options:
-        - High
-        - Medium
-        - Low
     validations:
       required: true
 

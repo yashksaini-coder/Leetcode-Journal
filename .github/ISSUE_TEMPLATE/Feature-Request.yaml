@@ -27,7 +27,7 @@ body:
       description: "Describe the solution you'd like"
       placeholder: "It would be great if..."
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: alternatives
@@ -42,17 +42,6 @@ body:
       label: "Screenshots or Mockups"
       description: "Add any relevant screenshots, mockups or examples"
       placeholder: "Drag and drop images here..."
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: "Priority"
-      options:
-        - High
-        - Medium
-        - Low
-    validations:
-      required: true
 
   - type: checkboxes
     id: terms
