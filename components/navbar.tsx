@@ -111,6 +111,14 @@ const Navbar1 = () => {
                   <HoveredLink href="#">Blogs2</HoveredLink>
                 </div>
               </MenuItem>
+              <Link href="resources">
+                <MenuItem setActive={setActive} active={active} item="Resources">
+                  <div className="flex flex-col space-y-4 text-sm">
+                    <HoveredLink href="#">Resources1</HoveredLink>
+                    <HoveredLink href="#">Resources2</HoveredLink>
+                  </div>
+                </MenuItem>
+              </Link>
             </Menu>
           </div>
             <div className="hidden lg:flex items-center space-x-4">
