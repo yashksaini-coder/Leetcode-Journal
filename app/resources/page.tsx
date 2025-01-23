@@ -22,7 +22,6 @@ export default function ResourcesPage() {
             Explore our curated collection of learning materials to enhance your skills in programming, web development,
             and DevOps.
           </p>
-          <SearchBar />
         </div>
 
         {/* Programming Languages Section */}
