@@ -1,4 +1,3 @@
-import { SearchBar } from "./component/search-bar"
 import { ResourceCard } from "./component/resource-card"
 import { Globe, Laptop } from "lucide-react"
 import Navbar1 from "@/components/navbar"
