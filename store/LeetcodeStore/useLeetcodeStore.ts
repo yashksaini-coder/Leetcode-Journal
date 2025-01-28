@@ -68,7 +68,7 @@ export const useLeetcodeStore = create<LeetcodeStore>((set) => ({
         try {
             const response = await axios.get("/api/leetcode/userDetails");
             const data = response.data;
-            console.log("data", data);
+            // console.log("data", data);
             set({ leetcodeUserProfile: data });
         } catch (error) {
             console.error(error);
