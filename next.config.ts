@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true, // Ignores all ESLint warnings and errors during builds
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // Match any hostname
+      },
+    ],
+  },
 };
 
 export default nextConfig;

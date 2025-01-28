@@ -20,7 +20,7 @@
  * 
  * @param {string} $username - The username of the user whose profile is to be fetched.
  */
-const query = `#graphql
+export const userProfileQuery = `#graphql
 query getUserProfile($username: String!) {
     allQuestionsCount {
         difficulty
@@ -88,5 +88,3 @@ query getUserProfile($username: String!) {
         lang
     }
 }`;
-
-export default query;
