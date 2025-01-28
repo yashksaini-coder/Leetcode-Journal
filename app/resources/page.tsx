@@ -1,8 +1,8 @@
-import { ResourceCard } from "./component/resource-card";
+import { ResourceCard } from "../../components/ui/resource-card";
 import { Globe, Laptop } from "lucide-react";
-import Navbar1 from "@/components/navbar";
-import { Ripple } from "./component/ripple";
-import SupportSection from "./component/support-section";
+import  Navbar1 from '@/components/navbar';
+import { Ripple } from "../../components/ui/ripple";
+import SupportSection from "../../components/ui/support-section";
 import Footer from "@/components/footer";
 
 export default function ResourcesPage() {

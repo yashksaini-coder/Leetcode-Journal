@@ -98,7 +98,7 @@ export default function LandingPage() {
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
               <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-foreground">
                 <span className="relative inline-block">
-                  LeetCodeJournal
+                  LeetCode Journal
                   {/* <Star
                     style={{
                       top: "-30px",

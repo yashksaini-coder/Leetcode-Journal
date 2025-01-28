@@ -25,7 +25,7 @@ export const MenuItem = ({
     children?: React.ReactNode;
 }) => {
     return (
-        <div onMouseEnter={() => setActive(item)} className="relative px-8 py-3 rounded-xl hover:bg-white hover:dark:bg-white hover:text-black transition-all duration-300 text-foreground shadow-sm border border-transparent   hover:border-white hover:shadow-[0px_0px_20px_5px_rgba(255,255,255,0.4)]">
+        <div onMouseEnter={() => setActive(item)} className="relative px-8 py-3 rounded-xl hover:bg-white hover:dark:bg-white text-black transition-all duration-300 text-foreground shadow-sm border border-transparent   hover:border-white hover:shadow-[0px_0px_20px_5px_rgba(255,255,255,0.4)]">
             <motion.p
                 transition={{ duration: 0.3 }}
                 className="cursor-pointer  hover:opacity-[0.9] "

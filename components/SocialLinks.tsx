@@ -19,7 +19,7 @@ export function SocialLinks() {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className=" hover:text-primary"
+          className="text-primary"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}
