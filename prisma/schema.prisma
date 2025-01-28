@@ -27,9 +27,35 @@ model User {
   email            String   @unique
   fullName         String
   gender           String
-  leetcodeUsername String 
+  leetcodeUsername String
   password         String
   isVerified       Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+// model leetcodeUser {
+//   id          String   @id @unique @default(uuid())
+//   username    String
+//   githubURL   String
+//   twitterUrl  String
+//   linkedinUrl String
+//   userAvatar  String
+//   countryName String
+//   skillTags   String[]
+//   starRating  Int
+//   badges      Badges[]
+// }
+
+// model Badges {
+//   id             String        @id @unique @default(uuid())
+//   displayName    String
+//   icon           String
+//   creationDate   String
+//   leetcodeUserId String?
+//   leetcodeUser   leetcodeUser? @relation(fields: [leetcodeUserId], references: [id])
+// }
+
+
+
+
