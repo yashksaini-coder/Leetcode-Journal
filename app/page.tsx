@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/card";
 import Footer from "@/components/footer";
 import { useRouter } from "next/navigation";
-import "./starStyles.css";
 
 //@ts-ignore
 const Highlight = ({ children, className }) => {
@@ -49,7 +48,7 @@ const Highlight = ({ children, className }) => {
           animate={{ y: 0, opacity: 1 }}
           transition={{
             duration: 0.5,
-            delay: 0.4 + i * 0.1,
+            delay: 0.4,
             ease: "easeOut",
           }}
           className="relative inline-block mx-1"
@@ -99,55 +98,6 @@ export default function LandingPage() {
               <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-foreground">
                 <span className="relative inline-block">
                   LeetCode Journal
-                  {/* <Star
-                    style={{
-                      top: "-30px",
-                      left: "10%",
-                      width: "20px",
-                      height: "20px",
-                      color: "foreground",
-                    }}
-                  />
-                  <Star
-                    style={{
-                      top: "20%",
-                      right: "-30px",
-                      width: "24px",
-                      height: "24px",
-                      color: "text-foreground",
-                      animationDelay: "0.3s",
-                    }}
-                  />
-                  <Star
-                    style={{
-                      bottom: "-20px",
-                      left: "30%",
-                      width: "16px",
-                      height: "16px",
-                      color: "text-foreground",
-                      animationDelay: "0.6s",
-                    }}
-                  />
-                  <Star
-                    style={{
-                      top: "40%",
-                      left: "-25px",
-                      width: "20px",
-                      height: "20px",
-                      color: "text-foreground",
-                      animationDelay: "0.9s",
-                    }}
-                  />
-                  <Star
-                    style={{
-                      bottom: "30%",
-                      right: "20%",
-                      width: "18px",
-                      height: "18px",
-                      color: "text-foreground",
-                      animationDelay: "1.2s",
-                    }}
-                  /> */}
                 </span>
               </div>
               <p></p>
