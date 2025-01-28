@@ -6,6 +6,6 @@
  */
 export { default as AcSubmissionQuery } from './recentAcSubmit';
 export { default as contestQuery } from './contest';
-export { default as userProfileQuery } from './userProfile';
+export { userProfileQuery } from './userProfile';
 export { default as submissionQuery } from './recentSubmit';
 export { default as languageStatsQuery } from './languageStats';
