@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import Footer from "@/components/footer";
 import { useRouter } from "next/navigation";
+import { SparklesText } from "@/components/ui/sparkles-text";
 
 //@ts-ignore
 const Highlight = ({ children, className }) => {
@@ -97,7 +98,7 @@ export default function LandingPage() {
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
               <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-foreground">
                 <span className="relative inline-block">
-                  LeetCode Journal
+                  <SparklesText text="LeetCode Journal" className="text-8xl"  sparklesCount={20}/>
                 </span>
               </div>
               <p></p>
@@ -140,7 +141,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
+      
         <section id="features" className="w-full abo py-12 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
