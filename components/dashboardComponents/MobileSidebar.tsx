@@ -11,14 +11,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { Button } from "../ui/button";
-import {
-  BookA,
-  FileQuestion,
-  Github,
-  Menu,
-  Settings,
-  User,
-} from "lucide-react";
+import { Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

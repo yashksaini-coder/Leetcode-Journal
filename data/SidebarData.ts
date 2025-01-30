@@ -2,11 +2,6 @@ import { BellRingIcon, BookA, FileQuestion, Settings, User } from "lucide-react"
 
 export const SidebarData = [
     {
-      title: "Profile",
-      icon: User,
-      href: "/dashboard/profile",
-    },
-    {
       title: "Problems",
       icon: FileQuestion,
       href: "/dashboard/problems",
