@@ -15,6 +15,8 @@ import {
 import Footer from "@/components/footer";
 import { useRouter } from "next/navigation";
 import { SparklesText } from "@/components/ui/sparkles-text";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+ 
 
 //@ts-ignore
 const Highlight = ({ children, className }) => {
@@ -93,6 +95,7 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden bg-background">
+        <BackgroundBeamsWithCollision>
           {/* <NetworkBackground /> */}
           <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center justify-center h-full text-center">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
@@ -140,8 +143,8 @@ export default function LandingPage() {
               </Button>
             </div>
           </div>
+          </BackgroundBeamsWithCollision>
         </section>
-      
         <section id="features" className="w-full abo py-12 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
