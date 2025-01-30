@@ -15,7 +15,7 @@ export default function Dashboard() {
     return <DashboardSkeleton />;
   }
   return (
-    <div className="flex flex-col min-h-screen p-4 sm:p-6 md:p-8">
+    <div className="flex flex-col p-4 sm:p-6 md:p-8">
       <Card className="w-full max-w-4xl mx-auto shadow-xl border-none">
         <CardHeader className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b">
           <div className="relative w-32 h-32 sm:w-40 sm:h-40">
