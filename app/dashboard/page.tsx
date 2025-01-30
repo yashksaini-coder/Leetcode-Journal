@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Image from "next/image";
 import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
@@ -7,18 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Github, Linkedin, Twitter, Award, Book, Star } from "lucide-react";
-
 export default function Dashboard() {
   const { fetchLeetcodeUserProfile, leetcodeUserProfile } = useLeetcodeStore();
-
   React.useEffect(() => {
     fetchLeetcodeUserProfile();
   }, [fetchLeetcodeUserProfile]);
-
   if (!leetcodeUserProfile) {
     return <DashboardSkeleton />;
   }
-
   return (
     <div className="flex flex-col min-h-screen p-4 sm:p-6 md:p-8">
       <Card className="w-full max-w-4xl mx-auto shadow-xl border-none">
@@ -125,7 +120,6 @@ export default function Dashboard() {
     </div>
   );
 }
-
 function StatItem({
   icon,
   value,
@@ -145,7 +139,6 @@ function StatItem({
     </div>
   );
 }
-
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   if (!href) return null;
   return (
@@ -159,7 +152,6 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
     </a>
   );
 }
-
 function DashboardSkeleton() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6 md:p-8">
