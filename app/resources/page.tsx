@@ -51,34 +51,6 @@ export default function ResourcesPage() {
             />
           </div>
         </div>
-
-        <div className="relative px-4 pb-24 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <Globe className="dark:text-white/80 text-black" size={32} />
-            <h2 className="text-3xl font-semibold">Foundations</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <ResourceCard
-              title="Python"
-              description="Known for its simplicity and wide range of applications, from web dev to data science."
-              buttonColor="bg-emerald-500"
-            />
-            <ResourceCard
-              title="C"
-              description="A high-performance, compiled language that provides low-level memory management."
-            />
-            <ResourceCard
-              title="C++/CPP"
-              description="Widely used for system/application software, game development, and more."
-            />
-            <ResourceCard
-              title="Java"
-              description="A popular language for building large-scale enterprise applications and Android apps."
-              isComingSoon
-            />
-          </div>
-        </div>
       </div>
       <SupportSection />
       <Footer />
