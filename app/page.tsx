@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Navbar1 from "@/components/navbar";
-import PricingCard from "@/components/LandingComponents/PriceCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import {
   Card,
@@ -16,7 +15,7 @@ import Footer from "@/components/footer";
 import { useRouter } from "next/navigation";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
- 
+import SupportSection from "@/components/ui/support-section";
 
 //@ts-ignore
 const Highlight = ({ children, className }) => {
@@ -218,6 +217,7 @@ export default function LandingPage() {
             </Tabs>
           </div>
         </section>
+        <SupportSection />
         <Footer />
       </main>
     </div>
