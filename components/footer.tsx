@@ -14,7 +14,7 @@ export default function Footer() {
     }, []);
 
     return (
-        <footer className="w-full pt-12 pb-12 px-4 md:px-32 border-t bg-card DEFAULT text-white">
+        <footer className="w-full pt-8 pb-12 px-4 md:px-32 border-t bg-card DEFAULT text-white">
             <div className="container mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div className="space-y-2 ">
