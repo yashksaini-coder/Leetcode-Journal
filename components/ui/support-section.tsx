@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function SupportSection() {
   return (
@@ -19,11 +20,7 @@ export default function SupportSection() {
         <Button
           className="w-full sm:w-auto px-8 py-6 text-lg font-medium relative overflow-hidden group bg-white/10 hover:bg-white/20 transition-colors"
           variant="ghost"
-        >
-          {/* Rainbow gradient border effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-rose-500 via-emerald-500 to-violet-500 opacity-20 group-hover:opacity-30 transition-opacity" />
-
-          <span className="relative z-10">Support Us</span>
+        ><Link href="https://github.com/yashksaini-coder/Leetcode-Journal" target="_blank">Support Us</Link>
         </Button>
       </div>
     </Card>
