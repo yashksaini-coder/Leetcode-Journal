@@ -1,5 +1,5 @@
 "use client";
-
+import Navbar1 from "@/components/navbar";
 import {
   useScroll,
   useTransform,
@@ -42,19 +42,12 @@ export const Timeline = ({ data }: { data: YearlyBlogs[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
+    
     <div
       className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-3xl font-semibold md:text-5xl md:mb-4 text-black dark:text-white max-w-4xl">
-          Leetcode Journal
-        </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-xs md:text-base max-w-sm">
-          Documenting my progress and learnings from solving Leetcode problems.
-        </p>
-      </div>
-
+    <Navbar1 />
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, yearIndex) => (
           <div key={item.year}>

@@ -10,7 +10,7 @@ export default async function BlogsPage() {
   }));
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
+    <div className="max-w-700 mx-auto p-4">
       {/* {Object.keys(blogsByYear)
         .sort((a, b) => parseInt(b) - parseInt(a))
         .map((year) => (
