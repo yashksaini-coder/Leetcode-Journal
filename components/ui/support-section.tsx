@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import { Github } from "lucide-react";
 
 export default function SupportSection() {
   return (
@@ -16,12 +16,17 @@ export default function SupportSection() {
         <p className="text-lg md:text-xl dark:text-neutral-200 text-neutral-700">
           Help us grow by sharing this website with your friends and colleagues!
         </p>
-
-        <Button
-          className="w-full sm:w-auto px-8 py-6 text-lg font-medium relative overflow-hidden group bg-white/10 hover:bg-white/20 transition-colors"
-          variant="ghost"
-        ><Link href="https://github.com/yashksaini-coder/Leetcode-Journal" target="_blank">Support Us</Link>
-        </Button>
+          <RainbowButton className="hidden md:inline-flex items-center space-x-2">
+              <a
+                  href="https://github.com/yashksaini-coder/leetcode-journal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+              >
+                  <Github className="mr-2 h-4 w-4" />
+                  <span>Star on GitHub</span>
+              </a>
+          </RainbowButton>
       </div>
     </Card>
   );
