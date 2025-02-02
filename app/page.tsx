@@ -93,10 +93,10 @@ export default function LandingPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden bg-background">
+        <section className="w-full py-10 md:py-18 lg:py-32 relative overflow-hidden bg-background">
         <BackgroundBeamsWithCollision>
           {/* <NetworkBackground /> */}
-          <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center justify-center h-full text-center">
+          <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center justify-center h-48 text-center">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-7xl/none">
               <div className="relative font-medium text-[3rem] sm:text-[4rem] md:text-[5rem] leading-none text-foreground">
                 <span className="relative inline-block">
