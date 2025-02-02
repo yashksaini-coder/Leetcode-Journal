@@ -44,7 +44,7 @@ export const useAuthStore = create<authStore>((set) => ({
             }
 
             if (data.session) {
-                router.push("/dashboard/profile");
+                router.push("/dashboard");
             } else {
                 throw new Error("Unable to retrieve session after login.");
             }
