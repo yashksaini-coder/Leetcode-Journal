@@ -27,17 +27,6 @@ export default function Footer() {
                     </div>
 
                     <div className="flex items-center space-x-4 -ml-2">
-                        <RainbowButton className="hidden md:inline-flex items-center space-x-2">
-                            <a
-                                href="https://github.com/yashksaini-coder/leetcode-journal"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center"
-                            >
-                                <Github className="mr-2 h-4 w-4" />
-                                <span>Star on GitHub</span>
-                            </a>
-                        </RainbowButton>
                         <SocialLinks />
                     </div>
                 </div>
