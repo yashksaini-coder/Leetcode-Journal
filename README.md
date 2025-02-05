@@ -1,4 +1,4 @@
-![Leetcode-Journal](https://socialify.git.ci/yashksaini-coder/Leetcode-Journal/image?font=Rokkitt&forks=1&issues=1&logo=https%3A%2F%2Fskillicons.dev%2Ficons%3Fi%3Dts&name=1&owner=1&pattern=Solid&pulls=1&stargazers=1&theme=Auto)
+![Leetcode-Journal](https://socialify.git.ci/yashksaini-coder/Leetcode-Journal/image?font=Rokkitt&name=1&owner=1&pattern=Solid&theme=Auto)
 
 # [Leetcode Journal](https://leetcode-journal.vercel.app/)
 
@@ -40,12 +40,31 @@ Leetcode Journal offers the following key features:
 
 Leetcode Journal leverages cutting-edge technologies to deliver a seamless user experience:
 
-| Frontend | ![Next.js](https://skillicons.dev/icons?i=nextjs) | ![TailwindCSS](https://skillicons.dev/icons?i=tailwind) | ![HTML](https://skillicons.dev/icons?i=html) |
-|----------|---------|----------|------------|
-| Backend | ![Node.js](https://skillicons.dev/icons?i=nodejs) | ![Express.js](https://skillicons.dev/icons?i=express) | ![Supabase](https://skillicons.dev/icons?i=supabase) |
-| Database | ![Supabase](https://skillicons.dev/icons?i=supabase) | ![Prisma](https://skillicons.dev/icons?i=prisma) | ![GraphQL](https://skillicons.dev/icons?i=graphql) |
-| Deployment | ![Vercel](https://skillicons.dev/icons?i=vercel) | ![Git](https://skillicons.dev/icons?i=git) | ![GitHub](https://skillicons.dev/icons?i=github) |
-
+<table>
+    <tr>
+        <td align="center">
+            <img alt="Next.js" src="https://skillicons.dev/icons?i=nextjs"/>
+        </td>
+        <td align="center">
+            <img alt="TailwindCSS" src="https://skillicons.dev/icons?i=tailwind"/>
+        </td>
+        <td align="center">
+            <img alt="Supabase" src="https://skillicons.dev/icons?i=supabase"/>
+        </td>
+        <td align="center">
+            <img alt="Prisma" src="https://skillicons.dev/icons?i=prisma"/>
+        </td>
+        <td align="center">
+            <img alt="Vercel" src="https://skillicons.dev/icons?i=vercel"/>
+        </td>
+        <td align="center">
+            <img alt="Git" src="https://skillicons.dev/icons?i=git"/>
+        </td>
+        <td align="center">
+            <img alt="GitHub" src="https://skillicons.dev/icons?i=github"/>
+        </td>
+    </tr>
+</table>
 
 ### How can you Contrbitute to this Project? 
 
