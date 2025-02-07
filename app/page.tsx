@@ -7,7 +7,6 @@ import { FooterSection } from "@/components/DashboardV2/FooterSection";
 import { HeroSection } from "@/components/DashboardV2/HeroSection";
 import { PricingSection } from "@/components/DashboardV2/PricingSection";
 import { ServicesSection } from "@/components/DashboardV2/ServicesSection";
-import { SponsorsSection } from "@/components/DashboardV2/SponsorsSection";
 import { TeamSection } from "@/components/DashboardV2/TeamSection";
 import { TestimonialSection } from "@/components/DashboardV2/TestimonialSection";
 
@@ -43,7 +42,6 @@ export default function Home() {
   return (
     <div className="w-full">
       <HeroSection />
-      <SponsorsSection />
       <BenefitsSection />
       <FeaturesSection />
       <ServicesSection />
