@@ -1,11 +1,9 @@
-import { Separator } from "@/components/ui/separator";
-import { ChevronsDownIcon } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const FooterSection = () => {
   return (
-    <footer id="footer" className="container mx-auto py-24 sm:py-32">
+    <footer id="footer" className="container px-3 mx-auto py-24 sm:py-32">
       <div className="p-10 bg-card border border-secondary rounded-2xl">
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
           <div className="col-span-full xl:col-span-2">
