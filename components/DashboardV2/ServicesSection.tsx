@@ -17,26 +17,37 @@ interface ServiceProps {
 }
 const serviceList: ServiceProps[] = [
   {
-    title: "Custom Domain Integration",
+    title: "Problem Solving",
     description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit adipisicing.",
-    pro: 0,
+      "Enhance your problem-solving skills with a variety of coding challenges.",
+    pro: ProService.NO,
   },
   {
-    title: "Social Media Integrations",
+    title: "Interview Preparation",
     description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, dicta.",
-    pro: 0,
+      "Get ready for your technical interviews with curated questions and solutions.",
+    pro: ProService.YES,
   },
   {
-    title: "Email Marketing Integrations",
-    description: "Lorem dolor sit amet adipisicing.",
-    pro: 0,
+    title: "Progress Tracking",
+    description: "Track your progress and see how you improve over time.",
+    pro: ProService.NO,
   },
   {
-    title: "SEO Optimization",
-    description: "Lorem ipsum dolor sit amet consectetur.",
-    pro: 1,
+    title: "Community Support",
+    description: "Join a community of fellow coders and get support.",
+    pro: ProService.NO,
+  },
+  {
+    title: "AI Assistance",
+    description:
+      "Get personalized recommendations and insights to help you grow.",
+    pro: ProService.YES,
+  },
+  {
+    title: "Code Review",
+    description: "Get feedback on your code to improve your skills.",
+    pro: ProService.YES,
   },
 ];
 
@@ -47,7 +58,7 @@ export const ServicesSection = () => {
         Services
       </h2>
 
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
+      <h2 className="text-3xl md:text-4xl text-indigo-500 text-center font-bold mb-4">
         Grow Your Business
       </h2>
       <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">

@@ -114,7 +114,7 @@ export const PricingSection = () => {
                 <div className="space-y-4">
                   {benefitList.map((benefit) => (
                     <span key={benefit} className="flex">
-                      <Check className="text-primary mr-2" />
+                      <Check className="text-indigo-500 mr-2" />
                       <h3>{benefit}</h3>
                     </span>
                   ))}
