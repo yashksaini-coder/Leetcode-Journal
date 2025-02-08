@@ -5,12 +5,28 @@ import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Github, Linkedin, Twitter, Award, Book, Star } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Award,
+  Book,
+  Star,
+  Target,
+  Timer,
+  Trophy,
+  TrendingUp,
+  CheckCircle,
+  XCircle,
+  Calendar
+} from "lucide-react";
+
 export default function Dashboard() {
   const { fetchLeetcodeUserProfile, leetcodeUserProfile } = useLeetcodeStore();
   React.useEffect(() => {
     fetchLeetcodeUserProfile();
   }, [fetchLeetcodeUserProfile]);
+
   if (!leetcodeUserProfile) {
     return <DashboardSkeleton />;
   }
@@ -48,46 +64,98 @@ export default function Dashboard() {
           </div>
         </CardHeader>
         <CardContent className="pt-6">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold mb-3">Statistics</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <StatItem
-                  icon={<Book className="w-5 h-5" />}
-                  value={
-                    leetcodeUserProfile.submitStats.acSubmissionNum[0].count ||
-                    0
-                  }
-                  label="Problems Solved"
-                />
-                <StatItem
-                  icon={<Award className="w-5 h-5" />}
-                  value={leetcodeUserProfile.contributions.points}
-                  label="Contribution Points"
-                />
-                <StatItem
-                  icon={<Star className="w-5 h-5" />}
-                  value={leetcodeUserProfile.profile.starRating}
-                  label="Star Rating"
-                />
-                <StatItem
-                  icon={<Award className="w-5 h-5" />}
-                  value={leetcodeUserProfile.profile.ranking}
-                  label="Global Ranking"
-                />
+          {/* New Additional Dashboard Sections */}
+          <div className="mt-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold mb-3 flex items-center">
+                  <Trophy className="w-5 h-5 mr-2 text-primary" />
+                  Solving Statistics
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <StatItem
+                    icon={<Book className="w-5 h-5 text-blue-500" />}
+                    value={
+                      leetcodeUserProfile.submitStats.acSubmissionNum[0].count ||
+                      0
+                    }
+                    label="Total Solved"
+                    subtitle={`${(
+                      (leetcodeUserProfile.submitStats.acSubmissionNum[0].count /
+                        leetcodeUserProfile.submitStats.totalSubmissionNum[0].count) *
+                      100
+                    ).toFixed(1)}% success rate`}
+                  />
+                  <StatItem
+                    icon={<Target className="w-5 h-5 text-green-500" />}
+                    value={
+                      leetcodeUserProfile.submitStats.acSubmissionNum[1].count ||
+                      0
+                    }
+                    label="Easy Problems"
+                    subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[1].submissions} submissions`}
+                  />
+                  <StatItem
+                    icon={<Target className="w-5 h-5 text-yellow-500" />}
+                    value={
+                      leetcodeUserProfile.submitStats.acSubmissionNum[2].count ||
+                      0
+                    }
+                    label="Medium Problems"
+                    subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[2].submissions} submissions`}
+                  />
+                  <StatItem
+                    icon={<Target className="w-5 h-5 text-red-500" />}
+                    value={
+                      leetcodeUserProfile.submitStats.acSubmissionNum[3].count ||
+                      0
+                    }
+                    label="Hard Problems"
+                    subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[3].submissions} submissions`}
+                  />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold mb-3 flex items-center">
+                  <Award className="w-5 h-5 mr-2 text-primary" />
+                  Performance Metrics
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <StatItem
+                    icon={<TrendingUp className="w-5 h-5 text-purple-500" />}
+                    value={leetcodeUserProfile.profile.ranking}
+                    label="Global Ranking"
+                    subtitle="Current Position"
+                  />
+                  <StatItem
+                    icon={<Star className="w-5 h-5 text-yellow-500" />}
+                    value={leetcodeUserProfile.profile.starRating}
+                    label="Contest Rating"
+                    subtitle={`Level ${Math.floor(leetcodeUserProfile.profile.starRating / 500) + 1}`}
+                  />
+                  <StatItem
+                    icon={<CheckCircle className="w-5 h-5 text-green-500" />}
+                    value={leetcodeUserProfile.contributions.points}
+                    label="Contribution Points"
+                    subtitle="Community Impact"
+                  />
+                </div>
               </div>
             </div>
+            <br></br>
+          {/* Original Badges */}
+          <div className="grid gap-6 md:grid-cols-3">
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold mb-3">Recent Badges</h3>
+              <h3 className="text-xl font-semibold mb-6">Recent Badges</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {leetcodeUserProfile.badges.slice(0, 6).map((badge) => (
+                {leetcodeUserProfile.badges.slice(0, 5).map((badge) => (
                   <div
                     key={badge.id}
                     className="flex flex-col items-center p-2 bg-secondary rounded-lg"
                   >
                     <div className="relative w-12 h-12 mb-2">
                       <Image
-                        src={badge.icon || "/placeholder.svg"}
+                        src={badge.icon}
                         alt={badge.displayName}
                         fill
                         className="object-contain"
@@ -101,6 +169,25 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+            {/* Submission Timeline */}
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold mb-4 flex items-center">
+                <Timer className="w-5 h-5 mr-2 text-primary" />
+                Submission Timeline
+              </h3>
+              <div className="bg-secondary/30 rounded-lg p-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <TimelineStat
+                    label="All Time"
+                    value={leetcodeUserProfile.submitStats.totalSubmissionNum[0].count}
+                    total={leetcodeUserProfile.submitStats.totalSubmissionNum[0].count}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Links */}
           <div className="flex justify-center gap-6 mt-8">
             <SocialLink
               href={leetcodeUserProfile.githubUrl}
@@ -120,25 +207,53 @@ export default function Dashboard() {
     </div>
   );
 }
+
 function StatItem({
   icon,
   value,
   label,
+  subtitle,
 }: {
   icon: React.ReactNode;
   value: number;
   label: string;
+  subtitle?: string;
 }) {
   return (
-    <div className="flex items-center space-x-3 bg-secondary/50 rounded-lg p-3">
-      {icon}
+    <div className="flex items-center space-x-3 bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors">
+      <div className="p-2 bg-background rounded-full">{icon}</div>
       <div>
-        <div className="text-2xl font-bold">{value}</div>
-        <div className="text-sm text-muted-foreground">{label}</div>
+        <div className="text-2xl font-bold">{value.toLocaleString()}</div>
+        <div className="text-sm font-medium">{label}</div>
+        {subtitle && (
+          <div className="text-xs text-muted-foreground">{subtitle}</div>
+        )}
       </div>
     </div>
   );
 }
+
+function TimelineStat({
+  label,
+  value,
+  total,
+}: {
+  label: string;
+  value: number;
+  total: number;
+}) {
+  const percentage = ((value / total) * 100).toFixed(1);
+  return (
+    <div className="text-center">
+      <div className="text-sm font-medium text-muted-foreground">{label}</div>
+      <div className="text-xl font-bold">{value.toLocaleString()}</div>
+      <div className="text-xs text-muted-foreground">
+        {percentage}% of total
+      </div>
+    </div>
+  );
+}
+
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   if (!href) return null;
   return (
@@ -152,6 +267,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
     </a>
   );
 }
+
 function DashboardSkeleton() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6 md:p-8">
