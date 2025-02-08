@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { TabContainer } from "./components/TabContainer";
-import Navbar1 from "@/components/navbar";
+// import Navbar1 from "@/components/navbar";
 import Footer from "@/components/footer";
 import ShinyButton from "@/components/ui/shiny-button";
-
+// Removed the old navbar componet raising the conflict
+// by: Yash Kumar Saini
 export default function LearnMorePage() {
   return (
     <div className="">
-      <Navbar1 />
+      {/* <Navbar1 /> */}
       <div className="min-h-screen bg-grey-500 bg-texture">
         <div className="container mx-auto px-4 md:px-32 pb-16 pt-8 md:pt-16">
           {/* Changed the x-padding for small devices + reduced y-padding-top for small devices */}

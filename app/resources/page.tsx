@@ -1,14 +1,15 @@
 import { ResourceCard } from "../../components/ui/resource-card";
 import { Globe, Laptop } from "lucide-react";
-import  Navbar1 from '@/components/navbar';
 import { Ripple } from "../../components/ui/ripple";
 import SupportSection from "../../components/ui/support-section";
 import Footer from "@/components/footer";
 
+// Removed the old navbar componet raising the conflict
+// by: Yash Kumar Saini
 export default function ResourcesPage() {
   return (
     <div className="">
-      <Navbar1 />
+      {/* <Navbar1 /> */}
       <div className="min-h-screen bg-background relative">
         {/* Hero Section */}
         <div className="relative pt-32 pb-16 px-4 text-center">
