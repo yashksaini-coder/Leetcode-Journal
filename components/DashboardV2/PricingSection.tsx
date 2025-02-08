@@ -29,14 +29,13 @@ const plans: PlanProps[] = [
     popular: 0,
     price: 0,
     description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
+      "Starter pack for personal use. Get started with the basics.",
     buttonText: "Start Free Trial",
     benefitList: [
       "1 team member",
-      "1 GB storage",
       "Upto 2 pages",
       "Community support",
-      "AI assistance",
+      "Dashboard access",
     ],
   },
   {
@@ -44,14 +43,13 @@ const plans: PlanProps[] = [
     popular: 1,
     price: 45,
     description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
+      "45$ per month for all basic feature access and DSA sheets access.",
     buttonText: "Get starterd",
     benefitList: [
       "4 team member",
-      "8 GB storage",
       "Upto 6 pages",
-      "Priority support",
-      "AI assistance",
+      "Dashboard access",
+      "DSA sheets access",
     ],
   },
   {
@@ -59,13 +57,12 @@ const plans: PlanProps[] = [
     popular: 0,
     price: 120,
     description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
+      "120$ per month for access to all features and benefits.",
     buttonText: "Contact US",
     benefitList: [
       "10 team member",
-      "20 GB storage",
       "Upto 10 pages",
-      "Phone & email support",
+      "Dashboard + DSA access",
       "AI assistance",
     ],
   },
@@ -73,7 +70,7 @@ const plans: PlanProps[] = [
 
 export const PricingSection = () => {
   return (
-    <section className="container px-3   mx-auto py-24 sm:py-32">
+    <section className="container px-24 mx-auto py-24 sm:py-32">
       <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
         Pricing
       </h2>
@@ -83,7 +80,7 @@ export const PricingSection = () => {
       </h2>
 
       <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground pb-14">
-        Lorem ipsum dolor sit amet consectetur adipisicing reiciendis.
+        Start at full Speed!
       </h3>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
