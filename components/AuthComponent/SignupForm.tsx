@@ -34,7 +34,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuthStore } from "@/store/AuthStore/useAuthStore";
 import AuthBottom from "./AuthBottom";
-import LoadingButton from "../Buttons/LoadingButton";
+import LoadingButton from "./LoadingButton";
 import { signupSchema } from "@/validations/validation";
 
 type SignupFormValues = z.infer<typeof signupSchema>;

@@ -26,7 +26,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuthStore } from "@/store/AuthStore/useAuthStore";
-import LoadingButton from "../Buttons/LoadingButton";
+import LoadingButton from "./LoadingButton";
 import AuthBottom from "./AuthBottom";
 import { signinSchema } from "@/validations/validation";
 
