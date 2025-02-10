@@ -9,6 +9,7 @@ import { PricingSection } from "@/components/DashboardV2/PricingSection";
 import { ServicesSection } from "@/components/DashboardV2/ServicesSection";
 import { TeamSection } from "@/components/DashboardV2/TeamSection";
 import { TestimonialSection } from "@/components/DashboardV2/TestimonialSection";
+import { V2Navbar } from "@/components/DashboardV2/V2Navbar";
 
 export const metadata = {
   title: "LeetCode Journal - Your Coding Companion",
@@ -41,6 +42,7 @@ export const metadata = {
 export default function Home() {
   return (
     <div className="w-full">
+      <V2Navbar/>
       <HeroSection />
       <BenefitsSection />
       <FeaturesSection />
