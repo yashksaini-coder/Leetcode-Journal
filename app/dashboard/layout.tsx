@@ -14,9 +14,10 @@ export default function RootLayout({
   return (
     <main className="min-h-screen max-w-7xl mx-auto px-3">
       <DashboardNavbar />
-      <div className="w-full dark:bg-neutral-900 md:p-6 p-3 bg-neutral-200 md:rounded-xl rounded-sm">
-        {children}
+      <div className="md:hidden block fixed top-1 left-1 w-full z-50">
+        <MobileSidear/>
       </div>
+      <div className="w-full dark:bg-neutral-900 bg-neutral-200 md:rounded-xl rounded-sm">{children}</div>
     </main>
   );
 }
