@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/dashboardComponents/AppSidebar";
+import { DashboardNavbar } from "@/components/dashboardComponents/DashboardNavbar";
 import MobileSidear from "@/components/dashboardComponents/MobileSidebar";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
@@ -11,10 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex min-h-screen overflow-hidden md:gap-3 md:p-3 h-full">
-      <div className="md:block hidden">
-        <AppSidebar />
-      </div>
+    <main className="min-h-screen max-w-7xl mx-auto px-3">
+      <DashboardNavbar />
       <div className="md:hidden block fixed top-1 left-1 w-full z-50">
         <MobileSidear/>
       </div>

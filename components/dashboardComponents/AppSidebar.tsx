@@ -27,21 +27,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import Logout from "../AuthComponent/Logout";
 
 
 export function AppSidebar() {
   const { setTheme, theme } = useTheme();
   const pathname = usePathname();
-  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
-  const handleLogout = async () => {
-    try {
-      signout();
-      router.push('/auth/signin');
-    } catch (error) {
-      console.error("Sign out error:", error);
-    }
-  };
+
 
   return (
     <aside
@@ -107,23 +100,7 @@ export function AppSidebar() {
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <LogOut className="cursor-pointer h-[1.8rem] w-[1.8rem] bg-grey " />
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action will Logout you from the application.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleLogout}>Continue</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Logout/>
         </div>
       </div>
     </aside>
