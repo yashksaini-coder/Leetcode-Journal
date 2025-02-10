@@ -1,6 +1,6 @@
 "use client";
 import { ChevronsDown, Github, Menu } from "lucide-react";
-import React from "react";
+import React ,  { Suspense } from "react";
 import {
   Sheet,
   SheetContent,
@@ -73,7 +73,7 @@ const featureList: FeatureProps[] = [
   },
 ];
 
-export const V2Navbar = () => {
+export const NavigationContent  = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { user, loading } = useAuth();
   const router = useRouter();
@@ -222,5 +222,13 @@ export const V2Navbar = () => {
         {renderAuthButtons()}
       </div>
     </header>
+  );
+};
+
+export const V2Navbar = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NavigationContent />
+    </Suspense>
   );
 };
