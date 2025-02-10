@@ -77,24 +77,25 @@ export const V2Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { user, loading } = useAuth();
   const router = useRouter();
+  const [authState, setAuthState] = React.useState({ user, loading });
+
+  React.useEffect(() => {
+    setAuthState({ user, loading });
+  }, [user, loading]);
 
   const handleSignOut = async () => {
     await signout();
-    router.push('/auth/signin');
+    router.push("/auth/signin");
   };
 
   const renderAuthButtons = () => {
-    if (loading) return null;
+    if (authState.loading) return null;
 
-    if (user) {
-      return (
-        <Button onClick={handleSignOut} className="rounded-2xl">
-          Sign Out
-        </Button>
-      );
-    }
-
-    return (
+    return authState.user ? (
+      <Button onClick={handleSignOut} className="rounded-2xl">
+        Sign Out
+      </Button>
+    ) : (
       <>
         <Link href="/auth/register">
           <Button className="rounded-2xl">Register</Button>
