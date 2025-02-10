@@ -29,7 +29,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://github.com/nobruf/shadcn-landing-page.git",
+    site: "https://github.com/yashksaini-coder/Leetcode-Journal",
     title: "Shadcn - Landing template",
     description: "Free Shadcn landing page for developers",
     images: [

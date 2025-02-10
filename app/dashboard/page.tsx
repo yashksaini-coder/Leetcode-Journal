@@ -17,8 +17,6 @@ import {
   Trophy,
   TrendingUp,
   CheckCircle,
-  XCircle,
-  Calendar
 } from "lucide-react";
 
 export default function Dashboard() {
