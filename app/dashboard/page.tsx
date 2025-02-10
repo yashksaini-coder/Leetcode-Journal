@@ -17,9 +17,8 @@ import {
   Trophy,
   TrendingUp,
   CheckCircle,
-  XCircle,
-  Calendar
 } from "lucide-react";
+import { V2Navbar } from "@/components/DashboardV2/V2Navbar";
 
 export default function Dashboard() {
   const { fetchLeetcodeUserProfile, leetcodeUserProfile } = useLeetcodeStore();
@@ -32,6 +31,7 @@ export default function Dashboard() {
   }
   return (
     <div className="flex flex-col p-4 sm:p-6 md:p-8">
+      <V2Navbar />
       <Card className="w-full max-w-4xl mx-auto shadow-xl border-none">
         <CardHeader className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b">
           <div className="relative w-32 h-32 sm:w-40 sm:h-40">
@@ -76,21 +76,23 @@ export default function Dashboard() {
                   <StatItem
                     icon={<Book className="w-5 h-5 text-blue-500" />}
                     value={
-                      leetcodeUserProfile.submitStats.acSubmissionNum[0].count ||
-                      0
+                      leetcodeUserProfile.submitStats.acSubmissionNum[0]
+                        .count || 0
                     }
                     label="Total Solved"
                     subtitle={`${(
-                      (leetcodeUserProfile.submitStats.acSubmissionNum[0].count /
-                        leetcodeUserProfile.submitStats.totalSubmissionNum[0].count) *
+                      (leetcodeUserProfile.submitStats.acSubmissionNum[0]
+                        .count /
+                        leetcodeUserProfile.submitStats.totalSubmissionNum[0]
+                          .count) *
                       100
                     ).toFixed(1)}% success rate`}
                   />
                   <StatItem
                     icon={<Target className="w-5 h-5 text-green-500" />}
                     value={
-                      leetcodeUserProfile.submitStats.acSubmissionNum[1].count ||
-                      0
+                      leetcodeUserProfile.submitStats.acSubmissionNum[1]
+                        .count || 0
                     }
                     label="Easy Problems"
                     subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[1].submissions} submissions`}
@@ -98,8 +100,8 @@ export default function Dashboard() {
                   <StatItem
                     icon={<Target className="w-5 h-5 text-yellow-500" />}
                     value={
-                      leetcodeUserProfile.submitStats.acSubmissionNum[2].count ||
-                      0
+                      leetcodeUserProfile.submitStats.acSubmissionNum[2]
+                        .count || 0
                     }
                     label="Medium Problems"
                     subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[2].submissions} submissions`}
@@ -107,8 +109,8 @@ export default function Dashboard() {
                   <StatItem
                     icon={<Target className="w-5 h-5 text-red-500" />}
                     value={
-                      leetcodeUserProfile.submitStats.acSubmissionNum[3].count ||
-                      0
+                      leetcodeUserProfile.submitStats.acSubmissionNum[3]
+                        .count || 0
                     }
                     label="Hard Problems"
                     subtitle={`${leetcodeUserProfile.submitStats.acSubmissionNum[3].submissions} submissions`}
@@ -131,7 +133,10 @@ export default function Dashboard() {
                     icon={<Star className="w-5 h-5 text-yellow-500" />}
                     value={leetcodeUserProfile.profile.starRating}
                     label="Contest Rating"
-                    subtitle={`Level ${Math.floor(leetcodeUserProfile.profile.starRating / 500) + 1}`}
+                    subtitle={`Level ${
+                      Math.floor(leetcodeUserProfile.profile.starRating / 500) +
+                      1
+                    }`}
                   />
                   <StatItem
                     icon={<CheckCircle className="w-5 h-5 text-green-500" />}
@@ -143,32 +148,32 @@ export default function Dashboard() {
               </div>
             </div>
             <br></br>
-          {/* Original Badges */}
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold mb-6">Recent Badges</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {leetcodeUserProfile.badges.slice(0, 5).map((badge) => (
-                  <div
-                    key={badge.id}
-                    className="flex flex-col items-center p-2 bg-secondary rounded-lg"
-                  >
-                    <div className="relative w-12 h-12 mb-2">
-                      <Image
-                        src={badge.icon}
-                        alt={badge.displayName}
-                        fill
-                        className="object-contain"
-                      />
+            {/* Original Badges */}
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold mb-6">Recent Badges</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {leetcodeUserProfile.badges.slice(0, 5).map((badge) => (
+                    <div
+                      key={badge.id}
+                      className="flex flex-col items-center p-2 bg-secondary rounded-lg"
+                    >
+                      <div className="relative w-12 h-12 mb-2">
+                        <Image
+                          src={badge.icon}
+                          alt={badge.displayName}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <span className="text-xs text-center">
+                        {badge.displayName}
+                      </span>
                     </div>
-                    <span className="text-xs text-center">
-                      {badge.displayName}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
             {/* Submission Timeline */}
             <div className="mt-8">
               <h3 className="text-xl font-semibold mb-4 flex items-center">
@@ -179,8 +184,14 @@ export default function Dashboard() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <TimelineStat
                     label="All Time"
-                    value={leetcodeUserProfile.submitStats.totalSubmissionNum[0].count}
-                    total={leetcodeUserProfile.submitStats.totalSubmissionNum[0].count}
+                    value={
+                      leetcodeUserProfile.submitStats.totalSubmissionNum[0]
+                        .count
+                    }
+                    total={
+                      leetcodeUserProfile.submitStats.totalSubmissionNum[0]
+                        .count
+                    }
                   />
                 </div>
               </div>
