@@ -1,72 +1,89 @@
 "use client";
-
-import { useState } from "react";
+import { Menu } from "lucide-react";
+import React from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../ui/sheet";
+import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { signout } from "@/app/actions/action";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ToggleTheme } from "../DashboardV2/ToggleTheme";
+import Logout from "../AuthComponent/Logout";
+import { SidebarData } from "@/data/SidebarData";
 
-const Navbar = ({
-  userId,
-  isLoading,
-}: {
-  userId?: string;
-  isLoading: boolean;
-}) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export const DashboardNavbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <header className="p-2">
-      <nav className="flex justify-between items-center px-6 py-4 bg-secondary/30 backdrop-blur-3xl rounded-xl ">
-        <div className="flex items-center space-x-2">
-          <span className="text-2xl font-bold">📓</span>
-          <span className="text-xl font-semibold">LeetCodeJournal</span>
-        </div>
-        <div className="hidden lg:flex items-center space-x-4">
-          {!isLoading ? (
-            userId ? (
-              <Button variant="destructive" onClick={signout}>
-                Sign Out
-              </Button>
-            ) : (
-              <>
-                <Link href="/" className="hover:text-neutral-400">
-                  Log in
-                </Link>
-                <Button className="bg-purple-500 hover:bg-purple-600">
-                  <Link href="/auth/register" className="">
-                    Sign up
-                  </Link>
-                </Button>
-              </>
-            )
-          ) : (
-            ""
-          )}
-          <ThemeToggle />
-        </div>
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden focus:outline-none"
-        >
-          {isMenuOpen ? "✖️" : "☰"}
-        </button>
-      </nav>
+    <header className="shadow-inner w-full my-3 lg:max-w-screen-xl top-5 mx-auto  border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-secondary/30 backdrop-blur-md">
+      <Link href="/" className="flex items-center font-semibold">
+        <Avatar>
+          <AvatarImage src="/logo.png" />
+          <AvatarFallback>LC</AvatarFallback>
+        </Avatar>
+        Leetcode Journal
+      </Link>
+      {/* <!-- Mobile --> */}
+      <div className="flex items-center lg:hidden">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Menu
+              onClick={() => setIsOpen(!isOpen)}
+              className="cursor-pointer lg:hidden"
+            />
+          </SheetTrigger>
 
-      {isMenuOpen && (
-        <div className="fixed inset-x-0 top-[65px] z-50 border-b bg-background p-6 lg:hidden">
-          <nav className="flex flex-col space-y-4">
-            <Link
-              href="/"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMenuOpen(true)}
-            >
-              Home
-            </Link>
-          </nav>
-        </div>
-      )}
+          <SheetContent
+            side="left"
+            className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary"
+          >
+            <div>
+              <SheetHeader className="mb-4 ml-4">
+                <SheetTitle className="flex items-center">
+                  <Link href="/" className="flex items-center">
+                    <Avatar>
+                      <AvatarImage src="/logo.png" />
+                      <AvatarFallback>LC</AvatarFallback>
+                    </Avatar>
+                    Leetcode Journal
+                  </Link>
+                </SheetTitle>
+              </SheetHeader>
+
+              <div className="flex flex-col gap-2">
+                {SidebarData.map(({ href, title }) => (
+                  <Button
+                    key={href}
+                    onClick={() => setIsOpen(false)}
+                    asChild
+                    variant="ghost"
+                    className="justify-start text-base"
+                  >
+                    <Link href={href}>{title}</Link>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            <SheetFooter className="flex-col sm:flex-col justify-start items-start">
+              <Separator className="mb-2" />
+
+              <ToggleTheme />
+              <Logout variant={"destructive"} />
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      <div className="hidden lg:flex gap-2">
+        <ToggleTheme />
+        <Logout />
+      </div>
     </header>
   );
 };
-
-export default Navbar;
