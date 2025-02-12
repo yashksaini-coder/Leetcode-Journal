@@ -44,14 +44,13 @@ export default function Home() {
     <div className="w-full">
       <V2Navbar/>
       <HeroSection />
-      <BenefitsSection />
-      <FeaturesSection />
+      {/* <BenefitsSection /> */}
+      {/* <FeaturesSection /> */}
       <ServicesSection />
-      <TestimonialSection />
+      {/* <TestimonialSection /> */}
       <TeamSection />
       <CommunitySection />
       <PricingSection />
-      <ContactSection />
       <FAQSection />
       <FooterSection />
     </div>
