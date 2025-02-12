@@ -1,6 +1,6 @@
 "use client";
 import { ChevronsDown, Github, Menu } from "lucide-react";
-import React from "react";
+import React ,  { Suspense } from "react";
 import {
   Sheet,
   SheetContent,
@@ -23,6 +23,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ToggleTheme } from "./ToggleTheme";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useAuth } from "@/hooks/useAuth";
+import { signout } from "@/app/actions/action";
+import { useRouter } from "next/navigation";
 
 interface RouteProps {
   href: string;
@@ -70,8 +73,41 @@ const featureList: FeatureProps[] = [
   },
 ];
 
-export const V2Navbar = () => {
+export const NavigationContent  = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  const [authState, setAuthState] = React.useState({ user, loading });
+
+  React.useEffect(() => {
+    setAuthState({ user, loading });
+  }, [user, loading]);
+
+  const handleSignOut = async () => {
+    await signout();
+    router.push("/auth/signin");
+  };
+
+  const renderAuthButtons = () => {
+    if (authState.loading) return null;
+
+    return authState.user ? (
+      <Button onClick={handleSignOut} className="rounded-2xl">
+        Sign Out
+      </Button>
+    ) : (
+      <>
+        <Link href="/auth/register">
+          <Button className="rounded-2xl">Register</Button>
+        </Link>
+        <Link href="/auth/signin">
+          <Button className="rounded-2xl">Login</Button>
+        </Link>
+      </>
+    );
+  };
+
+
   return (
     <header className="shadow-inner w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-secondary/30 backdrop-blur-md">
       <Link href="/" className="flex items-center font-semibold">
@@ -127,6 +163,8 @@ export const V2Navbar = () => {
               <Separator className="mb-2" />
 
               <ToggleTheme />
+              <Separator className="mb-2" />
+              {renderAuthButtons()}
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -181,14 +219,16 @@ export const V2Navbar = () => {
 
       <div className="hidden lg:flex gap-2">
         <ToggleTheme />
-
-        <Link href="/auth/register">
-          <Button className="rounded-2xl">Register</Button>
-        </Link>
-        <Link href="/auth/signin">
-          <Button className="rounded-2xl">Login</Button>
-        </Link>
+        {renderAuthButtons()}
       </div>
     </header>
+  );
+};
+
+export const V2Navbar = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NavigationContent />
+    </Suspense>
   );
 };

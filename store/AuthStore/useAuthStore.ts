@@ -15,13 +15,11 @@ interface authStore {
     isSigningIn: boolean;
     signinError: string | null;
     signin: (signinMetaData: { email: string, password: string },router: any) => void;
-    logout: () => void;
-
+    logout: (router: any) => void;
     signupError: string | null;
     isSigningUp: boolean;
     signup: (signupMetaData: User,router: any) => void;
     user: User | null;
-
     authUserLoading: boolean;
     fetchAuthUser: () => void;
     authUser: User | null;
@@ -32,7 +30,7 @@ export const useAuthStore = create<authStore>((set) => ({
     isSigningIn: false,
     signin: async (signinMetaData,router) => {
         const supabase = createClient()
-        set({ isSigningIn: true })
+        set({ isSigningIn: true, signinError: null })
         try {
             const { data, error: loginError } =
                 await supabase.auth.signInWithPassword(signinMetaData);
@@ -44,7 +42,8 @@ export const useAuthStore = create<authStore>((set) => ({
             }
 
             if (data.session) {
-                router.push("/dashboard");
+                // Ensure we have a session before redirecting
+                await router.push('/dashboard');
             } else {
                 throw new Error("Unable to retrieve session after login.");
             }
@@ -56,8 +55,14 @@ export const useAuthStore = create<authStore>((set) => ({
         }
     },
 
-    logout: () => {
-        console.log('logout');
+    logout: async (router) => {
+        const supabase = createClient()
+        try {
+            await supabase.auth.signOut();
+            router.push('/auth/signin');
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
     },
 
     signupError: null,

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -32,17 +31,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useAuthStore } from "@/store/AuthStore/useAuthStore";
 import AuthBottom from "./AuthBottom";
 import LoadingButton from "./LoadingButton";
 import { signupSchema } from "@/validations/validation";
+import { useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useAuthStore } from "@/store/AuthStore/useAuthStore"
+import { useAuth } from "@/hooks/useAuth";
 
 type SignupFormValues = z.infer<typeof signupSchema>;
 
-export default function SignupForm() {
+interface SignupFormProps {
+  searchParams?: URLSearchParams;
+}
+
+export default function SignupForm({searchParams}: SignupFormProps) {
   const { isSigningUp, signup, signupError } = useAuthStore();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const { isSigningIn, signin, signinError } = useAuthStore()
+  const { user, loading } = useAuth()
+
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -55,9 +64,22 @@ export default function SignupForm() {
     },
   });
 
-  const onSubmit = (data: SignupFormValues) => {
-    signup(data, router);
-  };
+  useEffect(() => {
+    // If user is already authenticated, redirect to the intended URL or dashboard
+    if (user && !loading) {
+      const redirectTo = searchParams?.get('redirect') || '/dashboard'
+      router.push(redirectTo)
+    }
+  }, [user, loading, router, searchParams])
+
+  const onSubmit = async (data: SignupFormValues) => {
+    try {
+      signup(data, router);
+      // The redirect will be handled by the useEffect above when the user state updates
+    } catch (error) {
+      console.error('Sign in error:', error)
+    }
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center md:p-0 p-2">
