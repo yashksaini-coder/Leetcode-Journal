@@ -41,13 +41,17 @@ import { useAuth } from "@/hooks/useAuth";
 
 type SignupFormValues = z.infer<typeof signupSchema>;
 
-export default function SignupForm() {
+interface SignupFormProps {
+  searchParams?: URLSearchParams;
+}
+
+export default function SignupForm({searchParams}: SignupFormProps) {
   const { isSigningUp, signup, signupError } = useAuthStore();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const { isSigningIn, signin, signinError } = useAuthStore()
   const { user, loading } = useAuth()
-  const searchParams = useSearchParams()
+
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -63,7 +67,7 @@ export default function SignupForm() {
   useEffect(() => {
     // If user is already authenticated, redirect to the intended URL or dashboard
     if (user && !loading) {
-      const redirectTo = searchParams.get('redirect') || '/dashboard'
+      const redirectTo = searchParams?.get('redirect') || '/dashboard'
       router.push(redirectTo)
     }
   }, [user, loading, router, searchParams])
