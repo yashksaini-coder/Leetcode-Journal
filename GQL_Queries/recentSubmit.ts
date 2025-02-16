@@ -11,7 +11,7 @@
  * - statusDisplay: The status of the submission (e.g., Accepted, Wrong Answer).
  * - lang: The programming language used for the submission.
  */
-const query = `#graphql
+export const recentSubmissionList = `#graphql
 query getRecentSubmissions($username: String!, $limit: Int) {
     recentSubmissionList(username: $username, limit: $limit) {
         title
@@ -22,4 +22,3 @@ query getRecentSubmissions($username: String!, $limit: Int) {
     }
 }`;
 
-export default query;

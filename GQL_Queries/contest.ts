@@ -19,7 +19,7 @@
  * - `finishTimeInSeconds`: The finish time in seconds.
  * - `contest`: The contest information, including the title and start time.
  */
-const query = `#graphql
+export const contestQuery = `#graphql
 query getUserContestRanking ($username: String!) {
     userContestRanking(username: $username) {
         attendedContestsCount
@@ -46,4 +46,3 @@ query getUserContestRanking ($username: String!) {
     }
 }`;
 
-export default query;

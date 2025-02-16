@@ -19,7 +19,7 @@
  * `;
  * ```
  */
-const query = `
+export const languageStats = `
     query languageStats($username: String!) {
         matchedUser(username: $username) {
             languageProblemCount {
@@ -29,6 +29,3 @@ const query = `
         }
     }
 `;
-
-
-export default query;
