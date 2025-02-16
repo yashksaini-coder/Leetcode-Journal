@@ -57,6 +57,7 @@ interface LeetcodeData {
     submissionCalendar: string; // JSON string representing submission data
   };
   recentSubmissions: {
+    titleSlug: any;
     timestamp: string;
     title: string;
     status: string;
@@ -66,6 +67,7 @@ interface LeetcodeData {
     problemsSolved: number;
   }[];
   userContestRanking: {
+    contestHistory: never[];
     attendedContestsCount: number;
     rating: number;
     globalRanking: number;

@@ -2,14 +2,11 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Line,
-  Bar,
-  Doughnut
-} from "react-chartjs-2";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -34,9 +31,12 @@ import {
   Calendar,
   Code,
   AlertCircle,
+  LineChart,
+  Target,
+  Award,
+  Hash
 } from "lucide-react";
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -70,45 +70,43 @@ export default function Dashboard() {
 
   const { userDetails, recentSubmissions, userContestRanking } = data;
 
-  // Problem Difficulty Distribution
-  const difficultyData = {
-    labels: ['Easy', 'Medium', 'Hard'],
-    datasets: [
-      {
-        data: [
-          userDetails.submitStats.acSubmissionNum[1].count,
-          userDetails.submitStats.acSubmissionNum[2].count,
-          userDetails.submitStats.acSubmissionNum[3].count,
-        ],
-        backgroundColor: [
-          '#4ade80',
-          '#fbbf24',
-          '#ef4444'
-        ],
-        borderWidth: 0,
-      },
-    ],
+  interface ContestHistoryItem {
+    date: string;
+    rating: number;
+  }
+  
+  // Extract contest history data
+  const contestHistory = (userContestRanking?.contestHistory || []) as ContestHistoryItem[];
+  const ratingHistoryData = {
+    labels: contestHistory.map(contest => new Date(contest.date).toLocaleDateString()),
+    datasets: [{
+      label: 'Contest Rating',
+      data: contestHistory.map(contest => contest.rating),
+      borderColor: '#3b82f6',
+      tension: 0.3,
+      pointRadius: 2,
+      pointHoverRadius: 5,
+    }],
   };
 
-  // Rating History Chart
-  const ratingHistoryData = {
-    labels: ['6m ago', '5m', '4m', '3m', '2m', '1m', 'Current'],
-    datasets: [
-      {
-        label: 'Rating',
-        data: [1200, 1350, 1450, 1520, 1650, 1750, userContestRanking?.rating || 0],
-        borderColor: '#3b82f6',
-        tension: 0.3,
-        pointRadius: 0,
-      },
-    ],
+  const difficultyData = {
+    labels: ['Easy', 'Medium', 'Hard'],
+    datasets: [{
+      data: [
+        userDetails.submitStats.acSubmissionNum[1].count,
+        userDetails.submitStats.acSubmissionNum[2].count,
+        userDetails.submitStats.acSubmissionNum[3].count,
+      ],
+      backgroundColor: ['#4ade80', '#fbbf24', '#ef4444'],
+      borderWidth: 0,
+    }],
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Profile Header */}
       <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-        <div className="relative w-24 h-24">
+        <div className="relative w-20 h-20">
           <Image
             src={userDetails.profile.userAvatar}
             alt="Profile"
@@ -116,153 +114,184 @@ export default function Dashboard() {
             className="rounded-full object-cover border-2 border-white shadow-lg"
           />
         </div>
-        <div className="text-center md:text-left">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <div className="text-center md:text-left flex-1">
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">
             {userDetails.profile.realName}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            @{userDetails.username} • Rank #{userDetails.profile.ranking}
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            @{userDetails.username} • Global Rank #{userDetails.profile.ranking}
           </p>
-          <div className="flex gap-4 mt-3 justify-center md:justify-start">
-            <SocialLink href={userDetails.githubUrl} icon={<Github />} />
-            <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin />} />
-            <SocialLink href={userDetails.twitterUrl ?? undefined} icon={<Twitter />} />
+          <div className="flex gap-4 mt-2 justify-center md:justify-start">
+            <SocialLink href={userDetails.githubUrl} icon={<Github size={18} />} />
+            <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin size={18} />} />
+            <SocialLink href={userDetails.twitterUrl || undefined} icon={<Twitter size={18} />} />
           </div>
+        </div>
+        <div className="flex gap-4 flex-wrap justify-center">
+          <QuickStat 
+            icon={<Target className="w-4 h-4" />}
+            label="Contest Rating"
+            value={userContestRanking?.rating || 0}
+          />
+          <QuickStat 
+            icon={<Award className="w-4 h-4" />}
+            label="Top"
+            value={`${userContestRanking?.topPercentage}%`}
+          />
+          <QuickStat 
+            icon={<Hash className="w-4 h-4" />}
+            label="Global Rank"
+            value={userContestRanking?.globalRanking || 0}
+          />
         </div>
       </div>
 
-      {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        {/* Left Column */}
-        <div className="lg:col-span-2 space-y-6">
+        {/* Leetcode calendar to show up here */}
+        <div className="lg:col-span-2">
           
-          {/* Rating Card */}
-          <Card className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-blue-600" />
-                Contest Rating
-              </h3>
-              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-                Top {userContestRanking?.topPercentage}%
-              </span>
-            </div>
-            <Line data={ratingHistoryData} options={{
-              responsive: true,
-              plugins: {
-                legend: { display: false },
-              },
-              scales: {
-                y: { grid: { color: '#e5e7eb' } },
-                x: { grid: { display: false } }
-              }
-            }} />
-          </Card>
-
-          {/* Problem Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-green-600" />
-                Solved Problems
-              </h3>
-              <div className="flex justify-center h-48">
-                <Doughnut data={difficultyData} options={{
-                  cutout: '70%',
-                  plugins: { legend: { position: 'bottom' } }
-                }} />
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-purple-600" />
-                Activity
-              </h3>
-              <div className="h-48">
-                <HeatMapCalendar submissions={recentSubmissions} />
-              </div>
-            </Card>
-          </div>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-6">
-          {/* Quick Stats */}
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-orange-600" />
-              Performance
-            </h3>
-            <div className="space-y-4">
-              <StatItem
-                label="Total Solved"
-                value={userDetails.submitStats.acSubmissionNum[0].count}
-                trend="+12% from last month"
-              />
-              <StatItem
-                label="Acceptance Rate"
-                value={`${(userDetails.submitStats.acSubmissionNum[0].count / userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%`}
-                trend="92nd percentile"
-              />
-              <StatItem
-                label="Contests Attended"
-                value={userContestRanking?.attendedContestsCount}
-                trend={`${userContestRanking?.topPercentage}% top`}
-              />
-            </div>
-          </Card>
-
-          {/* Recent Submissions */}
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+        {/* Recent Submissions */}
+        <Card className="h-[300px] overflow-hidden">
+          <CardHeader className="p-4">
+            <div className="flex items-center gap-2">
               <Code className="w-5 h-5 text-green-600" />
-              Recent Submissions
-            </h3>
-            <div className="space-y-3">
-              {recentSubmissions.slice(0, 5).map((submission, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
-                  <span className="text-sm">{submission.title}</span>
-                  <span className={`text-sm ${submission.status === 'Accepted' ? 'text-green-600' : 'text-red-600'}`}>
+              <h3 className="font-semibold">Recent Submissions</h3>
+            </div>
+          </CardHeader>
+          <CardContent className="p-4 overflow-y-auto">
+            <div className="space-y-2">
+              {recentSubmissions.map((submission, idx) => (
+                <Link 
+                  href={`/problems/${submission.titleSlug}`}
+                  key={idx} 
+                  className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors group"
+                >
+                  <span className="text-sm truncate group-hover:text-blue-600 transition-colors">
+                    {submission.title}
+                  </span>
+                  <span className={`text-xs px-2 py-1 rounded ${
+                    submission.status === 'Accepted' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-red-100 text-red-700'
+                  }`}>
                     {submission.status}
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
-          </Card>
+          </CardContent>
+        </Card>
+
+        {/* Additional Stats */}
+        <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <DetailCard 
+              title="Problem Solving"
+              icon={<Zap className="w-5 h-5 text-yellow-600" />}
+              stats={[
+                { label: 'Total Solved', value: userDetails.submitStats.acSubmissionNum[0].count },
+                { label: 'Easy', value: userDetails.submitStats.acSubmissionNum[1].count },
+                { label: 'Medium', value: userDetails.submitStats.acSubmissionNum[2].count },
+                { label: 'Hard', value: userDetails.submitStats.acSubmissionNum[3].count },
+              ]}
+            />
+            <DetailCard 
+              title="Submissions"
+              icon={<TrendingUp className="w-5 h-5 text-purple-600" />}
+              stats={[
+                { 
+                  label: 'Acceptance Rate', 
+                  value: `${(userDetails.submitStats.acSubmissionNum[0].count / 
+                    userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%` 
+                },
+                { label: 'Total Submissions', value: userDetails.submitStats.totalSubmissionNum[0].count },
+                { label: 'Accepted', value: userDetails.submitStats.acSubmissionNum[0].count },
+                { label: 'Contests', value: userContestRanking?.attendedContestsCount || 0 },
+              ]}
+            />
+          </div>
         </div>
+
+        <Card>
+          <CardHeader className="p-4">
+            <div className="flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-orange-600" />
+              <h3 className="font-semibold">Difficulty Distribution</h3>
+            </div>
+          </CardHeader>
+          <CardContent className="p-4">
+            <div className="h-48">
+              <Doughnut 
+                data={difficultyData} 
+                options={{
+                  cutout: '70%',
+                  plugins: { 
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                      callbacks: {
+                        label: (item) => `${item.label}: ${item.raw} solved`
+                      }
+                    }
+                  }
+                }} 
+              />
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 }
 
-// Improved Stat Item Component
-function StatItem({ label, value, trend }: { label: string; value: string | number; trend?: string }) {
+interface QuickStatProps {
+  icon: React.ReactNode;
+  label: string;
+  value: string | number;
+}
+
+function QuickStat({ icon, label, value }: QuickStatProps) {
   return (
-    <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-      <div>
-        <div className="text-sm text-gray-600">{label}</div>
-        <div className="text-xl font-semibold">{value}</div>
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg px-3 py-2 text-center">
+      <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+        {icon}
+        <span className="text-xs">{label}</span>
       </div>
-      {trend && <span className="text-sm text-gray-500">{trend}</span>}
+      <div className="font-semibold">{value}</div>
     </div>
   );
 }
 
-// Heatmap Calendar Component (Simplified)
-function HeatMapCalendar({ submissions }: { submissions: any[] }) {
-  // Implement a simplified heatmap based on submission dates
+interface DetailStats {
+  label: string;
+  value: string | number;
+}
+
+function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNode; stats: DetailStats[] }) {
   return (
-    <div className="text-center text-gray-500">
-      <AlertCircle className="w-12 h-12 mx-auto text-gray-300 mb-2" />
-      <p className="text-sm">Submission heatmap (placeholder)</p>
-    </div>
+    <Card>
+      <CardHeader className="p-4">
+        <div className="flex items-center gap-2">
+          {icon}
+          <h3 className="font-semibold">{title}</h3>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4">
+        <div className="grid grid-cols-2 gap-4">
+          {stats.map((stat: { label: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; value: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, idx: React.Key | null | undefined) => (
+            <div key={idx} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
+              <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+              <div className="text-lg font-semibold">{stat.value}</div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
-// Social Link Component
-function SocialLink({ href, icon }: { href?: string; icon: React.ReactNode }) {
+function SocialLink({ href, icon }: { href: string | undefined, icon: React.ReactNode }) {
   if (!href) return null;
   return (
     <a
@@ -276,13 +305,11 @@ function SocialLink({ href, icon }: { href?: string; icon: React.ReactNode }) {
   );
 }
 
-// Updated Skeleton Loader
 function DashboardSkeleton() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Profile Skeleton */}
       <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-        <Skeleton className="w-24 h-24 rounded-full" />
+        <Skeleton className="w-20 h-20 rounded-full" />
         <div className="space-y-2 text-center md:text-left">
           <Skeleton className="h-6 w-48" />
           <Skeleton className="h-4 w-32" />
@@ -294,19 +321,18 @@ function DashboardSkeleton() {
         </div>
       </div>
 
-      {/* Main Content Skeleton */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          <Skeleton className="h-64 rounded-xl" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="lg:col-span-2">
+          <Skeleton className="h-[300px] rounded-xl" />
+        </div>
+        <Skeleton className="h-[300px] rounded-xl" />
+        <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Skeleton className="h-64 rounded-xl" />
             <Skeleton className="h-64 rounded-xl" />
           </div>
         </div>
-        <div className="space-y-6">
-          <Skeleton className="h-64 rounded-xl" />
-          <Skeleton className="h-64 rounded-xl" />
-        </div>
+        <Skeleton className="h-64 rounded-xl" />
       </div>
     </div>
   );
