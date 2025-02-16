@@ -199,7 +199,7 @@ export default function Dashboard() {
                   className="flex items-center p-4 hover:bg-gray-50 transition-colors group"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate group-hover:text-blue-600">
+                    <p className="text-sm font-medium text-white-900 truncate group-hover:text-blue-600">
                       {submission.title}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
