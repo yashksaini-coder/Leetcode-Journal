@@ -27,7 +27,7 @@ export async function GET() {
         // Fetch all data concurrently
         const [userDetails, recentSubmissions, languageStats, userContestRanking] = await Promise.all([
             getLeetCodeUserDetails(LeetCodeUsername),
-            getRecentSubmissions(LeetCodeUsername),
+            getRecentSubmissions(LeetCodeUsername, 6),
             getLanguageStats(LeetCodeUsername),
             getUserContestRanking(LeetCodeUsername)
         ]);

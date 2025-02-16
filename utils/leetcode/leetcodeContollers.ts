@@ -13,9 +13,10 @@ export const getLeetCodeUserDetails = async (username: string) => {
     return response.data.matchedUser;
 }
 
-export const getRecentSubmissions = async (username: string) => {
+export const getRecentSubmissions = async (username: string, limit: number ) => {
     const response = await queryLeetCodeAPI(recentSubmissionList, {
         username: username,
+        limit: limit,
     });
 
     return response.data.recentSubmissionList;

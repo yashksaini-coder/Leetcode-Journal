@@ -175,13 +175,6 @@ export default function Dashboard() {
                   <span className="text-sm truncate group-hover:text-blue-600 transition-colors">
                     {submission.title}
                   </span>
-                  <span className={`text-xs px-2 py-1 rounded ${
-                    submission.status === 'Accepted' 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-red-100 text-red-700'
-                  }`}>
-                    {submission.status}
-                  </span>
                 </Link>
               ))}
             </div>
@@ -226,21 +219,48 @@ export default function Dashboard() {
               <h3 className="font-semibold">Difficulty Distribution</h3>
             </div>
           </CardHeader>
-          <CardContent className="p-4">
-            <div className="h-48">
+            <CardContent className="p-4 flex justify-center">
+            <div className="h-56 w-56">
               <Doughnut 
-                data={difficultyData} 
-                options={{
-                  cutout: '70%',
-                  plugins: { 
-                    legend: { position: 'bottom' },
-                    tooltip: {
-                      callbacks: {
-                        label: (item) => `${item.label}: ${item.raw} solved`
-                      }
-                    }
+              data={difficultyData} 
+              options={{
+                cutout: '65%',
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                legend: {
+                  position: 'bottom',
+                  align: 'center',
+                  labels: {
+                  padding: 20,
+                  usePointStyle: true,
                   }
-                }} 
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  padding: 12,
+                  titleFont: {
+                  size: 14,
+                  weight: 'bold'
+                  },
+                  bodyFont: {
+                  size: 13
+                  },
+                  callbacks: {
+                  label: (context) => {
+                    const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                    const percentage = ((context.raw as number / total) * 100).toFixed(1);
+                    return `${context.label}: ${context.raw} (${percentage}%)`;
+                  }
+                  }
+                }
+                },
+                animation: {
+                animateScale: true,
+                animateRotate: true,
+                duration: 2000
+                }
+              }} 
               />
             </div>
           </CardContent>
