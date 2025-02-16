@@ -173,7 +173,7 @@ export default function Dashboard() {
                 if (!value) {
                   return 'color-empty';
                 }
-                return `color-scale-${(value.count),4}`;
+                return `color-scale-${(value.count)}`;
               }}
               showWeekdayLabels
               onMouseOver={(e, value) => console.log(e, value)}
