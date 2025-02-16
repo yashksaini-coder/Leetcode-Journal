@@ -39,6 +39,7 @@
     "framer-motion": "^11.18.2",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
+    "leetcode-calendar": "^1.0.1",
     "lucide-react": "^0.469.0",
     "motion": "^11.18.2",
     "next": "15.1.2",
