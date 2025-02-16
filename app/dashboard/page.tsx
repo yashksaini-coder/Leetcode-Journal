@@ -6,7 +6,7 @@ import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,6 +16,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  BarElement,
 } from "chart.js";
 import {
   Github,
@@ -40,7 +41,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarElement
 );
 
 export default function Dashboard() {
@@ -65,7 +67,11 @@ export default function Dashboard() {
   const { userDetails, recentSubmissions, userContestRanking } = data;
 
   const contestData = {
-    labels: ["Rating", "Global Rank", "Contests Attended"],
+    labels: ["Rating", "Global Rank", "Contests Attended", "Top Percentage", "Total Participants", "Badge"],
+    // labels: ["Rating"],
+    // labels: ["Global Rank"],
+    // labels: ["Contests Attended"],
+    
     datasets: [
       {
         label: "Contest Performance",
@@ -73,6 +79,8 @@ export default function Dashboard() {
           userContestRanking?.rating || 0,
           userContestRanking?.globalRanking || 0,
           userContestRanking?.attendedContestsCount || 0,
+          userContestRanking?.topPercentage || 0,
+          userContestRanking?.totalParticipants || 0,
         ],
         borderColor: "#4caf50",
         backgroundColor: "rgba(76, 175, 80, 0.2)",
@@ -122,7 +130,7 @@ export default function Dashboard() {
                 Contest Performance
               </h3>
               <div className="bg-secondary/30 p-6 rounded-lg">
-                <Line data={contestData} />
+                <Bar data={contestData} />
               </div>
             </div>
           </div>
