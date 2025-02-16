@@ -91,8 +91,9 @@ export default function Dashboard() {
   const processLeetCodeData = (submissionCalendar: string) => {
     const parsedData = JSON.parse(submissionCalendar);
     
-    return Object.entries(parsedData).map(([timestamp]) => ({
-      date: new Date(Number(timestamp) * 1000).toISOString().split("T")[0]
+    return Object.entries(parsedData).map(([timestamp, count]) => ({
+      date: new Date(Number(timestamp) * 1000).toISOString().split("T")[0],
+      count: count as number
     }));
   };
 
