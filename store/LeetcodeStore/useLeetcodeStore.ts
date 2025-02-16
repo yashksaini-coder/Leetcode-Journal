@@ -1,7 +1,8 @@
 import axios from "axios";
 import { create } from "zustand";
 
-interface leetcodeProfile {
+interface LeetcodeData {
+  userDetails: {
     username: string;
     githubUrl: string;
     twitterUrl: string | null;
@@ -54,24 +55,46 @@ interface leetcodeProfile {
       }[];
     };
     submissionCalendar: string; // JSON string representing submission data
-  }
-  
+  };
+  recentSubmissions: {
+    titleSlug: any;
+    timestamp: string;
+    title: string;
+    status: string;
+  }[];
+  languageStats: {
+    languageName: string;
+    problemsSolved: number;
+  }[];
+  userContestRanking: {
+    contestHistory: never[];
+    attendedContestsCount: number;
+    rating: number;
+    globalRanking: number;
+    totalParticipants: number;
+    topPercentage: number;
+  };
+}
 
 interface LeetcodeStore {
-    leetcodeUserProfile : leetcodeProfile | null;
-    fetchLeetcodeUserProfile : VoidFunction
+  data: LeetcodeData | null;
+  isLoading: boolean;
+  error: string | null;
+  fetchLeetcodeData: () => Promise<void>;
 }
 
 export const useLeetcodeStore = create<LeetcodeStore>((set) => ({
-    leetcodeUserProfile: null,
-    fetchLeetcodeUserProfile: async () => {
-        try {
-            const response = await axios.get("/api/leetcode/userDetails");
-            const data = response.data;
-            // console.log("data", data);
-            set({ leetcodeUserProfile: data });
-        } catch (error) {
-            console.error(error);
-        }
+  data: null,
+  isLoading: false,
+  error: null,
+  fetchLeetcodeData: async () => {
+    try {
+      set({ isLoading: true, error: null });
+      const response = await axios.get("/api/leetcode/userDetails");
+      set({ data: response.data, isLoading: false });
+    } catch (error) {
+      set({ error: "Failed to fetch LeetCode data", isLoading: false });
+      console.error(error);
     }
-}))
+  }
+}));

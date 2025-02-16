@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +16,7 @@ import { LogOut } from "lucide-react";
 import { signout } from "@/app/actions/action";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 type buttonVariant =
   | "link"
@@ -28,21 +29,28 @@ type buttonVariant =
   | undefined;
 
 export default function Logout({ variant = "default" }: { variant?: buttonVariant }) {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   const handleLogout = async () => {
     try {
-      signout();
+      setIsLoading(true);
+      await signout();
       router.push("/auth/signin");
     } catch (error) {
+      toast.error("Failed to logout. Please try again.");
       console.error("Sign out error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Button variant={variant} size={"sm"}>
+      <AlertDialogTrigger asChild>
+        <Button variant={variant} size={"sm"} disabled={isLoading}>
           Logout
-          <LogOut />
+          <LogOut className="ml-2 h-4 w-4" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -54,7 +62,9 @@ export default function Logout({ variant = "default" }: { variant?: buttonVarian
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleLogout}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleLogout} disabled={isLoading}>
+            {isLoading ? "Logging out..." : "Continue"}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -1,5 +1,5 @@
 import prisma from "@/lib/database/prismaClient";
-import { getLeetCodeUserDetails } from "@/utils/leetcode/leetcodeContollers";
+import { getLeetCodeUserDetails, getRecentSubmissions, getLanguageStats, getUserContestRanking } from "@/utils/leetcode/leetcodeContollers";
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
@@ -24,7 +24,15 @@ export async function GET() {
 
         const LeetCodeUsername = user.leetcodeUsername;
 
-        const result = await getLeetCodeUserDetails(LeetCodeUsername)
+        // Fetch all data concurrently
+        const [userDetails, recentSubmissions, languageStats, userContestRanking] = await Promise.all([
+            getLeetCodeUserDetails(LeetCodeUsername),
+            getRecentSubmissions(LeetCodeUsername, 6),
+            getLanguageStats(LeetCodeUsername),
+            getUserContestRanking(LeetCodeUsername)
+        ]);
+
+        const result = { userDetails, recentSubmissions, languageStats, userContestRanking };
         return NextResponse.json(result);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
