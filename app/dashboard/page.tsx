@@ -29,7 +29,11 @@ import {
   Code,
   Target,
   Award,
-  Hash
+  Hash,
+  Calendar,
+  CheckCircle,
+  Star,
+  Timer
 } from "lucide-react";
 
 import LeetCodeCalendar from "leetcode-calendar";
@@ -68,25 +72,6 @@ export default function Dashboard() {
 
   const { userDetails, recentSubmissions, userContestRanking } = data;
 
-  interface ContestHistoryItem {
-    date: string;
-    rating: number;
-  }
-  
-  // Extract contest history data
-  const contestHistory = (userContestRanking?.contestHistory || []) as ContestHistoryItem[];
-  const ratingHistoryData = {
-    labels: contestHistory.map(contest => new Date(contest.date).toLocaleDateString()),
-    datasets: [{
-      label: 'Contest Rating',
-      data: contestHistory.map(contest => contest.rating),
-      borderColor: '#3b82f6',
-      tension: 0.3,
-      pointRadius: 2,
-      pointHoverRadius: 5,
-    }],
-  };
-
   const difficultyData = {
     labels: ['Easy', 'Medium', 'Hard'],
     datasets: [{
@@ -101,166 +86,225 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Profile Header */}
-      <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-        <div className="relative w-20 h-20">
-          <Image
-            src={userDetails.profile.userAvatar}
-            alt="Profile"
-            fill
-            className="rounded-full object-cover border-2 border-white shadow-lg"
-          />
-        </div>
-        <div className="text-center md:text-left flex-1">
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-            {userDetails.profile.realName}
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            @{userDetails.username} • Global Rank #{userDetails.profile.ranking}
-          </p>
-          <div className="flex gap-4 mt-2 justify-center md:justify-start">
-            <SocialLink href={userDetails.githubUrl} icon={<Github size={18} />} />
-            <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin size={18} />} />
-            <SocialLink href={userDetails.twitterUrl || undefined} icon={<Twitter size={18} />} />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      {/* Profile Header Card */}
+      <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700">
+        <CardContent className="p-6">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="relative w-24 h-24">
+              <Image
+                src={userDetails.profile.userAvatar}
+                alt="Profile"
+                fill
+                className="rounded-full object-cover border-4 border-white shadow-lg"
+              />
+            </div>
+            <div className="text-center md:text-left flex-1">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                {userDetails.profile.realName}
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                @{userDetails.username} • Global Rank #{userDetails.profile.ranking}
+              </p>
+              <div className="flex gap-4 justify-center md:justify-start">
+                <SocialLink href={userDetails.githubUrl} icon={<Github size={20} />} />
+                <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin size={20} />} />
+                <SocialLink href={userDetails.twitterUrl || undefined} icon={<Twitter size={20} />} />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <QuickStat 
+                icon={<Target />}
+                label="Contest Rating"
+                value={userContestRanking?.rating || 0}
+                color="blue"
+              />
+              <QuickStat 
+                icon={<Trophy />}
+                label="Top"
+                value={`${userContestRanking?.topPercentage}%`}
+                color="yellow"
+              />
+              <QuickStat 
+                icon={<Award />}
+                label="Global Rank"
+                value={userContestRanking?.globalRanking || 0}
+                color="purple"
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex gap-4 flex-wrap justify-center">
-          <QuickStat 
-            icon={<Target className="w-4 h-4" />}
-            label="Contest Rating"
-            value={userContestRanking?.rating || 0}
-          />
-          <QuickStat 
-            icon={<Award className="w-4 h-4" />}
-            label="Top"
-            value={`${userContestRanking?.topPercentage}%`}
-          />
-          <QuickStat 
-            icon={<Hash className="w-4 h-4" />}
-            label="Global Rank"
-            value={userContestRanking?.globalRanking || 0}
-          />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Leetcode calendar to show up here */}
-        <div className="lg:col-span-2">
-          <LeetCodeCalendar username="yashksaini"
-          blockSize={11} // Optional: Size of each block in pixels (default: 15)
-          blockMargin={3} // Optional: Margin between blocks in pixels (default: 5)
-          fontSize={11} // Optional: Font size of the text within blocks (default: 16)
-          theme={exampleTheme} // Optional: A custom theme object to style the calendar
-          style={{ maxWidth: '950px' }}
-           />
-        </div>
-
-        {/* Recent Submissions */}
-        <Card className="h-[300px] overflow-hidden">
-          <CardHeader className="p-4">
-            <div className="flex items-center gap-2">
-              <Code className="w-5 h-5 text-green-600" />
-              <h3 className="font-semibold">Recent Submissions</h3>
+        {/* Activity Calendar Section */}
+        <Card className="lg:col-span-2 overflow-hidden">
+          <CardHeader className="p-4 border-b">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold">Contribution Calendar</h3>
+              </div>
+              <span className="text-sm text-gray-500">
+                {userDetails.submitStats.totalSubmissionNum[0].count} total submissions
+              </span>
             </div>
           </CardHeader>
-          <CardContent className="p-4 overflow-y-auto">
-            <div className="space-y-2">
+          <CardContent className="p-6">
+            <LeetCodeCalendar 
+              username="yashksaini"
+              blockSize={11}
+              blockMargin={3}
+              fontSize={11}
+              theme={exampleTheme}
+              style={{ maxWidth: '100%' }}
+            />
+          </CardContent>
+        </Card>
+
+        {/* Recent Submissions Card */}
+        <Card className="h-[400px] overflow-hidden">
+          <CardHeader className="p-4 border-b">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Code className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold">Recent Activity</h3>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-0 overflow-y-auto h-[calc(400px-4rem)]">
+            <div className="divide-y">
               {recentSubmissions.map((submission, idx) => (
                 <Link 
                   href={`https://leetcode.com/problems/${submission.titleSlug}`}
                   key={idx} 
-                  className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors group"
+                  className="flex items-center p-4 hover:bg-gray-50 transition-colors group"
                 >
-                  <span className="text-sm truncate group-hover:text-blue-600 transition-colors">
-                    {submission.title}
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate group-hover:text-blue-600">
+                      {submission.title}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {new Date(submission.timestamp).toDateString()}
+                      {/* TODO: Fix the submission timestamp */}
+                    </p>
+                  </div>
+                  <CheckCircle className="w-5 h-5 text-green-500 ml-4" />
                 </Link>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Additional Stats */}
+        {/* Statistics Cards */}
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <DetailCard 
-              title="Problem Solving"
-              icon={<Zap className="w-5 h-5 text-yellow-600" />}
-              stats={[
-                { label: 'Total Solved', value: userDetails.submitStats.acSubmissionNum[0].count },
-                { label: 'Easy', value: userDetails.submitStats.acSubmissionNum[1].count },
-                { label: 'Medium', value: userDetails.submitStats.acSubmissionNum[2].count },
-                { label: 'Hard', value: userDetails.submitStats.acSubmissionNum[3].count },
-              ]}
-            />
-
-            <DetailCard 
-              title="Submissions"
-              icon={<TrendingUp className="w-5 h-5 text-purple-600" />}
+              title="Problem Solving Stats"
+              icon={<Star className="w-5 h-5 text-yellow-600" />}
               stats={[
                 { 
-                  label: 'Acceptance Rate', 
-                  value: `${(userDetails.submitStats.acSubmissionNum[0].count / 
-                    userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%` 
+                  label: 'Total Solved',
+                  value: userDetails.submitStats.acSubmissionNum[0].count,
+                  icon: <CheckCircle className="w-4 h-4 text-green-500" />
                 },
-                { label: 'Total Submissions', value: userDetails.submitStats.totalSubmissionNum[0].count },
-                { label: 'Points', value: userDetails.contributions.points },
-                { label: 'Contests', value: userContestRanking?.attendedContestsCount || 0 },
+                { 
+                  label: 'Easy Problems',
+                  value: userDetails.submitStats.acSubmissionNum[1].count,
+                  icon: <Zap className="w-4 h-4 text-green-500" />
+                },
+                { 
+                  label: 'Medium Problems',
+                  value: userDetails.submitStats.acSubmissionNum[2].count,
+                  icon: <Zap className="w-4 h-4 text-yellow-500" />
+                },
+                { 
+                  label: 'Hard Problems',
+                  value: userDetails.submitStats.acSubmissionNum[3].count,
+                  icon: <Zap className="w-4 h-4 text-red-500" />
+                },
+              ]}
+            />
+            <DetailCard 
+              title="Performance Metrics"
+              icon={<Timer className="w-5 h-5 text-purple-600" />}
+              stats={[
+                { 
+                  label: 'Acceptance Rate',
+                  value: `${(userDetails.submitStats.acSubmissionNum[0].count / 
+                    userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%`,
+                  icon: <TrendingUp className="w-4 h-4 text-blue-500" />
+                },
+                { 
+                  label: 'Total Submissions',
+                  value: userDetails.submitStats.totalSubmissionNum[0].count,
+                  icon: <Code className="w-4 h-4 text-green-500" />
+                },
+                { 
+                  label: 'Contribution Points',
+                  value: userDetails.contributions.points,
+                  icon: <Star className="w-4 h-4 text-yellow-500" />
+                },
+                { 
+                  label: 'Contest Count',
+                  value: userContestRanking?.attendedContestsCount || 0,
+                  icon: <Trophy className="w-4 h-4 text-orange-500" />
+                },
               ]}
             />
           </div>
         </div>
 
-        <Card>
-          <CardHeader className="p-4">
-            <div className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-orange-600" />
-              <h3 className="font-semibold">Difficulty Distribution</h3>
+        {/* Problem Distribution Chart */}
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader className="p-4 border-b">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-orange-600" />
+                <h3 className="font-semibold">Problem Distribution</h3>
+              </div>
             </div>
           </CardHeader>
-            <CardContent className="p-4 flex justify-center">
-            <div className="h-56 w-56">
+          <CardContent className="p-6 flex justify-center">
+            <div className="h-64 w-64">
               <Doughnut 
-              data={difficultyData} 
-              options={{
-                cutout: '65%',
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                legend: {
-                  position: 'bottom',
-                  align: 'center',
-                  labels: {
-                  padding: 20,
-                  usePointStyle: true,
+                data={difficultyData} 
+                options={{
+                  cutout: '65%',
+                  responsive: true,
+                  maintainAspectRatio: true,
+                  plugins: {
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        padding: 10,
+                        usePointStyle: true,
+                        font: {
+                          size: 12,
+                          weight: 'bold'
+                        }
+                      }
+                    },
+                    tooltip: {
+                      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                      padding: 12,
+                      titleFont: {
+                        size: 14,
+                        weight: 'bold'
+                      },
+                      bodyFont: {
+                        size: 13
+                      },
+                      callbacks: {
+                        label: (context) => {
+                          const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                          const percentage = ((context.raw as number / total) * 100).toFixed(1);
+                          return `${context.label}: ${context.raw} (${percentage}%)`;
+                        }
+                      }
+                    }
                   }
-                },
-                tooltip: {
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                  padding: 12,
-                  titleFont: {
-                  size: 14,
-                  weight: 'bold'
-                  },
-                  bodyFont: {
-                  size: 13
-                  },
-                  callbacks: {
-                  label: (context) => {
-                    const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-                    const percentage = ((context.raw as number / total) * 100).toFixed(1);
-                    return `${context.label}: ${context.raw} (${percentage}%)`;
-                  }
-                  }
-                }
-                },
-                animation: {
-                animateScale: true,
-                animateRotate: true,
-                duration: 2000
-                }
-              }} 
+                }} 
               />
             </div>
           </CardContent>
@@ -270,32 +314,32 @@ export default function Dashboard() {
   );
 }
 
-function QuickStat({ icon, label, value }:
-  {
-  icon: React.ReactNode;
-  label: string;
-  value: string | number;
-  }) {
-    return (
-      <div className="flex items-center space-x-3 bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors">
-        <div className="p-2 bg-background rounded-full">{icon}</div>
+function QuickStat({ icon, label, value, color = "blue" }: { icon: React.ReactNode; label: string; value: string | number; color?: "blue" | "yellow" | "purple" }) {
+  const colorVariants = {
+    blue: "bg-blue-50 dark:bg-blue-900/20",
+    yellow: "bg-yellow-50 dark:bg-yellow-900/20",
+    purple: "bg-purple-50 dark:bg-purple-900/20"
+  };
+
+  return (
+    <div className={`${colorVariants[color]} rounded-lg p-4 transition-all duration-300 hover:scale-105`}>
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+          {icon}
+        </div>
         <div>
           <div className="text-2xl font-bold">{value.toLocaleString()}</div>
-          <div className="text-sm font-medium">{label}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">{label}</div>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
-interface DetailStats {
-  label: string;
-  value: string | number;
-}
-
-function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNode; stats: DetailStats[] }) {
+function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNode; stats: any[] }) {
   return (
-    <Card>
-      <CardHeader className="p-4">
+    <Card className="hover:shadow-lg transition-shadow duration-300">
+      <CardHeader className="p-4 border-b">
         <div className="flex items-center gap-2">
           {icon}
           <h3 className="font-semibold">{title}</h3>
@@ -304,9 +348,14 @@ function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNo
       <CardContent className="p-4">
         <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
-              <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
-              <div className="text-lg font-semibold">{stat.value}</div>
+            <div key={idx} 
+              className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                {stat.icon}
+                <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+              </div>
+              <div className="text-xl font-semibold">{stat.value}</div>
             </div>
           ))}
         </div>
@@ -315,12 +364,12 @@ function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNo
   );
 }
 
-function SocialLink({ href, icon }: { href: string | undefined, icon: React.ReactNode }) {
+function SocialLink({ href, icon }: { href?: string; icon: React.ReactNode }) {
   if (!href) return null;
   return (
     <a
       href={href}
-      className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+      className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-300 hover:scale-110"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -328,6 +377,7 @@ function SocialLink({ href, icon }: { href: string | undefined, icon: React.Reac
     </a>
   );
 }
+
 
 function DashboardSkeleton() {
   return (
