@@ -196,6 +196,7 @@ export default function Dashboard() {
                 <Link 
                   href={`https://leetcode.com/problems/${submission.titleSlug}`}
                   key={idx} 
+                  target="_blank"
                   className="flex items-center p-4 hover:bg-gray-50 transition-colors group"
                 >
                   <div className="flex-1 min-w-0">
