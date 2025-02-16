@@ -6,7 +6,12 @@ import Link from "next/link";
 import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Line, Bar, Doughnut } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
+
+import CalendarHeatmap from "react-calendar-heatmap";
+import "../styles/style.css";
+import 'react-calendar-heatmap/dist/styles.css';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -82,6 +87,17 @@ export default function Dashboard() {
     }],
   };
 
+
+  const processLeetCodeData = (submissionCalendar: string) => {
+    const parsedData = JSON.parse(submissionCalendar);
+    
+    return Object.entries(parsedData).map(([timestamp]) => ({
+      date: new Date(Number(timestamp) * 1000).toISOString().split("T")[0]
+    }));
+  };
+
+  console.log(processLeetCodeData(userDetails.submissionCalendar));
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Profile Header Card */}
@@ -147,16 +163,21 @@ export default function Dashboard() {
               </span>
             </div>
           </CardHeader>
-          <CardContent className="p-6">
-            <LeetCodeCalendar 
-              username="yashksaini"
-              blockSize={11}
-              blockMargin={3}
-              fontSize={11}
-              theme={exampleTheme}
-              style={{ maxWidth: '100%' }}
+            <CardContent className="p-6">
+            <CalendarHeatmap
+              values={processLeetCodeData(userDetails.submissionCalendar)}
+              startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
+              endDate={new Date()}
+              classForValue={(value) => {
+                if (!value) {
+                  return 'color-empty';
+                }
+                return `color-scale-${(value.count),4}`;
+              }}
+              showWeekdayLabels
+              onMouseOver={(e, value) => console.log(e, value)}
             />
-          </CardContent>
+            </CardContent>
         </Card>
 
         {/* Recent Submissions Card */}
