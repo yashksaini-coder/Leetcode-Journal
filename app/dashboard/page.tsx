@@ -148,7 +148,7 @@ export default function Dashboard() {
         {/* Leetcode calendar to show up here */}
         <div className="lg:col-span-2">
           <LeetCodeCalendar username="yashksaini"
-          blockSize={12} // Optional: Size of each block in pixels (default: 15)
+          blockSize={11} // Optional: Size of each block in pixels (default: 15)
           blockMargin={3} // Optional: Margin between blocks in pixels (default: 5)
           fontSize={11} // Optional: Font size of the text within blocks (default: 16)
           theme={exampleTheme} // Optional: A custom theme object to style the calendar
@@ -168,7 +168,7 @@ export default function Dashboard() {
             <div className="space-y-2">
               {recentSubmissions.map((submission, idx) => (
                 <Link 
-                  href={`/problems/${submission.titleSlug}`}
+                  href={`https://leetcode.com/problems/${submission.titleSlug}`}
                   key={idx} 
                   className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors group"
                 >
