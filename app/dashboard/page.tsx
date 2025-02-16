@@ -25,17 +25,15 @@ import {
   Twitter,
   Trophy,
   TrendingUp,
-  CheckCircle,
-  Clock,
   Zap,
-  Calendar,
   Code,
-  AlertCircle,
-  LineChart,
   Target,
   Award,
   Hash
 } from "lucide-react";
+
+import LeetCodeCalendar from "leetcode-calendar";
+import { exampleTheme } from "../../lib/leetcode-calendar-theme";
 
 ChartJS.register(
   CategoryScale,
@@ -149,7 +147,13 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Leetcode calendar to show up here */}
         <div className="lg:col-span-2">
-          
+          <LeetCodeCalendar username="yashksaini"
+          blockSize={12} // Optional: Size of each block in pixels (default: 15)
+          blockMargin={3} // Optional: Margin between blocks in pixels (default: 5)
+          fontSize={11} // Optional: Font size of the text within blocks (default: 16)
+          theme={exampleTheme} // Optional: A custom theme object to style the calendar
+          style={{ maxWidth: '950px' }}
+           />
         </div>
 
         {/* Recent Submissions */}
@@ -245,22 +249,21 @@ export default function Dashboard() {
   );
 }
 
-interface QuickStatProps {
+function QuickStat({ icon, label, value }:
+  {
   icon: React.ReactNode;
   label: string;
   value: string | number;
-}
-
-function QuickStat({ icon, label, value }: QuickStatProps) {
-  return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg px-3 py-2 text-center">
-      <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-        {icon}
-        <span className="text-xs">{label}</span>
+  }) {
+    return (
+      <div className="flex items-center space-x-3 bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors">
+        <div className="p-2 bg-background rounded-full">{icon}</div>
+        <div>
+          <div className="text-2xl font-bold">{value.toLocaleString()}</div>
+          <div className="text-sm font-medium">{label}</div>
+        </div>
       </div>
-      <div className="font-semibold">{value}</div>
-    </div>
-  );
+    );
 }
 
 interface DetailStats {
@@ -279,7 +282,7 @@ function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNo
       </CardHeader>
       <CardContent className="p-4">
         <div className="grid grid-cols-2 gap-4">
-          {stats.map((stat: { label: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; value: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, idx: React.Key | null | undefined) => (
+          {stats.map((stat, idx) => (
             <div key={idx} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
               <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
               <div className="text-lg font-semibold">{stat.value}</div>
