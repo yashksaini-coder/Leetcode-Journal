@@ -36,9 +36,6 @@ import {
   Timer
 } from "lucide-react";
 
-import LeetCodeCalendar from "leetcode-calendar";
-import { exampleTheme } from "../../lib/leetcode-calendar-theme";
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
