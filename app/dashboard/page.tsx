@@ -201,6 +201,7 @@ export default function Dashboard() {
                 { label: 'Hard', value: userDetails.submitStats.acSubmissionNum[3].count },
               ]}
             />
+
             <DetailCard 
               title="Submissions"
               icon={<TrendingUp className="w-5 h-5 text-purple-600" />}
@@ -211,7 +212,7 @@ export default function Dashboard() {
                     userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%` 
                 },
                 { label: 'Total Submissions', value: userDetails.submitStats.totalSubmissionNum[0].count },
-                { label: 'Accepted', value: userDetails.submitStats.acSubmissionNum[0].count },
+                { label: 'Points', value: userDetails.contributions.points },
                 { label: 'Contests', value: userContestRanking?.attendedContestsCount || 0 },
               ]}
             />
