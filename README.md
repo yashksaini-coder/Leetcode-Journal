@@ -1,4 +1,8 @@
-![Leetcode-Journal](https://socialify.git.ci/yashksaini-coder/Leetcode-Journal/image?font=Rokkitt&name=1&owner=1&pattern=Solid&theme=Auto)
+<!-- ![Leetcode-Journal](https://socialify.git.ci/yashksaini-coder/Leetcode-Journal/image?font=Rokkitt&name=1&owner=1&pattern=Solid&theme=Auto) -->
+
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/e2fad388-7a5b-41fb-95c6-ff7c983193dc">
+</div>
 
 # [Leetcode Journal](https://leetcode-journal.vercel.app/)
 
@@ -6,7 +10,10 @@
 
 ## Project Overview
 
-<table align="center">
+
+[![wakatime](https://wakatime.com/badge/user/9a827e04-5df8-4525-ace8-e88326bbf87a/project/cbc54911-d322-42cb-a897-c093a59e53ad.svg?style=social)](https://wakatime.com/badge/user/9a827e04-5df8-4525-ace8-e88326bbf87a/project/cbc54911-d322-42cb-a897-c093a59e53ad)
+
+<!-- <table align="center">
     <thead align="center">
         <tr border: 2px;>
             <td><b>🌟 Stars</b></td>
@@ -25,7 +32,7 @@
            <td><img alt="Close Pull Requests" src="https://img.shields.io/github/issues-pr-closed/yashksaini-coder/Leetcode-Journal?style=flat&color=green&logo=github"/></td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
 ## Key Features
 
@@ -74,7 +81,7 @@ To contribute to the project, you need to fork the repository to your GitHub acc
 
 #### 2. Clone the Repository
 ```bash
-git clone https://github.com/your-username/leetcode-journal
+git clone https://github.com/yashksaini-coder/leetcode-journal
 
 # Navigate to the project directory
 cd leetcode-journal  
