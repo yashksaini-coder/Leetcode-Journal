@@ -28,6 +28,7 @@ export const DashboardNavbar = () => {
         </Avatar>
         Leetcode Journal
       </Link>
+
       {/* <!-- Mobile --> */}
       <div className="flex items-center lg:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -79,7 +80,8 @@ export const DashboardNavbar = () => {
           </SheetContent>
         </Sheet>
       </div>
-
+                
+      {/* <!-- Desktop --> */}
       <div className="hidden lg:flex gap-2">
         <ToggleTheme />
         <Logout />
