@@ -62,7 +62,7 @@ export const HeroSection = () => {
             height={1200}
             className="w-full md:w-[1200px] mx-auto rounded-3xl relative leading-none flex items-center border-[7px] border-secondary"
             src={
-              "https://media-hosting.imagekit.io//4b4efe3445654b3a/Screenshot%20(70).png?Expires=1833951335&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=HNAahPu-sVx5W-kJYp8u464sJkmi2sZlTHN-kLRiT47bkWVQCpCDcGkq24vVNWIQXG-mC67DPoT8xqsWAZZOc4~aoZaHAHsOFKdBuGqg15bwNhaH6a~MljHawD9eX74RYn6TwY8lMvsoh4m9NjpQ7VrJQ2Pcs5wCLS7wVcuXjuDMfmDagT2SFMiig45oVj1Fj0fZoPmio0DCAx2dQj7vX0g9yp6cB32-Y9B6jQrFrFTnaTZ5HViH5-Yvnxc7oYmVhc6sXQ8frZLRmGdqv2HC6SRZfMjPsviwTbXu~4R6YfsHbnDuKB6RWEssFG8lHSSu1uiBIJWJY3PFF~es79j9cw__"
+              "https://github.com/user-attachments/assets/434dfd4e-508d-468f-a42f-185672e4b1f4"
             }
             alt="dashboard"
           />
