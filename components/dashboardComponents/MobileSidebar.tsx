@@ -26,26 +26,27 @@ export default function MobileSidear() {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+  
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="p-2 rounded-lg bg-secondary/50 dark:bg-secondary/60 backdrop-blur-sm">
-          <Menu />
-        </button>
-      </SheetTrigger>
-      <SheetContent side={"left"}>
-        <SheetHeader>
+      <SheetContent 
+        side={"left"} 
+        className="w-[280px] border-r border-secondary/20"
+      >
+        <SheetHeader className="space-y-2 pb-6 border-b border-secondary/20">
           <SheetTitle>
-            <h1 className="font-ClashDisplayMedium text-xl">
-              LeetCode Journal.
+            <h1 className="font-ClashDisplayMedium text-2xl bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              LeetCode Journal
             </h1>
-            <SheetDescription className="text-neutral-500 dark:text-neutral-400">
-              Your personal coding companion.
+            <SheetDescription className="text-sm text-muted-foreground mt-1">
+              Your personal coding companion
             </SheetDescription>
           </SheetTitle>
         </SheetHeader>
-        <nav className="flex-grow overflow-y-auto py-4">
-          <ul className="space-y-2">
+        
+        <nav className="flex-grow overflow-y-auto py-6">
+          <ul className="space-y-1.5">
             {SidebarData.map((item, index) => {
               const isActive = pathname === item.href;
               return (
@@ -53,40 +54,44 @@ export default function MobileSidear() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex items-center p-2 rounded-lg transition-colors duration-200",
+                      "flex items-center p-3 rounded-lg transition-all duration-200 group hover:scale-[0.98]",
                       isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-primary/10 dark:hover:bg-primary/20"
+                        ? "bg-primary text-primary-foreground font-medium shadow-sm"
+                        : "hover:bg-secondary/80 dark:hover:bg-secondary/20"
                     )}
                   >
-                    <item.icon className={cn("h-6 w-6 mr-2")} />
-                    <span>{item.title}</span>
+                    <item.icon className={cn(
+                      "h-5 w-5 mr-3 transition-transform group-hover:scale-110",
+                      isActive ? "text-primary-foreground" : "text-muted-foreground"
+                    )} />
+                    <span className="text-sm">{item.title}</span>
                   </Link>
                 </li>
               );
             })}
           </ul>
         </nav>
-        {/* <NavItems /> */}
-        <SheetFooter className="absolute p-2 gap-1 bg-secondary/50 rounded-t-xl flex-col text-neutral-500 dark:text-neutral-400 flex items-center justify-center bottom-0 left-0 w-full">
+
+        <SheetFooter className="absolute p-4 gap-2 bg-secondary/30 backdrop-blur-sm rounded-t-xl flex-col border-t border-secondary/20 flex items-center justify-center bottom-0 left-0 w-full">
           <Button
             onClick={toggleTheme}
             size={"sm"}
             variant={"outline"}
-            className="font-semibold w-full"
+            className="font-medium w-full hover:bg-secondary/70 transition-colors"
           >
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
           </Button>
           <Button
             onClick={signout}
             variant={"outline"}
             size={"sm"}
-            className="font-semibold w-full text-red-500"
+            className="font-medium w-full text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors"
           >
             Sign Out
           </Button>
         </SheetFooter>
       </SheetContent>
+      </SheetTrigger>
     </Sheet>
   );
 }
