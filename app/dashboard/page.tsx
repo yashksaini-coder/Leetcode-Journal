@@ -203,8 +203,7 @@ export default function Dashboard() {
                       {submission.title}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      {new Date(submission.timestamp).toDateString()}
-                      {/* TODO: Fix the submission timestamp */}
+                      {new Date(Number(submission.timestamp) * 1000).toISOString().split("T")[0]}
                     </p>
                   </div>
                   <CheckCircle className="w-5 h-5 text-green-500 ml-4" />
