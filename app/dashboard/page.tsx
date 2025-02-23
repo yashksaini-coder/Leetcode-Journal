@@ -173,8 +173,6 @@ export default function Dashboard() {
                 }
                 return `color-scale-${(value.count)}`;
               }}
-              showWeekdayLabels
-              onMouseOver={(e, value) => console.log(e, value)}
             />
             </CardContent>
         </Card>
