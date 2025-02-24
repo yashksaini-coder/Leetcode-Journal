@@ -9,19 +9,6 @@ body:
         # General Issue Template
         Thanks for taking the time to fill out this issue! Please provide as much information as possible.
 
-  - type: dropdown
-    id: category
-    attributes:
-      label: "Category"
-      description: "What type of issue is this?"
-      options:
-        - Question
-        - Suggestion
-        - Problem
-        - Other
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:

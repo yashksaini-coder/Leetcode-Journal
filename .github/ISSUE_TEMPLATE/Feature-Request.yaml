@@ -30,13 +30,6 @@ body:
       required: false
 
   - type: textarea
-    id: alternatives
-    attributes:
-      label: "Alternative Solutions"
-      description: "What alternatives have you considered?"
-      placeholder: "Another approach could be..."
-
-  - type: textarea
     id: screenshots
     attributes:
       label: "Screenshots or Mockups"
