@@ -40,7 +40,6 @@ import {
   Star,
   Timer
 } from "lucide-react";
-import { count } from "console";
 
 ChartJS.register(
   CategoryScale,
@@ -88,7 +87,6 @@ export default function Dashboard() {
     }],
   };
 
-
   const processLeetCodeData = (submissionCalendar: string) => {
     const parsedData = JSON.parse(submissionCalendar);
     
@@ -101,7 +99,7 @@ export default function Dashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Profile Header Card */}
-      <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700">
+      <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="relative w-24 h-24">
@@ -151,19 +149,19 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Calendar Section */}
-        <Card className="lg:col-span-2 overflow-hidden">
+        <Card className="lg:col-span-2 overflow-hidden shadow-md rounded-lg">
           <CardHeader className="p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-green-600" />
-                <h3 className="font-semibold">Calendar</h3>
+                <h3 className="font-semibold">Contribution Calendar</h3>
               </div>
               <span className="text-sm text-gray-500">
                 {userDetails.submitStats.totalSubmissionNum[0].count} total submissions
               </span>
             </div>
           </CardHeader>
-            <CardContent className="p-6">
+          <CardContent className="p-6">
             <CalendarHeatmap
               values={processLeetCodeData(userDetails.submissionCalendar)}
               startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
@@ -175,31 +173,31 @@ export default function Dashboard() {
                 return `color-scale-${(value.count)}`;
               }}
             />
-            </CardContent>
-            <div className="p-4 border-t justify-between">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Badge className="w-5 h-5 text-sky-600" />
-                  <h3 className="font-semibold">Badges</h3>
-                </div>
-                <span className="text-sm text-gray-500">
-                  {(userDetails.badges).length} total badges
-                </span>
+          </CardContent>
+          <div className="p-4 border-t">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Badge className="w-5 h-5 text-sky-600" />
+                <h3 className="font-semibold">Badges</h3>
               </div>
-                <CardContent className="p-0">
-                <div className="flex justify-center items-center gap-4 px-4 py-2">
-                  {userDetails.badges.slice(0, 5).map((badge, idx) => (
-                  <div key={idx} className="flex flex-col items-center bg-gray-500 dark:bg-gray-800 rounded-lg p-3 min-w-[60px] max-w-[100px]">
+              <span className="text-sm text-gray-500">
+                {(userDetails.badges).length} total badges
+              </span>
+            </div>
+            <CardContent className="p-0">
+              <div className="flex justify-center items-center gap-4 px-4 py-2">
+                {userDetails.badges.slice(0, 5).map((badge, idx) => (
+                  <div key={idx} className="flex flex-col items-center bg-gray-200 dark:bg-gray-700 rounded-lg p-3 min-w-[60px] max-w-[100px]">
                     <img src={badge.icon} alt={`Badge ${idx + 1}`} className="w-full h-auto object-contain" />
                   </div>
-                  ))}
-                </div>
-                </CardContent>
-            </div>
+                ))}
+              </div>
+            </CardContent>
+          </div>
         </Card>
 
         {/* Recent Submissions Card */}
-        <Card className="h-[400px] overflow-hidden">
+        <Card className="h-[400px] overflow-hidden shadow-md rounded-lg">
           <CardHeader className="p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -215,13 +213,13 @@ export default function Dashboard() {
                   href={`https://leetcode.com/problems/${submission.titleSlug}`}
                   key={idx} 
                   target="_blank"
-                  className="flex items-center p-4 hover:bg-gray-50 transition-colors group"
+                  className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white-900 truncate group-hover:text-blue-600">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600">
                       {submission.title}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       {new Date(Number(submission.timestamp) * 1000).toISOString().split("T")[0]}
                     </p>
                   </div>
@@ -292,7 +290,7 @@ export default function Dashboard() {
         </div>
 
         {/* Problem Distribution Chart */}
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg">
           <CardHeader className="p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -301,7 +299,7 @@ export default function Dashboard() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="p-6 flex justify-center">
+          <CardContent className="p-0 flex justify-center">
             <div className="h-64 w-64">
               <Doughnut 
                 data={difficultyData} 
@@ -413,7 +411,6 @@ function SocialLink({ href, icon }: { href?: string; icon: React.ReactNode }) {
     </a>
   );
 }
-
 
 function DashboardSkeleton() {
   return (
