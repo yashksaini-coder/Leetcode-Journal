@@ -11,10 +11,5 @@ export const SidebarData = [
       icon: BookA,
       href: "/dashboard/journal",
     },
-    {
-      title: "Settings",
-      icon: Settings,
-      href: "/dashboard/settings",
-    },
   ];
   

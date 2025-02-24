@@ -82,10 +82,23 @@ export const DashboardNavbar = () => {
       </div>
                 
       {/* <!-- Desktop --> */}
-      <div className="hidden lg:flex gap-2">
-        <ToggleTheme />
-        <Logout />
+      <div className="flex gap-2">
+        {SidebarData.map(({ href, title }) => (
+          <Button
+            key={href}
+            onClick={() => setIsOpen(false)}
+            asChild
+            variant="ghost"
+            className="justify-start text-base"
+          >
+            <Link href={href}>{title}</Link>
+          </Button>
+        ))}
       </div>
+      <div className="hidden lg:flex gap-2">
+          <ToggleTheme />
+          <Logout />
+        </div>
     </header>
   );
 };

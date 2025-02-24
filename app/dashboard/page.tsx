@@ -115,7 +115,7 @@ export default function Dashboard() {
                 {userDetails.profile.realName}
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                @{userDetails.username} • Global Rank #{userDetails.profile.ranking}
+                @{userDetails.username} • Rank #{userDetails.profile.ranking}
               </p>
               <div className="flex gap-4 justify-center md:justify-start">
                 <SocialLink href={userDetails.githubUrl} icon={<Github size={20} />} />
