@@ -96,7 +96,7 @@ export const DashboardNavbar = () => {
         ))}
       </div>
       <div className="hidden lg:flex gap-2">
-          <ToggleTheme />
+          {/* <ToggleTheme /> */}
           <Logout />
         </div>
     </header>
