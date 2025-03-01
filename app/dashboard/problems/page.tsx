@@ -93,7 +93,7 @@ export default function Home() {
   }, [difficulty, tagSearch, page, limit]);
   
   return (
-    <div className="px-4 py-2 shadow-lg rounded-lg">
+    <div className="px-4 py-2 shadow-lg rounded-lg bg-neutral-900  border">
       <div className="flex justify-stretch">
         <div className="gap-2">
         </div>
