@@ -17,7 +17,7 @@ export default function RootLayout({
       <div className="md:hidden block fixed top-1 left-1 w-full z-50">
         <MobileSidear/>
       </div>
-      <div className="w-full dark:bg-neutral-900 bg-neutral-200 md:rounded-xl rounded-sm">{children}</div>
+      <div className="w-full dark:bg-neutral-900 dark: text-white bg-neutral-200 md:rounded-xl rounded-sm">{children}</div>
     </main>
   );
 }
