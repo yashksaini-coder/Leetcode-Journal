@@ -93,140 +93,157 @@ export default function Home() {
   }, [difficulty, tagSearch, page, limit]);
   
   return (
-    <div className="px-4 py-2 shadow-lg rounded-lg bg-neutral-900  border">
-      <div className="flex justify-stretch">
+    // Mobile first - small padding on mobile, more on larger screens
+    <div className="px-2 py-2 sm:px-3 md:px-4 shadow-lg rounded-lg bg-neutral-900 border">
+      {/* Header section */}
+      <div className="flex flex-col sm:flex-row justify-stretch">
         <div className="gap-2">
         </div>
-        {/* Div icons to show the color pattern for Free & Paid problems */}
-        {/* <div className="font-semibold content-center text-black grid justify-center items-center gap-2 ml-4">
-          <div className="flex bg-cyan-500">
-            <p className="mr-2 ml-2">
-              Free Problems
-            </p>
-          </div>
-          <div className="flex bg-amber-500">
-            <p className="mr-2 ml-2">
-              Paid Problems
-            </p>
-          </div>
-        </div> */}
+        {/* Removed color pattern div */}
       </div>
       {loading ? (
         <div className="flex mb-1 mt-1 justify-center">
           <Loader color="purple" size="xl"/>
         </div>
       ) : error ? (
-        <div className="h-6 w-[200px] border-20 animate-pulse bg-red-600 duration-500">
+        <div className="h-6 w-full sm:w-[200px] border-20 animate-pulse bg-red-600 duration-500">
           <span className="flex justify-center items-center h-full w-full">
             <p className="font-semibold text-white">{error}</p>
           </span>
         </div>
       ) : (
         <> 
-        <div className="flex justify-between items-center mb-3">
-        <div className="flex justify-end items-center my-6 gap-4">
-            <button className="px-4 py-2 border border-white text-white font-semibold hover:bg-neutral-600/50 duration-200 transition-colors disabled:opacity-50"
+        {/* Filter and pagination controls - stack vertically on mobile, horizontally on larger screens */}
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-2 space-y-2 lg:space-y-0">
+          {/* Pagination controls - centered on mobile, left-aligned on larger screens */}
+          <div className="flex justify-center lg:justify-start items-center gap-1.5">
+            {/* Smaller, more compact buttons with consistent styling */}
+            <button 
+              className="px-2 py-1 text-xs sm:text-sm border border-white text-white rounded-sm
+          hover:bg-white hover:text-black transition-colors duration-200 
+          disabled:opacity-50 disabled:cursor-not-allowed min-w-[60px]"
               onClick={() => setPage(1)}
-              disabled={page === 1}>
-              Home
+              disabled={page === 1}
+            >
+              First
             </button>
             <button
-              className="px-4 py-2 border border-white text-white font-semibold hover:bg-neutral-600/50 duration-200 transition-colors disabled:opacity-50"
+              className="px-2 py-1 text-xs sm:text-sm border border-white text-white rounded-sm
+          hover:bg-white hover:text-black transition-colors duration-200
+          disabled:opacity-50 disabled:cursor-not-allowed min-w-[60px]"
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}
             >
-              Previous
+              Prev
             </button>
-            <span className="text-lg">Page {page}</span>
+            <span className="px-3 text-sm sm:text-base">Page {page}</span>
             <button
-              className="px-4 py-2 border border-white font-semibold hover:bg-neutral-600/50 duration-200 transition-colors text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 py-1 text-xs sm:text-sm border border-white text-white rounded-sm
+          hover:bg-white hover:text-black transition-colors duration-200
+          disabled:opacity-50 disabled:cursor-not-allowed min-w-[60px]"
               onClick={() => setPage((prev) => prev + 1)}
               disabled={problems.length === 0}
             >
               Next
             </button>
           </div>
-          <div className="my-2 justify-end items-center flex gap-2">  
-            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="mr-2 outline-none bg-black text-white border border-white px-4 py-2">
-              {
-                ["ALL", "EASY", "MEDIUM", "HARD"].map((e) => <option key={e} className=" border border-white px-4 py-2" value={e}>{e}</option>)
-              }
-            </select>
 
-            <input
+            {/* Filter controls with improved alignment and sizing */}
+            <div className="flex flex-col md:flex-row gap-2 md:items-center justify-between w-full">  
+            <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+              {/* Compact difficulty selector */}
+              <select 
+              value={difficulty} 
+              onChange={(e) => setDifficulty(e.target.value)} 
+              className="h-8 px-2 text-xs sm:text-sm bg-black text-white border border-white rounded-sm
+                    hover:bg-white hover:text-black transition-colors duration-200"
+              >
+              {["ALL", "EASY", "MEDIUM", "HARD"].map((e) => (
+                <option key={e} value={e}>{e}</option>
+              ))}
+              </select>
+
+              {/* Streamlined tag search */}
+              <input
               type="text"
-              placeholder="Search by tags"
+              placeholder="Search by tags (comma-separated)"
               value={tagSearch}
               onChange={(e) => setTagSearch(e.target.value)}
-              className="mr-2 outline-none min-w-96 h-9 bg-black text-white border border-white px-4 py-2"
-            />
-          </div>
-          <div className="my-2 flex items-center gap-2">
-            <label className="text-white">Problems per page:</label>
-            <select
+              className="h-8 px-2 text-xs sm:text-sm bg-black text-white border border-white rounded-sm
+                    w-full sm:w-48 md:w-64 lg:w-80 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+
+            {/* Compact items per page selector */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm text-white whitespace-nowrap">Per page:</span>
+              <select
               value={limit}
               onChange={(e) => setLimit(Number(e.target.value))}
-              className="outline-none bg-black text-white border border-white px-4 py-2"
-            >
+              className="h-8 px-2 text-xs sm:text-sm bg-black text-white border border-white rounded-sm
+                    hover:bg-white hover:text-black transition-colors duration-200 w-16"
+              >
               {[10, 20, 30].map((e) => (
-                <option key={e} value={e}>
-                  {e}
-                </option>
+                <option key={e} value={e}>{e}</option>
               ))}
-            </select>
-          </div>
+              </select>
+            </div>
+            </div>
         </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border border-white">
-              <thead>
-                <tr className="bg-gray-800 text-white">
-                  <th className="border border-white px-4 py-2">ID</th>
-                  <th className="border border-white px-4 py-2">Title</th>
-                  <th className="border border-white px-4 py-2">Difficulty</th>
-                  <th className="border border-white px-4 py-2">Accuracy</th>
-                  <th className="border border-white px-4 py-2">Video</th>
-                  <th className="border border-white px-4 py-2">Tags</th>
-                  <th className="border border-white px-4 py-2"><ThumbsUp className="text-green-600"/></th>
-                  <th className="border border-white px-4 py-2"><ThumbsDown className="text-red-600"/></th>  
-                  <th className="border border-white px-4 py-2">Hints</th>              
-                </tr>
-              </thead>
-              <tbody className="border border-white">
-                {Array.isArray(problems) && problems.length > 0 ? (
-                  problems.map((problem, index) => (
-                    <tr key={problem.titleSlug} className="border-2 border-white hover:bg-neutral-800">
-                      <td className="border border-white text-center border px-4 py-2">{detailedProblems[index]?.questionId}</td>
-                        <td className={`border border-white  text-sm font-bold px-4 py-2 ${detailedProblems[index]?.isPaidOnly ? 'hover:bg-amber-500' : 'hover:bg-cyan-500'} hover:text-black`}>
-                        <a href={`https://leetcode.com/problems/${problem.titleSlug}`}
-                          target="_blank">
-                            {`${problem.title}`}
-                        </a>
-                      </td>
-                      <td className={`border border-white text-center font-semibold px-4 py-2 ${problem.difficulty === 'Easy' ? 'text-green-600' :
-                        problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600'}`}>{problem.difficulty}</td>
-                      <td className="border border-white text-center border px-4 py-2">{Math.round((problem.acRate))}%</td>
-                      <td className="border border-white text-center border px-4 py-2">{problem.hasVideoSolution ? "Yes" : "No"}</td>
-                      <td className="border border-white text-wrap text-xs px-4 py-2">{problem.topicTags.map((tag) => tag.name).join(", ")}</td>
-                      <td className="border border-white px-4 py-2">{detailedProblems[index]?.likes > 1000 ? (`${Math.round(detailedProblems[index]?.likes / 1000)}K`
-                      ) : (detailedProblems[index]?.likes)}</td>
-                      <td className="border border-white px-4 py-2">{detailedProblems[index]?.dislikes > 1000 ? (`${Math.round(detailedProblems[index]?.dislikes / 1000)}K`
-                      ) : (detailedProblems[index]?.dislikes)}</td>
-                      <td className="border border-white text-center px-4 py-2">
-                        {detailedProblems[index]?.hints?.length > 0 ? (
-                          <HintCard hints={detailedProblems[index].hints} />
-                        ) : (
-                          <span className="text-red-500">No hints found</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))) : (
-                  <tr>
-                    <td className="border px-4 py-2 text-center" rowSpan={10} colSpan={10}>No problems found</td>
+        
+        {/* Table container with horizontal scroll for small screens */}
+        <div className="overflow-x-auto -mx-2 sm:mx-0">
+          <table className="min-w-full border border-white text-xs sm:text-sm md:text-base">
+            <thead>
+              <tr className="bg-gray-800 text-white">
+                {/* Responsive column widths */}
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-8 md:w-12">ID</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Title</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Difficulty</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden sm:table-cell">Accuracy</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">Video</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">Tags</th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-10"><ThumbsUp className="text-green-600 h-4 w-4 md:h-5 md:w-5"/></th>
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-10"><ThumbsDown className="text-red-600 h-4 w-4 md:h-5 md:w-5"/></th>  
+                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Hints</th>              
+              </tr>
+            </thead>
+            <tbody className="border border-white">
+              {Array.isArray(problems) && problems.length > 0 ? (
+                problems.map((problem, index) => (
+                  <tr key={problem.titleSlug} className="border-2 border-white hover:bg-neutral-800">
+                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.questionId}</td>
+                    <td className={`border border-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 md:px-4 md:py-2 ${detailedProblems[index]?.isPaidOnly ? 'hover:bg-amber-500' : 'hover:bg-cyan-500'} hover:text-black`}>
+                      <a href={`https://leetcode.com/problems/${problem.titleSlug}`}
+                        target="_blank">
+                          {`${problem.title}`}
+                      </a>
+                    </td>
+                    <td className={`border border-white text-center font-semibold px-2 py-1 sm:px-3 md:px-4 md:py-2 ${problem.difficulty === 'Easy' ? 'text-green-600' :
+                      problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600'}`}>{problem.difficulty}</td>
+                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden sm:table-cell">{Math.round((problem.acRate))}%</td>
+                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">{problem.hasVideoSolution ? "Yes" : "No"}</td>
+                    <td className="border border-white text-wrap text-xs px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">{problem.topicTags.map((tag) => tag.name).join(", ")}</td>
+                    <td className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.likes > 1000 ? (`${Math.round(detailedProblems[index]?.likes / 1000)}K`
+                    ) : (detailedProblems[index]?.likes)}</td>
+                    <td className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.dislikes > 1000 ? (`${Math.round(detailedProblems[index]?.dislikes / 1000)}K`
+                    ) : (detailedProblems[index]?.dislikes)}</td>
+                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2">
+                      {detailedProblems[index]?.hints?.length > 0 ? (
+                        <HintCard hints={detailedProblems[index].hints} />
+                      ) : (
+                        <span className="text-red-500">No hints</span>
+                      )}
+                    </td>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))) : (
+                <tr>
+                  <td className="border px-2 py-1 sm:px-3 md:px-4 md:py-2 text-center" rowSpan={10} colSpan={10}>No problems found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
         </>
       )}
     </div>
