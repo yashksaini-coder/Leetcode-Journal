@@ -28,7 +28,7 @@ interface authStore {
 export const useAuthStore = create<authStore>((set) => ({
     signinError: null,
     isSigningIn: false,
-    signin: async (signinMetaData,router) => {
+    signin: async (signinMetaData, router) => {
         const supabase = createClient()
         set({ isSigningIn: true, signinError: null })
         try {
@@ -42,8 +42,9 @@ export const useAuthStore = create<authStore>((set) => ({
             }
 
             if (data.session) {
-                // Ensure we have a session before redirecting
-                await router.push('/dashboard');
+                // For reliable redirection, reload the page instead of using router.push
+                // This ensures the middleware properly detects the authentication state
+                window.location.href = '/dashboard';
             } else {
                 throw new Error("Unable to retrieve session after login.");
             }
@@ -59,7 +60,8 @@ export const useAuthStore = create<authStore>((set) => ({
         const supabase = createClient()
         try {
             await supabase.auth.signOut();
-            router.push('/auth/signin');
+            // Use window.location for reliable redirection after logout
+            window.location.href = '/auth/signin';
         } catch (error) {
             console.error('Logout error:', error);
         }
