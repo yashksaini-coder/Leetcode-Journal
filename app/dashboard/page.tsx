@@ -118,9 +118,9 @@ export default function Dashboard() {
                 @{userDetails.username} • Rank #{userDetails.profile.ranking}
               </p>
               <div className="flex gap-4 justify-center sm:justify-start">
-                <SocialLink href={userDetails.githubUrl} icon={<Github size={16} />} />
-                <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin size={16} />} />
-                <SocialLink href={userDetails.twitterUrl || undefined} icon={<Twitter size={16} />} />
+                <SocialLink href={userDetails.githubUrl} icon={<Github size={22} />} />
+                <SocialLink href={userDetails.linkedinUrl} icon={<Linkedin size={22} />} />
+                <SocialLink href={userDetails.twitterUrl || undefined} icon={<Twitter size={22} />} />
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full sm:w-auto mt-4 sm:mt-0">
@@ -149,7 +149,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Activity Calendar Section */}
-        <Card className="md:col-span-2 overflow-hidden shadow-md rounded-lg">
+        <Card className="md:col-span-2 overflow-hidden shadow-md rounded-lg bg-white dark:bg-gray-800">
           <CardHeader className="p-3 sm:p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Recent Submissions Card */}
-        <Card className="h-[350px] sm:h-[400px] overflow-hidden shadow-md rounded-lg">
+        <Card className="h-[350px] sm:h-[400px] overflow-hidden shadow-md rounded-lg bg-white dark:bg-gray-800">
           <CardHeader className="p-3 sm:p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -233,7 +233,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Statistics Cards */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <DetailCard 
               title="Problem Solving Stats"
@@ -292,7 +292,7 @@ export default function Dashboard() {
         </div>
 
         {/* Problem Distribution Chart */}
-        <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg">
+        <Card className="mb-4 bg-white dark:bg-gray-800 shadow-md rounded-lg">
           <CardHeader className="p-3 sm:p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -352,15 +352,15 @@ export default function Dashboard() {
 
 function QuickStat({ icon, label, value, color = "blue" }: { icon: React.ReactNode; label: string; value: string | number; color?: "blue" | "yellow" | "purple" }) {
   const colorVariants = {
-    blue: "bg-blue-50 dark:bg-blue-900/20",
-    yellow: "bg-yellow-50 dark:bg-yellow-900/20",
-    purple: "bg-purple-50 dark:bg-purple-900/20"
+    blue: "bg-blue-100/80 dark:bg-blue-900/30",
+    yellow: "bg-yellow-100/80 dark:bg-yellow-900/30",
+    purple: "bg-purple-100/80 dark:bg-purple-900/30"
   };
 
   return (
-    <div className={`${colorVariants[color]} rounded-lg p-1.5 sm:p-2 md:p-3 lg:p-4 transition-all duration-300 hover:scale-105 w-full`}>
-      <div className="flex items-center gap-1 sm:gap-2">
-        <div className="p-1 sm:p-1.5 lg:p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+    <div className={`${colorVariants[color]} rounded-lg p-1.5 sm:p-2 md:p-3 lg:p-4 transition-all duration-300 hover:scale-105 w-full flex items-stretch`}>
+      <div className="flex items-center gap-1 sm:gap-2 w-full">
+        <div className="p-1 sm:p-1.5 lg:p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm flex-shrink-0">
           <div className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5">
             {icon}
           </div>
@@ -380,7 +380,7 @@ function QuickStat({ icon, label, value, color = "blue" }: { icon: React.ReactNo
 
 function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNode; stats: any[] }) {
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-300">
+    <Card className="hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-gray-800 h-full">
       <CardHeader className="p-3 sm:p-4 border-b">
         <div className="flex items-center gap-2">
           {icon}
@@ -391,7 +391,7 @@ function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNo
         <div className="grid grid-cols-2 gap-2 sm:gap-4">
           {stats.map((stat, idx) => (
             <div key={idx} 
-              className="bg-gray-50 dark:bg-gray-800 p-2 sm:p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="bg-gray-100/80 dark:bg-gray-700/50 p-2 sm:p-4 rounded-lg hover:bg-gray-200/80 dark:hover:bg-gray-700/80 transition-colors flex flex-col justify-between h-full"
             >
               <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
                 {stat.icon}
