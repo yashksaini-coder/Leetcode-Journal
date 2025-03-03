@@ -99,7 +99,7 @@ export default function Dashboard() {
   return (
     <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Profile Header Card */}
-      <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+      <Card className="bg-white dark:bg-neutral-800 shadow-md rounded-lg overflow-hidden">
         <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
@@ -149,7 +149,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Activity Calendar Section */}
-        <Card className="md:col-span-2 overflow-hidden shadow-md rounded-lg bg-white dark:bg-gray-800">
+        <Card className="md:col-span-2 overflow-hidden shadow-md rounded-lg bg-white dark:bg-neutral-800">
           <CardHeader className="p-3 sm:p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Recent Submissions Card */}
-        <Card className="h-[350px] sm:h-[400px] overflow-hidden shadow-md rounded-lg bg-white dark:bg-gray-800">
+        <Card className="h-[350px] sm:h-[400px] overflow-hidden shadow-md rounded-lg bg-white dark:bg-neutral-800">
           <CardHeader className="p-3 sm:p-4 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -292,7 +292,7 @@ export default function Dashboard() {
         </div>
 
         {/* Problem Distribution Chart */}
-        <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] h-full flex flex-col">
+        <Card className="bg-white dark:bg-neutral-800 shadow-md rounded-lg max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] h-full flex flex-col">
           <CardHeader className="p-3 sm:p-4 border-b flex-shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -382,7 +382,7 @@ function QuickStat({ icon, label, value, color = "blue" }: { icon: React.ReactNo
 
 function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNode; stats: any[] }) {
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-gray-800 h-full">
+    <Card className="hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-neutral-800 h-full">
       <CardHeader className="p-3 sm:p-4 border-b">
         <div className="flex items-center gap-2">
           {icon}
