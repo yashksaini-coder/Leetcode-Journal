@@ -15,7 +15,6 @@ export default function NotFound() {
                 <a href="https://github.com/sponsors/yashksaini-coder" target="_blank" className="relative px-2 py-1">help cover his cloud charges by sponsoring him on GitHub.</a>
               </span>
             </span>
-            .
           </p>
           <Link href="/" className="text-blue-500 hover:text-blue-700 underline">
             Return to Home
