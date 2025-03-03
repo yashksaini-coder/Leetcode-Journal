@@ -93,13 +93,11 @@ export default function Home() {
   }, [difficulty, tagSearch, page, limit]);
   
   return (
-    // Mobile first - small padding on mobile, more on larger screens
     <div className="px-2 py-2 sm:px-3 md:px-4 shadow-lg rounded-lg bg-neutral-900 border">
       {/* Header section */}
       <div className="flex flex-col sm:flex-row justify-stretch">
         <div className="gap-2">
         </div>
-        {/* Removed color pattern div */}
       </div>
       {loading ? (
         <div className="flex mb-1 mt-1 justify-center">
@@ -136,11 +134,13 @@ export default function Home() {
             >
               Prev
             </button>
-            <span className="px-3 text-sm sm:text-base">Page {page}</span>
+              <span className="min-w-[60px] px-2 font-light text-sm sm:text-base flex items-center justify-center whitespace-nowrap">
+                Page {page}
+              </span>
             <button
-              className="px-2 py-1 text-xs sm:text-sm border border-white text-white rounded-sm
-          hover:bg-white hover:text-black transition-colors duration-200
-          disabled:opacity-50 disabled:cursor-not-allowed min-w-[60px]"
+              className="mr-4 px-2 py-1 text-xs sm:text-sm border border-white text-white rounded-sm
+              hover:bg-white hover:text-black transition-colors duration-200
+              disabled:opacity-50 disabled:cursor-not-allowed min-w-[60px]"
               onClick={() => setPage((prev) => prev + 1)}
               disabled={problems.length === 0}
             >
@@ -191,44 +191,50 @@ export default function Home() {
             </div>
         </div>
         
-        {/* Table container with horizontal scroll for small screens */}
-        <div className="overflow-x-auto -mx-2 sm:mx-0">
-          <table className="min-w-full border border-white text-xs sm:text-sm md:text-base">
+        {/* Enhanced table container with better responsiveness */}
+        <div className="overflow-x-auto -mx-2 sm:mx-0 rounded-md">
+          <table className="min-w-full border border-white text-xs sm:text-sm md:text-base table-fixed">
             <thead>
               <tr className="bg-gray-800 text-white">
-                {/* Responsive column widths */}
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-8 md:w-12">ID</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Title</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Difficulty</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden sm:table-cell">Accuracy</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">Video</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">Tags</th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-10"><ThumbsUp className="text-green-600 h-4 w-4 md:h-5 md:w-5"/></th>
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2 w-10"><ThumbsDown className="text-red-600 h-4 w-4 md:h-5 md:w-5"/></th>  
-                <th className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">Hints</th>              
+                {/* Optimized column widths */}
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[40px] md:w-[60px]">ID</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[120px] sm:w-[180px] md:w-[250px]">Title</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[70px] md:w-[90px]">Difficulty</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[60px] md:w-[80px] hidden sm:table-cell">Accuracy</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[60px] md:w-[70px] hidden md:table-cell">Video</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[120px] md:w-[160px] hidden md:table-cell">Tags</th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[50px]"><ThumbsUp className="text-green-600 h-4 w-4 md:h-5 md:w-5"/></th>
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[50px]"><ThumbsDown className="text-red-600 h-4 w-4 md:h-5 md:w-5"/></th>  
+                <th className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[70px] md:w-[90px]">Hints</th>              
               </tr>
             </thead>
             <tbody className="border border-white">
               {Array.isArray(problems) && problems.length > 0 ? (
                 problems.map((problem, index) => (
                   <tr key={problem.titleSlug} className="border-2 border-white hover:bg-neutral-800">
-                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.questionId}</td>
-                    <td className={`border border-white text-xs sm:text-sm font-bold px-2 py-1 sm:px-3 md:px-4 md:py-2 ${detailedProblems[index]?.isPaidOnly ? 'hover:bg-amber-500' : 'hover:bg-cyan-500'} hover:text-black`}>
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">{detailedProblems[index]?.questionId}</td>
+                    <td className={`border border-white text-xs sm:text-sm font-bold px-1 py-1 sm:px-2 md:px-3 md:py-2 ${detailedProblems[index]?.isPaidOnly ? 'hover:bg-amber-500' : 'hover:bg-cyan-500'} hover:text-black truncate`}>
                       <a href={`https://leetcode.com/problems/${problem.titleSlug}`}
-                        target="_blank">
+                        target="_blank"
+                        className="block truncate"
+                        title={problem.title}>
                           {`${problem.title}`}
                       </a>
                     </td>
-                    <td className={`border border-white text-center font-semibold px-2 py-1 sm:px-3 md:px-4 md:py-2 ${problem.difficulty === 'Easy' ? 'text-green-600' :
+                    <td className={`border border-white text-center font-semibold px-1 py-1 sm:px-2 md:px-3 md:py-2 ${problem.difficulty === 'Easy' ? 'text-green-600' :
                       problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600'}`}>{problem.difficulty}</td>
-                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden sm:table-cell">{Math.round((problem.acRate))}%</td>
-                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">{problem.hasVideoSolution ? "Yes" : "No"}</td>
-                    <td className="border border-white text-wrap text-xs px-2 py-1 sm:px-3 md:px-4 md:py-2 hidden md:table-cell">{problem.topicTags.map((tag) => tag.name).join(", ")}</td>
-                    <td className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.likes > 1000 ? (`${Math.round(detailedProblems[index]?.likes / 1000)}K`
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2 hidden sm:table-cell">{Math.round((problem.acRate))}%</td>
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2 hidden md:table-cell">{problem.hasVideoSolution ? "Yes" : "No"}</td>
+                    <td className="border border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 text-xs hidden md:table-cell">
+                      <div className="max-h-[60px] overflow-y-auto">
+                        {problem.topicTags.map((tag) => tag.name).join(", ")}
+                      </div>
+                    </td>
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">{detailedProblems[index]?.likes > 1000 ? (`${Math.round(detailedProblems[index]?.likes / 1000)}K`
                     ) : (detailedProblems[index]?.likes)}</td>
-                    <td className="border border-white px-2 py-1 sm:px-3 md:px-4 md:py-2">{detailedProblems[index]?.dislikes > 1000 ? (`${Math.round(detailedProblems[index]?.dislikes / 1000)}K`
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">{detailedProblems[index]?.dislikes > 1000 ? (`${Math.round(detailedProblems[index]?.dislikes / 1000)}K`
                     ) : (detailedProblems[index]?.dislikes)}</td>
-                    <td className="border border-white text-center px-2 py-1 sm:px-3 md:px-4 md:py-2">
+                    <td className="border border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">
                       {detailedProblems[index]?.hints?.length > 0 ? (
                         <HintCard hints={detailedProblems[index].hints} />
                       ) : (
@@ -238,7 +244,7 @@ export default function Home() {
                   </tr>
                 ))) : (
                 <tr>
-                  <td className="border px-2 py-1 sm:px-3 md:px-4 md:py-2 text-center" rowSpan={10} colSpan={10}>No problems found</td>
+                  <td className="border px-1 py-1 sm:px-2 md:px-3 md:py-2 text-center" rowSpan={10} colSpan={10}>No problems found</td>
                 </tr>
               )}
             </tbody>
