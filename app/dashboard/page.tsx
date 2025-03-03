@@ -292,8 +292,8 @@ export default function Dashboard() {
         </div>
 
         {/* Problem Distribution Chart */}
-        <Card className="mb-4 bg-white dark:bg-gray-800 shadow-md rounded-lg">
-          <CardHeader className="p-3 sm:p-4 border-b">
+        <Card className="bg-white dark:bg-gray-800 shadow-md rounded-lg max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] h-full flex flex-col">
+          <CardHeader className="p-3 sm:p-4 border-b flex-shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
@@ -301,47 +301,49 @@ export default function Dashboard() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="p-2 sm:p-4 flex justify-center items-center">
-            <div className="h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64">
-              <Doughnut 
-                data={difficultyData} 
-                options={{
-                  cutout: '65%',
-                  responsive: true,
-                  maintainAspectRatio: true,
-                  plugins: {
-                    legend: {
-                      position: 'bottom',
-                      labels: {
-                        padding: window.innerWidth < 640 ? 5 : 10,
-                        usePointStyle: true,
-                        font: {
-                          size: window.innerWidth < 640 ? 10 : 12,
-                          weight: 'bold'
+          <CardContent className="p-2 sm:p-4 flex justify-center items-center flex-1 overflow-hidden">
+            <div className="h-full w-full flex items-center justify-center">
+              <div className="h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64">
+                <Doughnut 
+                  data={difficultyData} 
+                  options={{
+                    cutout: '65%',
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        labels: {
+                          padding: window.innerWidth < 640 ? 5 : 10,
+                          usePointStyle: true,
+                          font: {
+                            size: window.innerWidth < 640 ? 10 : 12,
+                            weight: 'bold'
+                          }
                         }
-                      }
-                    },
-                    tooltip: {
-                      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                      padding: window.innerWidth < 640 ? 8 : 12,
-                      titleFont: {
-                        size: window.innerWidth < 640 ? 12 : 14,
-                        weight: 'bold'
                       },
-                      bodyFont: {
-                        size: window.innerWidth < 640 ? 11 : 13
-                      },
-                      callbacks: {
-                        label: (context) => {
-                          const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-                          const percentage = ((context.raw as number / total) * 100).toFixed(1);
-                          return `${context.label}: ${context.raw} (${percentage}%)`;
+                      tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: window.innerWidth < 640 ? 8 : 12,
+                        titleFont: {
+                          size: window.innerWidth < 640 ? 12 : 14,
+                          weight: 'bold'
+                        },
+                        bodyFont: {
+                          size: window.innerWidth < 640 ? 11 : 13
+                        },
+                        callbacks: {
+                          label: (context) => {
+                            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                            const percentage = ((context.raw as number / total) * 100).toFixed(1);
+                            return `${context.label}: ${context.raw} (${percentage}%)`;
+                          }
                         }
                       }
                     }
-                  }
-                }} 
-              />
+                  }} 
+                />
+              </div>
             </div>
           </CardContent>
         </Card>
