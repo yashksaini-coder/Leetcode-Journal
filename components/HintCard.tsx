@@ -16,7 +16,7 @@ export function HintCard({ hints }: { hints: string[] }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild className="w-36rem rounded-none">
-        <Button className="py-2 text-black hover:bg-purple-700 bg-white hover:text-white" variant="outline">Hints</Button>
+        <Button className="text-black hover:bg-purple-700 bg-white hover:text-white" variant="outline">Hints</Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-36rem backdrop-blur bg-opacity-100 border border-gray-100 text-white">
         <AlertDialogHeader>

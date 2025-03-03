@@ -38,10 +38,10 @@ interface FeatureProps {
 }
 
 const routeList: RouteProps[] = [
-  {
-    href: "#testimonials",
-    label: "Testimonials",
-  },
+  // {
+  //   href: "#testimonials",
+  //   label: "Testimonials",
+  // },
   {
     href: "#team",
     label: "Team",
@@ -97,12 +97,14 @@ export const NavigationContent  = () => {
       </Button>
     ) : (
       <>
-        <Link href="/auth/register">
-          <Button className="rounded-2xl">Register</Button>
-        </Link>
-        <Link href="/auth/signin">
-          <Button className="rounded-2xl">Login</Button>
-        </Link>
+        <div className="justify-between flex gap-2">
+          <Link href="/auth/register">
+            <Button className="rounded-xl">Register</Button>
+          </Link>
+          <Link href="/auth/signin">
+            <Button className="rounded-xl">Login</Button>
+          </Link>
+        </div>
       </>
     );
   };
@@ -117,6 +119,7 @@ export const NavigationContent  = () => {
         </Avatar>
         Leetcode Journal
       </Link>
+
       {/* <!-- Mobile --> */}
       <div className="flex items-center lg:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -139,13 +142,13 @@ export const NavigationContent  = () => {
                       <AvatarImage src="/logo.png" />
                       <AvatarFallback>LC</AvatarFallback>
                     </Avatar>
-                    Leetcode Journal
+                    <p className="text-sm">Leetcode Journal</p>
                   </Link>
                 </SheetTitle>
               </SheetHeader>
 
               <div className="flex flex-col gap-2">
-                {routeList.map(({ href, label }) => (
+                {/* {routeList.map(({ href, label }) => (
                   <Button
                     key={href}
                     onClick={() => setIsOpen(false)}
@@ -155,16 +158,17 @@ export const NavigationContent  = () => {
                   >
                     <Link href={href}>{label}</Link>
                   </Button>
-                ))}
+                ))} */}
+                {renderAuthButtons()}
               </div>
             </div>
 
             <SheetFooter className="flex-col sm:flex-col justify-start items-start">
               <Separator className="mb-2" />
 
-              <ToggleTheme />
+              {/* <ToggleTheme />
               <Separator className="mb-2" />
-              {renderAuthButtons()}
+              {renderAuthButtons()} */}
             </SheetFooter>
           </SheetContent>
         </Sheet>
