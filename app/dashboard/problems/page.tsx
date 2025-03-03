@@ -207,9 +207,10 @@ export default function Home() {
                 <th className="border border-gray-300 dark:border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[120px] md:w-[160px] hidden md:table-cell">Tags</th>
                 <th className="border border-gray-300 dark:border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[50px]"><ThumbsUp className="text-green-600 h-4 w-4 md:h-5 md:w-5"/></th>
                 <th className="border border-gray-300 dark:border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[50px]"><ThumbsDown className="text-red-600 h-4 w-4 md:h-5 md:w-5"/></th>  
-                <th className="border border-gray-300 dark:border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[70px] md:w-[90px]">Hints</th>              
+                <th className="border border-gray-300 dark:border-white px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[60px] md:w-[80px]">Hints</th>              
               </tr>
             </thead>
+
             <tbody className="border border-gray-300 dark:border-white">
               {Array.isArray(problems) && problems.length > 0 ? (
                 problems.map((problem, index) => (
@@ -244,7 +245,7 @@ export default function Home() {
                     ) : (detailedProblems[index]?.likes)}</td>
                     <td className="border border-gray-300 dark:border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">{detailedProblems[index]?.dislikes > 1000 ? (`${Math.round(detailedProblems[index]?.dislikes / 1000)}K`
                     ) : (detailedProblems[index]?.dislikes)}</td>
-                    <td className="border border-gray-300 dark:border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2">
+                    <td className="border border-gray-300 dark:border-white text-center px-1 py-1 sm:px-2 md:px-3 md:py-2 w-[60px] md:w-[80px] overflow-hidden whitespace-normal">
                       {detailedProblems[index]?.hints?.length > 0 ? (
                         <HintCard hints={detailedProblems[index].hints} />
                       ) : (
