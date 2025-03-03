@@ -97,10 +97,6 @@ export default function Home() {
   
   return (
     <div className="px-2 py-2 sm:px-3 md:px-4 shadow-lg rounded-lg bg-white dark:bg-neutral-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200">
-      {/* Header section */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-        <h1 className="text-xl font-bold mb-2 sm:mb-0">LeetCode Problems</h1>
-      </div>
       {loading ? (
         <div className="flex mb-1 mt-1 justify-center">
           <Loader color={theme === 'dark' ? "purple" : "blue"} size="xl"/>
