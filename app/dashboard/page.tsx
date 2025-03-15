@@ -7,10 +7,8 @@ import { useLeetcodeStore } from "@/store/LeetcodeStore/useLeetcodeStore";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Doughnut } from "react-chartjs-2";
-
-import CalendarHeatmap from "react-calendar-heatmap";
-import "../styles/style.css";
-import 'react-calendar-heatmap/dist/styles.css';
+import { Tooltip as MuiTooltip } from '@mui/material'
+import { ActivityCalendar } from 'react-activity-calendar'
 
 import {
   Chart as ChartJS,
@@ -89,13 +87,23 @@ export default function Dashboard() {
 
   const processLeetCodeData = (submissionCalendar: string) => {
     const parsedData = JSON.parse(submissionCalendar);
-    
-    return Object.entries(parsedData).map(([timestamp, count]) => ({
-      date: new Date(Number(timestamp) * 1000).toISOString().split("T")[0],
-      count: count as number
-    }));
+
+    return Object.entries(parsedData).map(([timestamp, count]) => {
+      const contributionCount = count as number;
+      let level = 0;
+      if (contributionCount > 0) {
+        level = Math.min(Math.ceil(contributionCount / 5), 4);
+      }
+
+      return {
+        date: new Date(Number(timestamp) * 1000).toISOString().split("T")[0],
+        count: contributionCount,
+        level: level
+      };
+    });
   };
 
+  console.log(processLeetCodeData(userDetails.submissionCalendar));
   return (
     <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Profile Header Card */}
@@ -124,19 +132,19 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full sm:w-auto mt-4 sm:mt-0">
-              <QuickStat 
+              <QuickStat
                 icon={<Target />}
                 label="Rating"
                 value={userContestRanking?.rating || 0}
                 color="blue"
               />
-              <QuickStat 
+              <QuickStat
                 icon={<Trophy />}
                 label="Top"
                 value={`${userContestRanking?.topPercentage}%`}
                 color="yellow"
               />
-              <QuickStat 
+              <QuickStat
                 icon={<Award />}
                 label="Rank"
                 value={userContestRanking?.globalRanking || 0}
@@ -162,17 +170,20 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <CardContent className="p-2 sm:p-4 md:p-6 overflow-x-auto">
-            <div className="min-w-[600px]">
-              <CalendarHeatmap
-                values={processLeetCodeData(userDetails.submissionCalendar)}
-                startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
-                endDate={new Date()}
-                classForValue={(value) => {
-                  if (!value) {
-                    return 'color-empty';
-                  }
-                  return `color-scale-${(value.count)}`;
-                }}
+            <div className="h-[160px] transform scale-30 origin-center">
+              <ActivityCalendar
+                theme={{ dark: ['#020202', '#058c42', '#16DB65', '#0D2818', '#04471C'] }}
+                data={processLeetCodeData(userDetails.submissionCalendar)}
+                renderBlock={(block, activity) => (
+                <MuiTooltip title={`${activity.count} activities on ${activity.date}`}>
+                  {block}
+                </MuiTooltip>
+                )}
+                renderColorLegend={(block, level) => (
+                <MuiTooltip title={`Level: ${level}`}>{block}</MuiTooltip>
+                )}
+                weekStart={1}
+                ref={(ref) => console.log(ref)}
               />
             </div>
           </CardContent>
@@ -211,9 +222,9 @@ export default function Dashboard() {
           <CardContent className="p-0 overflow-y-auto h-[calc(350px-3rem)] sm:h-[calc(400px-4rem)]">
             <div className="divide-y">
               {recentSubmissions.map((submission, idx) => (
-                <Link 
+                <Link
                   href={`https://leetcode.com/problems/${submission.titleSlug}`}
-                  key={idx} 
+                  key={idx}
                   target="_blank"
                   className="flex items-center p-3 sm:p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
                 >
@@ -235,53 +246,53 @@ export default function Dashboard() {
         {/* Statistics Cards */}
         <div className="md:col-span-2 max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <DetailCard 
+            <DetailCard
               title="Problem Solving Stats"
               icon={<Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />}
               stats={[
-                { 
+                {
                   label: 'Total Solved',
                   value: userDetails.submitStats.acSubmissionNum[0].count,
                   icon: <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                 },
-                { 
+                {
                   label: 'Easy Problems',
                   value: userDetails.submitStats.acSubmissionNum[1].count,
                   icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                 },
-                { 
+                {
                   label: 'Medium Problems',
                   value: userDetails.submitStats.acSubmissionNum[2].count,
                   icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" />
                 },
-                { 
+                {
                   label: 'Hard Problems',
                   value: userDetails.submitStats.acSubmissionNum[3].count,
                   icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
                 },
               ]}
             />
-            <DetailCard 
+            <DetailCard
               title="Performance Metrics"
               icon={<Timer className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />}
               stats={[
-                { 
+                {
                   label: 'Acceptance Rate',
-                  value: `${(userDetails.submitStats.acSubmissionNum[0].count / 
+                  value: `${(userDetails.submitStats.acSubmissionNum[0].count /
                     userDetails.submitStats.totalSubmissionNum[0].count * 100).toFixed(1)}%`,
                   icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
                 },
-                { 
+                {
                   label: 'Total Submissions',
                   value: userDetails.submitStats.totalSubmissionNum[0].count,
                   icon: <Code className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                 },
-                { 
+                {
                   label: 'Contribution Points',
                   value: userDetails.contributions.points,
                   icon: <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" />
                 },
-                { 
+                {
                   label: 'Contest Count',
                   value: userContestRanking?.attendedContestsCount || 0,
                   icon: <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />
@@ -304,8 +315,8 @@ export default function Dashboard() {
           <CardContent className="p-2 sm:p-4 flex justify-center items-center flex-1 overflow-hidden">
             <div className="h-full w-full flex items-center justify-center">
               <div className="h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64">
-                <Doughnut 
-                  data={difficultyData} 
+                <Doughnut
+                  data={difficultyData}
                   options={{
                     cutout: '65%',
                     responsive: true,
@@ -341,7 +352,7 @@ export default function Dashboard() {
                         }
                       }
                     }
-                  }} 
+                  }}
                 />
               </div>
             </div>
@@ -392,7 +403,7 @@ function DetailCard({ title, icon, stats }: { title: string; icon: React.ReactNo
       <CardContent className="p-2 sm:p-4">
         <div className="grid grid-cols-2 gap-2 sm:gap-4">
           {stats.map((stat, idx) => (
-            <div key={idx} 
+            <div key={idx}
               className="bg-gray-100/80 dark:bg-gray-700/50 p-2 sm:p-4 rounded-lg hover:bg-gray-200/80 dark:hover:bg-gray-700/80 transition-colors flex flex-col justify-between h-full"
             >
               <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
