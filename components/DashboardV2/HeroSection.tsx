@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-
+import banner from "@/public/hero-banner.png";
 export const HeroSection = () => {
   const { theme } = useTheme();
   return (
@@ -59,11 +59,9 @@ export const HeroSection = () => {
           <div className="absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 bg-indigo-500/50 rounded-full blur-3xl"></div>
           <Image
             width={1200}
-            height={1200}
+            height={600}
             className="w-full md:w-[1200px] mx-auto rounded-3xl relative leading-none flex items-center border-[7px] border-secondary"
-            src={
-              "https://github.com/user-attachments/assets/434dfd4e-508d-468f-a42f-185672e4b1f4"
-            }
+            src={banner}
             alt="dashboard"
           />
 
