@@ -62,7 +62,7 @@ const featureList: FeatureProps[] = [
     description: "See your entire Leetcode journey comes alive using .",
   },
   {
-    title: "New Problem Dashborad",
+    title: "New Problem Dashboard",
     description:
       "With a new Dashboard to show problems, giving users a new aesthetic look.",
   },
