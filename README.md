@@ -14,7 +14,7 @@
 
 Leetcode Journal offers the following key features:
 
-- **🗂️ Problems Dashboard:** Showcaseing problems by difficulty, topic, or category for better organization.
+- **🗂️ Problems Dashboard:** Showcasing problems by difficulty, topic, or category for better organization.
 - **📈 Track Progress:** Visualize your journey with detailed progress tracking.
 - **📊 Performance Analytics:** Leverage charts and insights to discover patterns in your performance.
 
