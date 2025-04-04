@@ -48,39 +48,12 @@ Leetcode Journal leverages cutting-edge technologies to deliver a seamless user 
     </tr>
 </table>
 
----
+## Workflow
 
-<a href="https://github.com/yashksaini-coder">
-    <table>
-        <tbody>
-            <tr>
-                <td align="left" valign="top" width="14.28%">
-                    <img src="https://github.com/yashksaini-coder.png?s=60" width="130px;"/>
-                    <br/>
-                    <h4 align="center">
-                        <b>Yash K. Saini</b>
-                    </h4>
-                    <div align="center">
-                        <p>(Author)</p>
-                    </div>
-                </td>
-                <td align="left" valign="top" width="85%">
-                    <p>
-                        👋 Hi there! I'm <u><em><strong>Yash K. Saini</strong></em></u>, a self-taught software developer and a computer science student from India.
-                    </p>
-                    <ul>
-                     <li>
-                        I love building & contributing to Open Source software solutions & projects that help solve real-world problems.
-                    </li>
-                    <li>
-                        I want to build products & systems that can benefit & solve problems for many other DEVs.
-                    </li>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</a>
+The entire application works on a client-server architecture. The backend is requested from the client side using Next.js API routes. Originally, the real backend server is deployed on Render where Leetcode API is called to fetch the data. The data is then stored in a Supabase database. 
 
-<p align="center">
-    <strong>🌟 If you find this project helpful, please give it a star on GitHub! 🌟</strong>
-</p>
+On the client side, the data is fetched for the users, problems, submissions, and progress. The data is then displayed in a user-friendly manner using charts and tables. The application is deployed on Vercel for better performance and scalability.
+
+### System Design:
+
+<img align="center" src="./public/System-design.png"/>
