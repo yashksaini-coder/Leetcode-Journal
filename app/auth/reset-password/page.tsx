@@ -10,10 +10,19 @@ import { supabase } from '@/lib/supabaseClient'
 export default function ResetPasswordPage() {
   const router = useRouter()
   const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [status, setStatus] = useState<'idle' | 'updating' | 'updated' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setErrorMessage('')
+
+    if (newPassword !== confirmPassword) {
+      setErrorMessage('Passwords do not match.')
+      return
+    }
+
     setStatus('updating')
 
     // Use the access token to update the user's password
@@ -47,6 +56,19 @@ export default function ResetPasswordPage() {
               required
               className="w-full p-2 border rounded"
             />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="w-full p-2 border rounded"
+            />
+            {errorMessage && (
+              <Alert variant="destructive" className="mt-2">
+                <AlertDescription>{errorMessage}</AlertDescription>
+              </Alert>
+            )}
             <Button type="submit" disabled={status === 'updating'}>
               {status === 'updating' ? 'Updating...' : 'Set New Password'}
             </Button>
@@ -65,4 +87,4 @@ export default function ResetPasswordPage() {
       </Card>
     </main>
   )
-} 
+}
