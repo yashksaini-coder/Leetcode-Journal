@@ -58,18 +58,18 @@ const routeList: RouteProps[] = [
 
 const featureList: FeatureProps[] = [
   {
-    title: "Showcase Your Value ",
-    description: "Highlight how your product solves user problems.",
+    title: "Showcase Your Journey ",
+    description: "See your entire Leetcode journey comes alive using .",
   },
   {
-    title: "Build Trust",
+    title: "New Problem Dashborad",
     description:
-      "Leverages social proof elements to establish trust and credibility.",
+      "With a new Dashboard to show problems, giving users a new aesthetic look.",
   },
   {
-    title: "Capture Leads",
+    title: "Join a Vibrant community",
     description:
-      "Make your lead capture form visually appealing and strategically.",
+      "Join a leading discord community with like-minded people who push and help each other to grow.",
   },
 ];
 
