@@ -1,5 +1,4 @@
-## <u>How can you Contrbitute to this Project?</u>
-
+## <u>How can you Contribute to this Project?</u>
 #### 1. Fork the Repository
 
 To contribute to the project, you need to fork the repository to your GitHub account. You can do this by clicking on the [Fork](https://github.com/yashksaini-coder/leetcode-journal/fork) button at the top right corner of the repository page.
