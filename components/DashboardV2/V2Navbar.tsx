@@ -59,7 +59,7 @@ const routeList: RouteProps[] = [
 const featureList: FeatureProps[] = [
   {
     title: "Showcase Your Journey ",
-    description: "See your entire Leetcode journey comes alive using .",
+    description: "See your entire Leetcode journey comes alive using our interactive visualizations.",
   },
   {
     title: "New Problem Dashboard",
