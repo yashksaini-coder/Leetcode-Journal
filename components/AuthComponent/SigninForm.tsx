@@ -128,6 +128,11 @@ export default function SigninForm() {
                   title="Sign in"
                   type="submit"
                 />
+                <div className="flex justify-center mt-4">
+                  <a href="/auth/forgot-password" className="text-blue-600 hover:underline">
+                    Forgot Password?
+                  </a>
+                </div>
               </form>
             </Form>
           </CardContent>
